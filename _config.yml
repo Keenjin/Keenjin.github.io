@@ -1,21 +1,21 @@
 # Basic
-title: Keenjin
-subtitle: Keen的博客
+title: Keen的博客
+subtitle: 记录所思、所想、所遇
 description: 欢迎来到我的个人站~
 # 头像里面的标题
 avatarTitle: Keenjin
 # 头像里面的描述
-avatarDesc: iOS / 机器学习
+avatarDesc: 数学 / 编程
 url: "http://Keenjin.github.io"
 
-# Comment
-comment:
-    disqus: keenjin
-    # uyan: 2143225  # 有言id,登录有言官网申请
+#gitment
+comment_gitment_repo: https://github.com/Keenjin/Keenjin.github.io
+comment_gitment_clientId: b69b91686e42d255b112
+comment_gitment_clientSecret: a3f96e2dbe10da6c0b0865023c5f4f148dca18c6
 
 # Social
 social:
-    # weibo: 5366874726 
+    weibo: 1883034105 
     github: keenjin
     # twitter: 
     mail: 523059842@qq.com
@@ -23,13 +23,7 @@ social:
 # 百度统计 
 # 使用博客模板请去掉或者更换 id 
 baidu:
-    id: 865e1f758ddfb60b37674b5ebc9b88c5  
-
-# Google Analytics
-# 使用博客模板请去掉或者更换 id
-# ga:
-    # id: UA-84134159-3   
-    # host: auto  
+    id: 865e1f758ddfb60b37674b5ebc9b88c5   
 
 
 # 《----------------- 上面的信息修改成你自己的 ---------------------------》

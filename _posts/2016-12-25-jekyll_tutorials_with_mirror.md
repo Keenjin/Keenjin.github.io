@@ -86,4 +86,7 @@ Server = https://mirror.yandex.ru/mirrors/msys2/mingw/x86_64/
 这里的异常，往往是因为gemfile和gemfile.lock跟当前环境不匹配导致的，某些版本号不一样了。这里需要重新运行如下bundle install，安装各种依赖的库（由于前面设置了bundle的安装源，所以这里就不会有问题了，要是没有可访问的镜像源，可能还是异常的）  
 
 # 4 总结  
-> 凡是无法执行成功，都可能是安装源失败。linux有个比较好的点，所有的依赖，都在安装的时候自动去下载安装
+> 凡是无法执行成功，都可能是安装源失败。linux有个比较好的点，所有的依赖，都在安装的时候自动去下载安装  
+
+# 5 评论系统
+使用的评论系统，是github官方的gitment，具体过程，是参考[Jekyll博客添加Gitment评论系统](https://blog.csdn.net/zhangquan2015/article/details/80178794)
