@@ -89,4 +89,28 @@ Server = https://mirror.yandex.ru/mirrors/msys2/mingw/x86_64/
 > 凡是无法执行成功，都可能是安装源失败。linux有个比较好的点，所有的依赖，都在安装的时候自动去下载安装  
 
 # 5 评论系统
-使用的评论系统，是github官方的gitment，具体过程，是参考[Jekyll博客添加Gitment评论系统](https://blog.csdn.net/zhangquan2015/article/details/80178794)
+本文首先尝试使用的评论系统，是github官方的gitment，具体过程，是参考[Jekyll博客添加Gitment评论系统](https://blog.csdn.net/zhangquan2015/article/details/80178794)  
+但是试用之后，发现，gitment系统已经停止服务了，需要自己搭建服务器去搞，就算了，换做valine评论系统，这个更加轻量级，不需要像gitment一样需要用github账号登录。  
+具体添加方式，依旧是在_include\comments.html里面修改，增加如下：  
+```
+{% if site.valine_comment.enable %}
+<div id="valinecomments"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valinecomments',
+        app_id: '{{ site.valine_comment.leancloud_appid }}',   //这里变量的取值在网站配置文件里_config.yml
+        app_key: '{{ site.valine_comment.leancloud_appkey }}', //这里变量的取值在网站配置文件里_config.yml
+        placeholder:'{{ site.valine_comment.placeholder }}'    //这里变量的取值在网站配置文件里_config.yml
+    });</script>
+```  
+另外，需要在_config.yml中分配配置app_id、app_key、placeholder。这三者，是从[leancloud](https://leancloud.cn/dashboard/applist.html#/apps)上注册生成的，具体参照步骤<https://valine.js.org/quickstart.html>中进行。 
+_config.yml中配置如下： 
+```
+valine_comment:
+  enable: true
+  leancloud_appid: xxxxxxxxxxxxx-xxx        # app_id
+  leancloud_appkey: xxxxxxxxxx              # app_key
+  placeholder: "欢迎提出您的宝贵意见"         # placeholder
+```
