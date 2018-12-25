@@ -113,4 +113,4 @@ valine_comment:
   leancloud_appid: xxxxxxxxxxxxx-xxx        # app_id
   leancloud_appkey: xxxxxxxxxx              # app_key
   placeholder: "欢迎提出您的宝贵意见"         # placeholder
-```
+```  
