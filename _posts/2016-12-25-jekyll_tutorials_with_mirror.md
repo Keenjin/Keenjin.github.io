@@ -104,6 +104,7 @@ Server = https://mirror.yandex.ru/mirrors/msys2/mingw/x86_64/
         app_key: '{{ site.valine_comment.leancloud_appkey }}', //这里变量的取值在网站配置文件里_config.yml
         placeholder:'{{ site.valine_comment.placeholder }}'    //这里变量的取值在网站配置文件里_config.yml
     });</script>
+{% endif %}
 ```  
 另外，需要在_config.yml中分配配置app_id、app_key、placeholder。这三者，是从[leancloud](https://leancloud.cn/dashboard/applist.html#/apps)上注册生成的，具体参照步骤<https://valine.js.org/quickstart.html>中进行。 
 _config.yml中配置如下： 
