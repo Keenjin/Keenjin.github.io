@@ -60,7 +60,7 @@ Server = http://www2.futureware.at/~nickoe/msys2-mirror/mingw/i686/
 Server = https://mirror.yandex.ru/mirrors/msys2/mingw/i686/
 
 * 文件4： C:\msys64\etc\pacman.d\mirrorlist.mingw64（配置源）  
-> Server = http://mirror-sng.oa.com/msys2/mingw/x86_64/  
+> Server = http://mirror-xxx.xxx.com/msys2/mingw/x86_64/  
 Server = http://repo.msys2.org/mingw/x86_64/  
 Server = https://sourceforge.net/projects/msys2/files/REPOS/MINGW/x86_64/  
 Server = http://www2.futureware.at/~nickoe/msys2-mirror/mingw/x86_64/  
