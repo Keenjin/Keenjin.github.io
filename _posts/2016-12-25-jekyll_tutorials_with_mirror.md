@@ -2,7 +2,7 @@
 layout: post
 title: Jekyll搭建个人博客
 date: 2018-12-25 
-tags: 工具 经验  
+tags: 经验  
 ---
 
 # 1 概述
