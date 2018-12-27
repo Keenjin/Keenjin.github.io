@@ -38,12 +38,10 @@
             function center(obj) {
               //obj这个参数是弹出框的整个对象
               var screenWidth = $(window).width(), screenHeigth = $(window).height();
-              //获取屏幕宽高
-              var scollTop = $(document).scrollTop();
               //当前窗口距离页面顶部的距离
               var objLeft = (screenWidth - obj.width()) / 2;
               ///弹出框距离左侧距离
-              var objTop = (screenHeigth - obj.height()) / 2 + scollTop;
+              var objTop = (screenHeigth - obj.height()) / 2;
               ///弹出框距离顶部的距离
               obj.css({
                   left:objLeft + "px",
