@@ -5,7 +5,7 @@ date: 2018-12-26
 tags: 经验  
 ---
   
-> 这里，只有实际操作过程中的积累
+> 实际操作过程中的积累
 
 # 1 常用操作命令
 ## 压缩tar
@@ -61,9 +61,7 @@ $ ll
 ```
 -rwxr-xr-x 1 keenjin 1049089 26 12月 27 10:25 test.sh*
 ```
-
-# 2 常用符号及环境变量
-## ./运行某个sh脚本
+## 运行某个sh脚本./
 命令：
 ```
 $ chmod a+x test.sh
@@ -74,6 +72,79 @@ $ ./test.sh  #内容是mkdir test;ls
 ```
 -rwxr-xr-x 1 keenjin 1049089 26 12月 27 10:25 test.sh*
 test
+```
+## 打印内容echo
+命令：
+```
+$ echo "test"
+$ echo `pwd`
+$ echo $0
+```
+结果：
+```
+test
+/c/Users/keenjin/linux_shell
+./shelltest.sh
+```
+## 日期date
+命令：
+```
+$ date
+$ date +%Y%m%d
+$ date -d '+1 day ago' +%Y%m%d
+$ date +%Y-%m-%d
+```
+结果：
+```
+2018年12月27日 15:13:15
+20181227
+20181226
+2018-12-27
+```
+## 上传rz
+命令：
+```
+$ rz
+```
+结果：
+```
+弹出一个对话框，选择要上传到xshell登录的服务器的文件
+```
+## 下载sz
+命令：
+```
+$ sz test.py
+```
+结果：
+```
+弹出对话框，选择一个目录，用来存放下载的test.py文件
+```
+
+# 2 shell内使用的常用命令
+## $0表示当前sh脚本的文件路径（相对路径），这个本身输出的是一个字符串，可以用echo打印出来
+```
+echo $0
+结果：
+./shelltest.sh
+```
+## ``或者$()，表示把命令框起来，shell解释的时候优先执行，并把结果作为输出
+```
+$(dirname "$0")
+结果：
+/c/Users/keenjin/linux_shell
+```
+## dirname，取当前sh脚本
+```
+$(dirname "$0")
+结果：
+/c/Users/keenjin/linux_shell
+```
+## $var或${var}，用于变量替换，var是一个变量，类似宏
+```
+date=$(date +%Y%m%d)
+echo "现在时间:${date}"
+结果：
+现在时间是:20181227
 ```
 
 # 3 其他问题
