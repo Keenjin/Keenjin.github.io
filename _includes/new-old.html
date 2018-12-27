@@ -41,7 +41,7 @@
               //当前窗口距离页面顶部的距离
               var objLeft = (screenWidth - obj.width()) / 2;
               ///弹出框距离左侧距离
-              var objTop = (screenHeigth - obj.height()) / 2;
+              var objTop = (screenHeigth - obj.height()) / 2 + $(document).scrollTop();
               ///弹出框距离顶部的距离
               obj.css({
                   left:objLeft + "px",
@@ -56,7 +56,7 @@
             <style type="text/css">
               .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
               .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
-              .shang_box-play{width:360px;height:270px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:0px;top:0px;display:none;}
+              .shang_box-play{width:360px;height:270px;background-color:#fff;border-radius:10px;position: absolute;;z-index:1000;left:0px;top:0px;display:none;}
               .shang_box-play img{border:none;border-width:0;}
               .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
               .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
