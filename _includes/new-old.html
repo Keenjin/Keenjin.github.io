@@ -29,13 +29,11 @@
             function dashangToggle(){
               $(".hide_box-play").fadeToggle();
               $(".shang_box-play").fadeToggle();
-              isOpen = 1;
               center($(".shang_box-play"));
             }
             function dashangToggle_hide(){
               $(".hide_box-play").fadeToggle();
               $(".shang_box-play").fadeToggle();
-              isOpen = 0;
             }
             function center(obj) {
               //obj这个参数是弹出框的整个对象
@@ -52,43 +50,7 @@
                   top:objTop + "px"
               });
               obj.fadeIn(500);
-              //弹出框淡入
-              isOpen = 1;
-              //弹出框打开后这个变量置1 说明弹出框是打开装填
-              //当窗口大小发生改变时
-              $(window).resize(function() {
-                  //只有isOpen状态下才执行
-                  if (isOpen == 1) {
-                      //重新获取数据
-                      screenWidth = $(window).width();
-                      screenHeigth = $(window).height();
-                      var scollTop = $(document).scrollTop();
-                      objLeft = (screenWidth - obj.width()) / 2;
-                      var objTop = (screenHeigth - obj.height()) / 2 + scollTop;
-                      obj.css({
-                          left:objLeft + "px",
-                          top:objTop + "px"
-                      });
-                      obj.fadeIn(500);
-                  }
-              });
-              //当滚动条发生改变的时候
-              $(window).scroll(function() {
-                  if (isOpen == 1) {
-                      //重新获取数据
-                      screenWidth = $(window).width();
-                      screenHeigth = $(window).height();
-                      var scollTop = $(document).scrollTop();
-                      objLeft = (screenWidth - obj.width()) / 2;
-                      var objTop = (screenHeigth - obj.height()) / 2 + scollTop;
-                      obj.css({
-                          left:objLeft + "px",
-                          top:objTop + "px"
-                      });
-                      obj.fadeIn(500);
-                  }
-              });
-          }
+            }
             </script>
 
             <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
@@ -96,7 +58,7 @@
             <style type="text/css">
               .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
               .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
-              .shang_box-play{width:360px;height:270px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:0px;top:0px;border:1px dotted #dedede;display:none;}
+              .shang_box-play{width:360px;height:270px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:0px;top:0px;display:none;}
               .shang_box-play img{border:none;border-width:0;}
               .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
               .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
@@ -104,7 +66,7 @@
                 margin-right: 10px;margin-top: 5px;
               }
               .shang_logo{display:block;text-align:center;margin:20px auto;}
-              .shang_tit-play{width: 100%;height: 25px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play{width: 100%;height: 15px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;font-family: 'Microsoft YaHei';margin-top: 10px;margin-right:2px;}
               .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
               .shang_payimg{width:140px;padding:10px;padding-left: 20px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
               .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
