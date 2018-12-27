@@ -4,7 +4,7 @@
               <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">打赏一个呗</a></p>
               <div class="hide_box-play"></div>
               <div class="shang_box-play">
-                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle_hide()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
                 <div class="shang_tit-play">
                   <p>感谢您的支持，我会继续努力的!</p>
                 </div>
@@ -29,7 +29,66 @@
             function dashangToggle(){
               $(".hide_box-play").fadeToggle();
               $(".shang_box-play").fadeToggle();
+              isOpen = 1;
+              center($(".shang_box-play"));
             }
+            function dashangToggle_hide(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+              isOpen = 0;
+            }
+            function center(obj) {
+              //obj这个参数是弹出框的整个对象
+              var screenWidth = $(window).width(), screenHeigth = $(window).height();
+              //获取屏幕宽高
+              var scollTop = $(document).scrollTop();
+              //当前窗口距离页面顶部的距离
+              var objLeft = (screenWidth - obj.width()) / 2;
+              ///弹出框距离左侧距离
+              var objTop = (screenHeigth - obj.height()) / 2 + scollTop;
+              ///弹出框距离顶部的距离
+              obj.css({
+                  left:objLeft + "px",
+                  top:objTop + "px"
+              });
+              obj.fadeIn(500);
+              //弹出框淡入
+              isOpen = 1;
+              //弹出框打开后这个变量置1 说明弹出框是打开装填
+              //当窗口大小发生改变时
+              $(window).resize(function() {
+                  //只有isOpen状态下才执行
+                  if (isOpen == 1) {
+                      //重新获取数据
+                      screenWidth = $(window).width();
+                      screenHeigth = $(window).height();
+                      var scollTop = $(document).scrollTop();
+                      objLeft = (screenWidth - obj.width()) / 2;
+                      var objTop = (screenHeigth - obj.height()) / 2 + scollTop;
+                      obj.css({
+                          left:objLeft + "px",
+                          top:objTop + "px"
+                      });
+                      obj.fadeIn(500);
+                  }
+              });
+              //当滚动条发生改变的时候
+              $(window).scroll(function() {
+                  if (isOpen == 1) {
+                      //重新获取数据
+                      screenWidth = $(window).width();
+                      screenHeigth = $(window).height();
+                      var scollTop = $(document).scrollTop();
+                      objLeft = (screenWidth - obj.width()) / 2;
+                      var objTop = (screenHeigth - obj.height()) / 2 + scollTop;
+                      obj.css({
+                          left:objLeft + "px",
+                          top:objTop + "px"
+                      });
+                      obj.fadeIn(500);
+                  }
+              });
+          }
             </script>
 
             <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
@@ -37,7 +96,7 @@
             <style type="text/css">
               .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
               .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
-              .shang_box-play{width:360px;height:270px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-140px;margin-top:-200px;border:1px dotted #dedede;display:none;}
+              .shang_box-play{width:360px;height:270px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:0px;top:0px;border:1px dotted #dedede;display:none;}
               .shang_box-play img{border:none;border-width:0;}
               .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
               .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
