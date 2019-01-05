@@ -17,11 +17,6 @@ tags: 语言
 
 ![字符串格式化](https://s2.ax1x.com/2019/01/05/F7MHqx.jpg)  
 
-[![F7MLdK.jpg](https://s2.ax1x.com/2019/01/05/F7MLdK.jpg)](https://imgchr.com/i/F7MLdK)
-[![F7MqZ6.jpg](https://s2.ax1x.com/2019/01/05/F7MqZ6.jpg)](https://imgchr.com/i/F7MqZ6)
-[![F7MHqx.jpg](https://s2.ax1x.com/2019/01/05/F7MHqx.jpg)](https://imgchr.com/i/F7MHqx)
-[![F7M7s1.jpg](https://s2.ax1x.com/2019/01/05/F7M7s1.jpg)](https://imgchr.com/i/F7M7s1)
-
 # py脚本传参（类似exe传参）
 
 ```python
