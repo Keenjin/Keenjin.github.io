@@ -7,15 +7,20 @@ tags: 语言
 
 # py符号
 
-![关键字](../images/post/python_note/python_symbol_keywords.jpg)  
+![关键字](https://s2.ax1x.com/2019/01/05/F7M4G4.jpg)  
 
-![数据类型](../images/post/python_note/python_symbol_datatype.jpg)  
+![数据类型](https://s2.ax1x.com/2019/01/05/F7M7s1.jpg)  
 
-![操作符](../images/post/python_note/python_symbol_operator.jpg)  
+![操作符](https://s2.ax1x.com/2019/01/05/F7MLdK.jpg)  
 
-![字符串转义符](../images/post/python_note/python_symbol_string_escape.jpg)  
+![字符串转义符](https://s2.ax1x.com/2019/01/05/F7MqZ6.jpg)  
 
-![字符串格式化](../images/post/python_note/python_symbol_string_format.jpg)  
+![字符串格式化](https://s2.ax1x.com/2019/01/05/F7MHqx.jpg)  
+
+[![F7MLdK.jpg](https://s2.ax1x.com/2019/01/05/F7MLdK.jpg)](https://imgchr.com/i/F7MLdK)
+[![F7MqZ6.jpg](https://s2.ax1x.com/2019/01/05/F7MqZ6.jpg)](https://imgchr.com/i/F7MqZ6)
+[![F7MHqx.jpg](https://s2.ax1x.com/2019/01/05/F7MHqx.jpg)](https://imgchr.com/i/F7MHqx)
+[![F7M7s1.jpg](https://s2.ax1x.com/2019/01/05/F7M7s1.jpg)](https://imgchr.com/i/F7M7s1)
 
 # py脚本传参（类似exe传参）
 
