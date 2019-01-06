@@ -118,3 +118,99 @@ words = five.break_words(sentence)
 help(five)
 help(five.break_words)
 ```
+
+# virtualenv创建python工程
+
+## Step1:安装virtualenv
+
+```bash
+> pip install virtual
+```
+
+## Step2:创建总工程根目录（根据特定python版本）
+
+```bash
+> mkdir KeenProj
+> virtualenv --system-site-packages KeenProj/Proj1
+```
+
+## Step3:激活Proj1
+
+```bash
+> .\KeenProj\Proj1\Scripts\activate.bat
+```
+
+## Step4:安装nose（自动化单元测试）
+
+```bash
+> pip install nose
+```
+
+## Step5:进入Proj1，创建一个主线版本trunk
+
+```bash
+> cd KeenProj/Proj1
+> mkdir Proj1_trunk
+> cd Proj1_trunk
+```
+
+## Step6:创建项目框架
+
+```bash
+> mkdir bin
+> mkdir MyModule
+> mkdir tests
+> mkdir docs
+> touch MyModule/__init__.py
+> touch tests/__init__.py
+> touch setup.py
+> touch tests/MyModule_tests.py
+> tree /f
+```
+
+## Step7:编辑setup.py
+
+```python
+# 参考：https://docs.python.org/3/distutils/setupscript.html
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
+config = {
+    'description': 'My Project',
+    'author': 'My Name',
+    'url': 'URL to get it at.',
+    'download_url': 'Where to download it.',
+    'author_email': 'My email.',
+    'version': '0.1',
+    'install_requires': ['nose'],
+    'packages': ['NAME'],
+    'scripts': [],
+    'name': 'projectname'
+}
+
+setup(**config)
+```
+
+## Step8:编辑tests/MyModule_tests.py
+
+```python
+from nose.tools import *
+import MyModule
+
+def setup():
+    print("SETUP!")
+
+def teardown():
+    print("TEAR DOWN!")
+
+def test_basic():
+    print("I RAN!")
+```
+
+## Step9:测试nose有效
+
+```bash
+> nosetests
+```
