@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Python笔记
+title: Python笔记杂项
 date: 2019-01-04
-tags: 语言  
+tags: python  
 ---
 
 # py符号
