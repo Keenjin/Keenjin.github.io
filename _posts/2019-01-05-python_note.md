@@ -5,6 +5,11 @@ date: 2019-01-04
 tags: python  
 ---
 
+# py资源
+
+python流行库：https://github.com/jobbole/awesome-python-cn/blob/master/README.md
+官方模块查询（支持的python版本等）：https://pypi.org/
+
 # py符号
 
 ![关键字](https://s2.ax1x.com/2019/01/05/F7M4G4.jpg)  
@@ -119,6 +124,30 @@ help(five)
 help(five.break_words)
 ```
 
+# py中cls和self的区别
+
+例子：
+
+```python
+class A(object):
+    a = 'a'
+    @staticmethod
+    def foo1(name):
+        print('hello', name)
+        print(A.a) # 正常
+        print(A.foo2('mamq')) # 报错: unbound method foo2() must be called with A instance as first argument (got str instance instead)
+    def foo2(self, name):
+        print('hello', name)
+    @classmethod
+    def foo3(cls, name):
+        print('hello', name)
+        print(A.a)
+        print(cls().foo2(name))
+```
+
+cls用在classmethod方法中，内部可以调用静态方法（此时跟staticmethod方法一样），也可以调用非静态方法。它内部会生成临时对象，来调用非静态方法，所以可以直接用类调用：A.foo3('testname')
+self只用在对象调用中：A a; a.foo2('testname')
+
 # virtualenv创建python工程
 
 ## Step1:安装virtualenv
@@ -214,3 +243,5 @@ def test_basic():
 ```bash
 > nosetests
 ```
+
+# 
