@@ -7,6 +7,8 @@ tags: python
 
 # py资源
 
+![](https://latex.codecogs.com/gif.latex?$x^_2$)
+
 python流行库：https://github.com/jobbole/awesome-python-cn/blob/master/README.md
 官方模块查询（支持的python版本等）：https://pypi.org/
 
