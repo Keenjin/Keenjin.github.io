@@ -7,8 +7,6 @@ tags: python
 
 # py资源
 
-![](https://latex.codecogs.com/gif.latex?$x^_2$)
-
 python流行库：https://github.com/jobbole/awesome-python-cn/blob/master/README.md
 官方模块查询（支持的python版本等）：https://pypi.org/
 
@@ -246,4 +244,11 @@ def test_basic():
 > nosetests
 ```
 
-# 
+https://www.codecogs.com/latex/eqneditor.php
+
+问题：已知速度和加速度的关系v = v0 + gt，求g  
+
+测量方法：轮轴下拉一个物体，另一端以每秒50次不停在纸上打点  
+
+测量建模：  
+（1）打点测量点间隔![](https://latex.codecogs.com/gif.latex?\Delta&space;s$_0$,\Delta&space;s$_1$,\Delta&space;s$_2$,...)
