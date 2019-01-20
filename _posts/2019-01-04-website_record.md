@@ -16,3 +16,7 @@ vscode编辑、编译、调试python官方教程：https://code.visualstudio.com
 在线api文档（包括python、java、c++等几乎所有的语言的文档）：https://devdocs.io  
 
 在线编程学习教程：https://hackr.io/
+
+学习python的numpy库：http://www.runoob.com/numpy/numpy-ndarray-object.html
+
+分类算法对比：https://scikit-learn.org/stable/modules/clustering.html
