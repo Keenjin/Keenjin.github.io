@@ -269,3 +269,92 @@ class C : public IA, public IB
 }
 
 ```
+
+# 使用boost::filesystem::recursive_directory_iterator遍历文件夹
+
+```c++
+// 递归遍历整个文件夹
+boost::system::error_code dir_error, no_error;
+boost::filesystem::recursive_directory_iterator iter(oPath, dir_error), end_iter;
+while (iter != end_iter)
+{
+    try
+    {
+        if (dir_error != no_error)      // 经常会有一些无法访问的异常，比如权限问题等，这里要判断下，过滤下此类异常
+        {
+            iter.increment(dir_error);
+            continue;
+        }
+
+        if (boost::filesystem::is_regular_file(*iter))      // 这里可能是子目录，也可能是文件
+        {
+            if (HandleFile(*iter))
+            {
+                break;
+            }
+        }
+
+        iter.increment(dir_error);
+    }
+    catch (boost::filesystem::filesystem_error&)
+    {
+
+    }
+}
+```
+
+# boost::asio::io_context配合boost::thread实现异步任务
+
+```c++
+class CLogic
+{
+private:
+    // 注意，m_io_context的定义必须在m_work_guard之前
+    boost::asio::io_context m_io_context;
+    boost::asio::executor_work_guard<boost::asio::io_context::executor_type> m_work_guard;
+    boost::thread m_thread;
+public:
+    CLogic()
+    : m_io_context()
+	, m_thread(boost::bind(&boost::asio::io_context::run, &m_io_context))		// 创建一个线程，用于m_io_context.run()
+	, m_work_guard(boost::asio::make_work_guard(m_io_context))		// 设置让m_io_context.run()不返回，方便post任务
+    {
+
+    }
+
+    ~CLogic()
+    {
+        m_io_context.stop();
+	    m_thread.interrupt();		// 线程到中断点，抛异常
+	    m_thread.join();
+    }
+
+    void DoTask()
+    {
+        std::wstring strParam;
+        m_io_context.post(boost::bind(&CLogic::DoTaskThread, this, strParam));
+    }
+
+    void DoTaskThread(std::wstring strParam)
+    {
+        ...
+        while(xxx)
+        {
+            try
+            {
+                ...
+                boost::this_thread::interruption_point();       // 线程调用interrupt接口时，执行到这里会抛出boost::thread_interrupted异常，可以方便在异常位置处理事件
+
+                ...
+                boost::this_thread::sleep(boost::posix_time::milliseconds(100));
+                boost::this_thread::interruption_point();
+            }
+            catch(boost::thread_interrupted&)
+            {
+                break;
+            }
+        }
+    }
+}
+
+```
