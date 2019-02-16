@@ -99,7 +99,7 @@ private:
 
 # boost::shared_ptr使用注意点
 
-1、由于c++11支持了std::shared_ptr，项目为了能同时支持vs2015编译和vs2005编译，全部使用boost库
+1、由于c++11支持了std::shared_ptr，项目为了能同时支持vs2015编译和vs2005编译，全部使用boost库  
 2、一般我们面向接口编程，使用boost::shared_ptr<IAppInterface>。如果我们使用的类，想让外界调用方不用错（不使用std::shared_ptr来使用），一般是禁止构造函数，然后自定义static的CreateInstance导出boost::shared_ptr
 3、如果我们全程都统一使用boost::shared_ptr，存在一个问题，如果我们的类之间使用了设计模式，需要传递this指针，直接传递this，对方使用boost::shared_ptr来接收，会有一个问题，对方如果析构了，会直接把我释放，那么不在我这个对象的预期之内，可能导致crash
 4、为了正确使用3中所说，采用了class CApp : public boost::enable_shared_from_this<CApp>继承自boost::enable_shared_from_this，这个东西，使用装饰者模式，让CApp内部包含一个boost::weak_ptr，而this指针传递，使用它的接口this->shared_from_this()，这个东西会将本身指针包括引用计数，传递给参数的临时boost::shared_ptr，也就是说，传递出去后，本身是加引用计数的，只要对方使用boost::shared_ptr来接收，引用计数就由对方拿住（也就是此时引用计数为2）；如果对方不使用boost::shared_ptr来接收，那么引用计数随着传参的临时变量析构，保持为1
