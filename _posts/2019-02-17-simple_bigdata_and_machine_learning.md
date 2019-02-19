@@ -17,11 +17,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from IPython.display import Latex,display
 
-
-display(Latex(r'已知模型$y=ax+b$，以及大量样本的$x_i \to y_i$，求$a$和$b$'))
-display(Latex(r'$y_i=\begin{pmatrix}x_i&1\end{pmatrix}\begin{pmatrix}a\\b\end{pmatrix}$'))
-display(Latex(r'$\begin{pmatrix}y_1\\\vdots\\y_i\\\vdots\\y_n\end{pmatrix}=\begin{pmatrix}x_1&1\\\vdots&\vdots\\x_i&1\\\vdots&\vdots\\x_n&1\end{pmatrix}\begin{pmatrix}a\\b\end{pmatrix}=X_{(n,2)}\begin{pmatrix}a\\b\end{pmatrix}$'))
-
 print("-"*100)
 x = np.array([1,2,3,4,5,6,7,8,9])
 y = np.array([0.199,0.389,0.5,0.783,0.980,1.777,1.38,1.575,1.771])
@@ -40,24 +35,12 @@ y={y}
 print("-"*100)
 P = np.linalg.lstsq(X, y, rcond=None)[0]   # 最小二乘法
 print(f'P.shape={P.shape}')
-display(Latex(r'$P=\begin{pmatrix}a\\b\end{pmatrix}=\begin{pmatrix}{%f}\\{%f}\end{pmatrix}$'%(P[0],P[1])))
 
 plt.plot(x, y, 'o', label='original data')
 plt.plot(x, P[0] * x + P[1], 'r', label='fitted line')
 
 plt.show()
 ```
-
-
-已知模型$y=ax+b$，以及大量样本的$x_i \to y_i$，求$a$和$b$
-
-
-
-$y_i=\begin{pmatrix}x_i&1\end{pmatrix}\begin{pmatrix}a\\b\end{pmatrix}$
-
-
-
-$\begin{pmatrix}y_1\\\vdots\\y_i\\\vdots\\y_n\end{pmatrix}=\begin{pmatrix}x_1&1\\\vdots&\vdots\\x_i&1\\\vdots&\vdots\\x_n&1\end{pmatrix}\begin{pmatrix}a\\b\end{pmatrix}=X_{(n,2)}\begin{pmatrix}a\\b\end{pmatrix}$
 
 
     ----------------------------------------------------------------------------------------------------
@@ -82,11 +65,8 @@ $\begin{pmatrix}y_1\\\vdots\\y_i\\\vdots\\y_n\end{pmatrix}=\begin{pmatrix}x_1&1\
     
 
 
-$P=\begin{pmatrix}a\\b\end{pmatrix}=\begin{pmatrix}{0.210000}\\{-0.010667}\end{pmatrix}$
 
-
-
-![png](白话大数据与机器学习/output_3_5.png)
+![png](/images/post/白话大数据与机器学习/output_3_5.png)
 
 
 ### 1.2 非线性拟合 - 指数转log，变线性
@@ -99,13 +79,6 @@ import matplotlib.pyplot as plt
 from IPython.display import Latex,display
 from scipy.optimize import curve_fit
 
-
-display(Latex(r'已知模型$s=\alpha\cdot e^{\beta t}$，以及大量样本的$t_i \to s_i$，求$\alpha$和$\beta$'))
-display(Latex(r'转化为线性回归模型$lns=\beta t + ln\alpha$'))
-display(Latex(r'$y=lns$'))
-display(Latex(r'$x=t$'))
-display(Latex(r'$a=\beta$'))
-display(Latex(r'$b=ln\alpha$'))
 
 print("-"*100)
 t = np.array([1960,1961,1962,1963,1964,1965,1966,1967,1968])
@@ -145,29 +118,6 @@ plt.show()
 ```
 
 
-已知模型$s=\alpha\cdot e^{\beta t}$，以及大量样本的$t_i \to s_i$，求$\alpha$和$\beta$
-
-
-
-转化为线性回归模型$lns=\beta t + ln\alpha$
-
-
-
-$y=lns$
-
-
-
-$x=t$
-
-
-
-$a=\beta$
-
-
-
-$b=ln\alpha$
-
-
     ----------------------------------------------------------------------------------------------------
     
     X.shape=(9, 2)
@@ -190,7 +140,7 @@ $b=ln\alpha$
     
 
 
-![png](白话大数据与机器学习/output_5_7.png)
+![png](/images/post/白话大数据与机器学习/output_5_7.png)
 
 
 ## 2 聚类
@@ -328,7 +278,7 @@ plt.show()
     
 
 
-![png](白话大数据与机器学习/output_8_1.png)
+![png](/images/post/白话大数据与机器学习/output_8_1.png)
 
 
 ### 2.2 聚类评估 - 聚类趋势评估
@@ -351,7 +301,6 @@ def conf_zh(font_name):
 conf_zh('SimHei')
 
 print('霍普金斯统计量：')
-display(Latex(r'$H=\frac{\sum\limits_{i=1}^{n}y_i}{\sum\limits_{i=1}^{n}x_i + \sum\limits_{i=1}^{n}y_i}$'))
 
 x = []
 f = open('city.txt',encoding='utf-8')
@@ -417,8 +366,6 @@ H={H}
     霍普金斯统计量：
     
 
-
-$H=\frac{\sum\limits_{i=1}^{n}y_i}{\sum\limits_{i=1}^{n}x_i + \sum\limits_{i=1}^{n}y_i}$
 
 
     
@@ -520,7 +467,7 @@ plt.show()
     
 
 
-![png](白话大数据与机器学习/output_12_1.png)
+![png](/images/post/白话大数据与机器学习/output_12_1.png)
 
 
 由上述曲线，可知，K取2、5、8、12时，是拐点
@@ -546,9 +493,6 @@ def conf_zh(font_name):
 conf_zh('SimHei')
 
 print('轮廓系数：')
-display(Latex(r'$s(v)=\frac{b(v)-a(v)}{max[a(v),b(v)]}$'))
-display(Latex(r'$a(v)$表示任意一个样本空间中的向量v到本类簇中其他点的距离的平均值'))
-display(Latex(r'$b(v)$表示任意一个样本空间中的向量v到其他类簇中离v最近的向量的平均距离'))
 
 x = []
 f = open('city.txt',encoding='utf-8')
@@ -621,19 +565,6 @@ plt.show()
 
     轮廓系数：
     
-
-
-$s(v)=\frac{b(v)-a(v)}{max[a(v),b(v)]}$
-
-
-
-$a(v)$表示任意一个样本空间中的向量v到本类簇中其他点的距离的平均值
-
-
-
-$b(v)$表示任意一个样本空间中的向量v到其他类簇中离v最近的向量的平均距离
-
-
     
     x_y=[[121.48  31.22]
      [121.24  31.4 ]
@@ -646,7 +577,7 @@ $b(v)$表示任意一个样本空间中的向量v到其他类簇中离v最近的
     
 
 
-![png](白话大数据与机器学习/output_15_5.png)
+![png](/images/post/白话大数据与机器学习/output_15_5.png)
 
 
 ## 3 分类
@@ -1158,7 +1089,7 @@ plt.show()
     
 
 
-![png](白话大数据与机器学习/output_23_1.png)
+![png](/images/post/白话大数据与机器学习/output_23_1.png)
 
 
 由于在34岁以后，无相亲的，所以这些是垃圾数据，可以排除掉。而在34岁年龄熵达到最小值，比学历要重，因此选年龄且按照34划分是目前看起来最合适作为根的
@@ -1605,7 +1536,7 @@ if __name__ == '__main__':
     
 
 
-![png](白话大数据与机器学习/output_33_1.png)
+![png](/images/post/白话大数据与机器学习/output_33_1.png)
 
 
 遗传算法最大的问题，就是可能会灭绝，能有一个优质股产生是不容易的。上述的结果，最后也是很随机的能抽到140,75也不是百分百的
