@@ -55,6 +55,9 @@ Step5：定制要分析观测的数据Data Table维度
 
 通过System Configuration - Trace Statistic，可以看到有非常多的各种不同的Provider
 
+<details>
+<summary>Providers列表</summary>
+
 | Line # | Provider Name                                  | Event Name                                                                                     | Count   |
 |--------|------------------------------------------------|------------------------------------------------------------------------------------------------|---------|
 | 1      | d00792da-07b7-40f5-97eb-5d974e054740           | <Unknown>                                                                                      | 27      |
@@ -548,6 +551,8 @@ Step5：定制要分析观测的数据Data Table维度
 | 489    |                                                | DiskIo: Flush                                                                                  | 18      |
 | 490    |                                                | DiskIo: Flush Init                                                                             | 4       |
 | 491    | 3044f61a-99b0-4c21-b203-d39423c73b00           | <Unknown>                                                                                      | 30      |
+
+</details>
 
 ### 生成ETL
 
