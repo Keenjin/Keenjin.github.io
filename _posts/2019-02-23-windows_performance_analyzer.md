@@ -58,499 +58,2964 @@ Step5：定制要分析观测的数据Data Table维度
 <details>
 <summary>Providers列表</summary>
 
-| Line # | Provider Name                                  | Event Name                                                                                     | Count   |
-|--------|------------------------------------------------|------------------------------------------------------------------------------------------------|---------|
-| 1      | d00792da-07b7-40f5-97eb-5d974e054740           | <Unknown>                                                                                      | 27      |
-| 2      | a688ee40-d8d9-4736-b6f9-6b74935ba3b1           | <Unknown>                                                                                      | 652     |
-| 3      | WinSATAssessment                               |                                                                                                | 3       |
-| 4      |                                                | WinSAT: WinSPR Compressed Info                                                                 | 1       |
-| 5      |                                                | WinSAT: Metrics Compressed Info                                                                | 1       |
-| 6      |                                                | WinSAT: SystemConfig Compressed Info                                                           | 1       |
-| 7      | Thread                                         |                                                                                                | 143991  |
-| 8      |                                                | Thread: Create                                                                                 | 95      |
-| 9      |                                                | Thread: Delete                                                                                 | 159     |
-| 10     |                                                | Thread: Start Rundown                                                                          | 2490    |
-| 11     |                                                | Thread: End Rundown                                                                            | 2428    |
-| 12     |                                                | Thread: CSwitch                                                                                | 85467   |
-| 13     |                                                | Thread: SetPriority                                                                            | 860     |
-| 14     |                                                | Thread: SetBasePriority                                                                        | 5362    |
-| 15     |                                                | Thread: ReadyThread                                                                            | 46270   |
-| 16     |                                                | Thread: Set Page Priority                                                                      | 167     |
-| 17     |                                                | Thread: Set I/O Priority                                                                       | 100     |
-| 18     |                                                | Thread [Provider]                                                                              | 401     |
-| 19     |                                                | Thread: Set Ideal Processor                                                                    | 97      |
-| 20     |                                                | Thread: Set User Ideal Processor                                                               | 95      |
-| 21     | SysConfigEx                                    |                                                                                                | 63      |
-| 22     |                                                | SysConfigEx: BuildInfo                                                                         | 1       |
-| 23     |                                                | SysConfigEx: SystemPaths                                                                       | 1       |
-| 24     |                                                | SysConfigEx: UnknownVolume                                                                     | 1       |
-| 25     |                                                | SysConfigEx: VolumeMapping                                                                     | 13      |
-| 26     |                                                | SysConfigEx: NetworkInterface                                                                  | 46      |
-| 27     |                                                | SysConfigEx [Provider]                                                                         | 1       |
-| 28     | SysConfig                                      |                                                                                                | 455     |
-| 29     |                                                | SysConfig: CPUs                                                                                | 1       |
-| 30     |                                                | SysConfig: Physical Disks                                                                      | 2       |
-| 31     |                                                | SysConfig: Logical Disks                                                                       | 7       |
-| 32     |                                                | SysConfig: Network Cards                                                                       | 5       |
-| 33     |                                                | SysConfig: Video Adapters                                                                      | 2       |
-| 34     |                                                | SysConfig: Services                                                                            | 283     |
-| 35     |                                                | SysConfig: Power Management                                                                    | 1       |
-| 36     |                                                | SysConfig: IRQs                                                                                | 16      |
-| 37     |                                                | SysConfig: PnP Devices                                                                         | 117     |
-| 38     |                                                | SysConfig: NUMA Nodes                                                                          | 1       |
-| 39     |                                                | SysConfig: Platform                                                                            | 1       |
-| 40     |                                                | SysConfig: Processor Group Configuration                                                       | 1       |
-| 41     |                                                | SysConfig: Processor Mapping                                                                   | 1       |
-| 42     |                                                | SysConfig: Display DPI                                                                         | 1       |
-| 43     |                                                | SysConfig: Code Integrity                                                                      | 1       |
-| 44     |                                                | SysConfig: Machine Id                                                                          | 1       |
-| 45     |                                                | SysConfig [Provider]                                                                           | 14      |
-| 46     | StackWalk                                      | Stack Walk                                                                                     | 1260641 |
-| 47     | Process                                        |                                                                                                | 594     |
-| 48     |                                                | Process: Create                                                                                | 1       |
-| 49     |                                                | Process: Delete                                                                                | 6       |
-| 50     |                                                | Process: Start Rundown                                                                         | 154     |
-| 51     |                                                | Process: End Rundown                                                                           | 149     |
-| 52     |                                                | Process [Provider]                                                                             | 6       |
-| 53     |                                                | Process: PerfCounters: End                                                                     | 6       |
-| 54     |                                                | Process: PerfCounters: Rundown                                                                 | 149     |
-| 55     |                                                | Process: Zombie                                                                                | 123     |
-| 56     | Power                                          |                                                                                                | 113     |
-| 57     |                                                | Power: Perf State Change                                                                       | 4       |
-| 58     |                                                | Power: Idle State Change                                                                       | 109     |
-| 59     | Pool                                           |                                                                                                | 626357  |
-| 60     |                                                | Pool: Allocate                                                                                 | 241999  |
-| 61     |                                                | Pool: Allocate Session                                                                         | 7365    |
-| 62     |                                                | Pool: Free                                                                                     | 368975  |
-| 63     |                                                | Pool: Free Session                                                                             | 7643    |
-| 64     |                                                | Pool: PoolSnap Start Rundown                                                                   | 24      |
-| 65     |                                                | Pool: PoolSnap End Rundown                                                                     | 24      |
-| 66     |                                                | Pool: BigPoolSnap Start Rundown                                                                | 149     |
-| 67     |                                                | Pool: BigPoolSnap End Rundown                                                                  | 146     |
-| 68     |                                                | Pool: PoolSnap Session Start Rundown                                                           | 5       |
-| 69     |                                                | Pool: PoolSnap Session End Rundown                                                             | 5       |
-| 70     |                                                | Pool: BigPoolSnap Session Start Rundown                                                        | 11      |
-| 71     |                                                | Pool: BigPoolSnap Session End Rundown                                                          | 11      |
-| 72     | Perfinfo                                       |                                                                                                | 1568074 |
-| 73     |                                                | Mark                                                                                           | 3       |
-| 74     |                                                | Sampled Profile                                                                                | 13853   |
-| 75     |                                                | Message Signaled Interrupt                                                                     | 5468    |
-| 76     |                                                | SysCall: Enter                                                                                 | 769129  |
-| 77     |                                                | SysCall: Exit                                                                                  | 767373  |
-| 78     |                                                | Interrupt                                                                                      | 190     |
-| 79     |                                                | Dpc                                                                                            | 12056   |
-| 80     |                                                | Sampled Profile Freq: Start Rundown                                                            | 1       |
-| 81     |                                                | Sampled Profile Freq: End Rundown                                                              | 1       |
-| 82     | PageFault                                      |                                                                                                | 135319  |
-| 83     |                                                | PageFault: Transition                                                                          | 38820   |
-| 84     |                                                | PageFault: Demand Zero                                                                         | 47925   |
-| 85     |                                                | PageFault: Copy on Write                                                                       | 76      |
-| 86     |                                                | PageFault: Guard Page                                                                          | 60      |
-| 87     |                                                | PageFault: Hard Page Fault                                                                     | 16401   |
-| 88     |                                                | PageFault [Provider]                                                                           | 34      |
-| 89     |                                                | Hardfault                                                                                      | 5150    |
-| 90     |                                                | Memory: VirtualAlloc                                                                           | 1269    |
-| 91     |                                                | Memory: VirtualFree                                                                            | 855     |
-| 92     |                                                | Memory: MemInfo                                                                                | 27      |
-| 93     |                                                | Memory: MMStat                                                                                 | 1       |
-| 94     |                                                | Memory: MemInfoExWS                                                                            | 27      |
-| 95     |                                                | Memory: MemInfoExSessionWS                                                                     | 27      |
-| 96     |                                                | Memory: VirtualAlloc Start Rundown                                                             | 12434   |
-| 97     |                                                | Memory: VirtualAlloc End Rundown                                                               | 12213   |
-| 98     | Microsoft-Windows-Win32k                       |                                                                                                | 13925   |
-| 99     |                                                | Microsoft-Windows-Win32k/ThreadInfoRundown/win:Info                                            | 778     |
-| 100    |                                                | Microsoft-Windows-Win32k/QueuePostMessage/win:Info                                             | 4994    |
-| 101    |                                                | Microsoft-Windows-Win32k/SendMessage/win:Start                                                 | 31      |
-| 102    |                                                | Microsoft-Windows-Win32k/RetrievePostMessage/win:Info                                          | 7296    |
-| 103    |                                                | Microsoft-Windows-Win32k/RetrieveSendMessage/win:Start                                         | 31      |
-| 104    |                                                | Microsoft-Windows-Win32k/RetrieveInputMessage/win:Info                                         | 201     |
-| 105    |                                                | Microsoft-Windows-Win32k/RetrievePseudoMessage/win:Info                                        | 37      |
-| 106    |                                                | Microsoft-Windows-Win32k/WakePump/win:Info                                                     | 228     |
-| 107    |                                                | Microsoft-Windows-Win32k/SendMessage/win:Stop                                                  | 31      |
-| 108    |                                                | Microsoft-Windows-Win32k/RetrieveSendMessage/win:Stop                                          | 31      |
-| 109    |                                                | Microsoft-Windows-Win32k/QueueInputMessage/win:Info                                            | 196     |
-| 110    |                                                | Microsoft-Windows-Win32k/DispatchMessage/win:Start                                             | 28      |
-| 111    |                                                | Microsoft-Windows-Win32k/DispatchMessage/win:Stop                                              | 28      |
-| 112    |                                                | Microsoft-Windows-Win32k/QueueNullPostMessage/win:Info                                         | 15      |
-| 113    | Microsoft-Windows-UserModePowerService         |                                                                                                | 310     |
-| 114    |                                                | Microsoft-Windows-UserModePowerService/RundownPlatformRole/win:Info                            | 1       |
-| 115    |                                                | Microsoft-Windows-UserModePowerService/RundownPowerScheme/win:Info                             | 1       |
-| 116    |                                                | Microsoft-Windows-UserModePowerService/RundownAcPowerSetting/win:Info                          | 140     |
-| 117    |                                                | Microsoft-Windows-UserModePowerService/RundownDcPowerSetting/win:Info                          | 140     |
-| 118    |                                                | Microsoft-Windows-UserModePowerService/RundownBatteryInformation/win:Info                      | 1       |
-| 119    |                                                | Microsoft-Windows-UserModePowerService/RundownBatteryStatus/win:Info                           | 1       |
-| 120    |                                                | Microsoft-Windows-UserModePowerService/RundownBrightnessCapability/win:Info                    | 1       |
-| 121    |                                                | Microsoft-Windows-UserModePowerService/RundownPowerSource/win:Info                             | 1       |
-| 122    |                                                | Microsoft-Windows-UserModePowerService/RundownOverrideConfiguration/win:Info                   | 1       |
-| 123    |                                                | Microsoft-Windows-UserModePowerService/RundownPowerProfileSetting/win:Info                     | 7       |
-| 124    |                                                | Microsoft-Windows-UserModePowerService/RundownSmartUserPresenceState/win:Info                  | 1       |
-| 125    |                                                | Microsoft-Windows-UserModePowerService/RundownOverlaySchemePowerSetting/win:Info               | 11      |
-| 126    |                                                | Microsoft-Windows-UserModePowerService/RundownActualOverlayPowerScheme/win:Info                | 2       |
-| 127    |                                                | Microsoft-Windows-UserModePowerService/RundownEffectiveOverlayPowerScheme/win:Info             | 1       |
-| 128    |                                                | Microsoft-Windows-UserModePowerService/RundownOverlaySuspendReason/win:Info                    | 1       |
-| 129    | Microsoft-Windows-TCPIP                        |                                                                                                | 1930    |
-| 130    |                                                | Microsoft-Windows-TCPIP/TcpEndpointCreation/win:Info                                           | 12      |
-| 131    |                                                | Microsoft-Windows-TCPIP/TcpRequestConnect/win:Info                                             | 3       |
-| 132    |                                                | Microsoft-Windows-TCPIP/TcpInspectConnectComplete/win:Info                                     | 3       |
-| 133    |                                                | Microsoft-Windows-TCPIP/TcpTcbSynSend/win:Info                                                 | 3       |
-| 134    |                                                | Microsoft-Windows-TCPIP/TcpBindEndpointComplete/win:Info                                       | 3       |
-| 135    |                                                | Microsoft-Windows-TCPIP/TcpCloseEndpoint/win:Info                                              | 16      |
-| 136    |                                                | Microsoft-Windows-TCPIP/TcpCreateEndpointComplete/win:Info                                     | 12      |
-| 137    |                                                | Microsoft-Windows-TCPIP/TcpConnectTcbProceeding/win:Info                                       | 3       |
-| 138    |                                                | Microsoft-Windows-TCPIP/TcpConnectTcbComplete/win:Info                                         | 1       |
-| 139    |                                                | Microsoft-Windows-TCPIP/TcpConnectTcbFailure/win:Info                                          | 2       |
-| 140    |                                                | Microsoft-Windows-TCPIP/TcpCloseTcbRequest/win:Info                                            | 5       |
-| 141    |                                                | Microsoft-Windows-TCPIP/TcpAbortTcbRequest/win:Info                                            | 4       |
-| 142    |                                                | Microsoft-Windows-TCPIP/TcpAbortTcbComplete/win:Info                                           | 4       |
-| 143    |                                                | Microsoft-Windows-TCPIP/TcpShutdownTcb/win:Info                                                | 6       |
-| 144    |                                                | Microsoft-Windows-TCPIP/TcpDisconnectTcbRtoTimeout/win:Info                                    | 2       |
-| 145    |                                                | Microsoft-Windows-TCPIP/TcpTcbStateChange/win:Info                                             | 10      |
-| 146    |                                                | Microsoft-Windows-TCPIP/TcpTcbStartTimer/win:Info                                              | 68      |
-| 147    |                                                | Microsoft-Windows-TCPIP/TcpTcbStopTimer/win:Info                                               | 124     |
-| 148    |                                                | Microsoft-Windows-TCPIP/TcpTcbExpireTimer/win:Info                                             | 7       |
-| 149    |                                                | Microsoft-Windows-TCPIP/TcpDataTransferReceive/win:Info                                        | 118     |
-| 150    |                                                | Microsoft-Windows-TCPIP/TcpSetTcpOption/win:Info                                               | 1       |
-| 151    |                                                | Microsoft-Windows-TCPIP/TcpReceiveRequest/win:Info                                             | 6       |
-| 152    |                                                | Microsoft-Windows-TCPIP/TcpDeliveryIndicated/win:Info                                          | 54      |
-| 153    |                                                | Microsoft-Windows-TCPIP/TcpDeliverySatisfied/win:Info                                          | 5       |
-| 154    |                                                | Microsoft-Windows-TCPIP/TcpSendPosted/win:Info                                                 | 57      |
-| 155    |                                                | Microsoft-Windows-TCPIP/TcpSendTransmitted/win:Info                                            | 57      |
-| 156    |                                                | Microsoft-Windows-TCPIP/TcpSendAdvance/win:Info                                                | 58      |
-| 157    |                                                | Microsoft-Windows-TCPIP/TcpSrttMeasurementStarted/win:Info                                     | 60      |
-| 158    |                                                | Microsoft-Windows-TCPIP/TcpSrttMeasurementComplete/win:Info                                    | 58      |
-| 159    |                                                | Microsoft-Windows-TCPIP/TcpSrttMeasurementCancelled/win:Info                                   | 2       |
-| 160    |                                                | Microsoft-Windows-TCPIP/UdpEndpointSendMessages/win:Info                                       | 1       |
-| 161    |                                                | Microsoft-Windows-TCPIP/UdpEndpointReceiveMessages/win:Info                                    | 1       |
-| 162    |                                                | Microsoft-Windows-TCPIP/TcpDeliveryFlush/win:Info                                              | 4       |
-| 163    |                                                | Microsoft-Windows-TCPIP/TcpConnectRestransmit/win:Info                                         | 2       |
-| 164    |                                                | Microsoft-Windows-TCPIP/TcpAcquirePort/win:Info                                                | 3       |
-| 165    |                                                | Microsoft-Windows-TCPIP/TcpAcquireWeakRefPort/win:Info                                         | 3       |
-| 166    |                                                | Microsoft-Windows-TCPIP/TcpReleasePort/win:Info                                                | 14      |
-| 167    |                                                | Microsoft-Windows-TCPIP/TcpFlushSack/win:Info                                                  | 2       |
-| 168    |                                                | Microsoft-Windows-TCPIP/IpInterfaceRundown/win:Info                                            | 10      |
-| 169    |                                                | Microsoft-Windows-TCPIP/TcpipReceiveSlowPath/win:Info                                          | 16      |
-| 170    |                                                | Microsoft-Windows-TCPIP/TcpipSendSlowPath/win:Info                                             | 141     |
-| 171    |                                                | Microsoft-Windows-TCPIP/TcpTemplateParameters/win:Info                                         | 1       |
-| 172    |                                                | Microsoft-Windows-TCPIP/TcpTemplateChanged/win:Info                                            | 3       |
-| 173    |                                                | Microsoft-Windows-TCPIP/TcpCwndRestart/win:Info                                                | 58      |
-| 174    |                                                | Microsoft-Windows-TCPIP/RssBindingRundown/win:Info                                             | 1       |
-| 175    |                                                | Microsoft-Windows-TCPIP/RssPortRundown/win:Info                                                | 1       |
-| 176    |                                                | Microsoft-Windows-TCPIP/TcpConnectionRundown/win:Info                                          | 32      |
-| 177    |                                                | Microsoft-Windows-TCPIP//win:Info                                                              | 136     |
-| 178    |                                                | Microsoft-Windows-TCPIP/IpNeighborState/win:Info                                               | 1       |
-| 179    |                                                | Microsoft-Windows-TCPIP/IpNeighborDiscovery/win:Info                                           | 2       |
-| 180    |                                                | Microsoft-Windows-TCPIP/IpSourceAddressSelection/win:Info                                      | 16      |
-| 181    |                                                | Microsoft-Windows-TCPIP/IpSortedAddressPairs/win:Info                                          | 26      |
-| 182    |                                                | Microsoft-Windows-TCPIP/TcpDataTransferCumAck/win:Info                                         | 57      |
-| 183    |                                                | Microsoft-Windows-TCPIP/TcpDataTransferSend/win:Info                                           | 123     |
-| 184    |                                                | Microsoft-Windows-TCPIP/TcpDataTransferRttSample/win:Info                                      | 58      |
-| 185    |                                                | Microsoft-Windows-TCPIP/TcpDataTransferRetransmitRound/win:Info                                | 2       |
-| 186    |                                                | Microsoft-Windows-TCPIP/TcpipNblOob/win:Info                                                   | 39      |
-| 187    |                                                | Microsoft-Windows-TCPIP/TcpipRouteLookup/win:Info                                              | 56      |
-| 188    |                                                | Microsoft-Windows-TCPIP/TcpipSrcAddrLookup/win:Info                                            | 8       |
-| 189    |                                                | Microsoft-Windows-TCPIP/Memory/win:Info                                                        | 6       |
-| 190    |                                                | Microsoft-Windows-TCPIP/TcpAssociateNameResContext/win:Info                                    | 2       |
-| 191    |                                                | Microsoft-Windows-TCPIP/TcpInspectConnectWithNameResContext/win:Info                           | 1       |
-| 192    |                                                | Microsoft-Windows-TCPIP/IpRouteBlocked/win:Info                                                | 1       |
-| 193    |                                                | Microsoft-Windows-TCPIP/TcpTailLossProbe/win:Info                                              | 3       |
-| 194    |                                                | Microsoft-Windows-TCPIP/TcpRack/win:Info                                                       | 11      |
-| 195    |                                                | Microsoft-Windows-TCPIP/UdpCreateEndpointComplete/win:Info                                     | 10      |
-| 196    |                                                | Microsoft-Windows-TCPIP/UdpBindEndpointComplete/win:Info                                       | 3       |
-| 197    |                                                | Microsoft-Windows-TCPIP/UdpCloseEndpointBound/win:Info                                         | 3       |
-| 198    |                                                | Microsoft-Windows-TCPIP/UdpCloseEndpointUnBound/win:Info                                       | 7       |
-| 199    |                                                | Microsoft-Windows-TCPIP/IcmpSendRecv/win:Info                                                  | 8       |
-| 200    |                                                | Microsoft-Windows-TCPIP/TcpSendComplete/win:Info                                               | 57      |
-| 201    |                                                | Microsoft-Windows-TCPIP/TcpCubicDataTransferCumAck/win:Info                                    | 3       |
-| 202    |                                                | Microsoft-Windows-TCPIP/IpRouteDGDStateChange/win:Info                                         | 1       |
-| 203    |                                                | Microsoft-Windows-TCPIP/IpRouteRundown/win:Info                                                | 34      |
-| 204    |                                                | Microsoft-Windows-TCPIP/InetInspect/win:Info                                                   | 171     |
-| 205    |                                                | Microsoft-Windows-TCPIP/TcpipSourceConstraint/win:Info                                         | 2       |
-| 206    |                                                | Microsoft-Windows-TCPIP/RemoteEndpoint/win:Info                                                | 26      |
-| 207    | Microsoft-Windows-StorPort                     |                                                                                                | 15747   |
-| 208    |                                                | Microsoft-Windows-StorPort/Port/win:Info                                                       | 2632    |
-| 209    |                                                | Microsoft-Windows-StorPort/Port/Dispatch                                                       | 2615    |
-| 210    |                                                | Microsoft-Windows-StorPort/Port/Completion                                                     | 2615    |
-| 211    |                                                | Microsoft-Windows-StorPort/Port/Queue                                                          | 5265    |
-| 212    |                                                | Microsoft-Windows-StorPort/Port/win:Start                                                      | 8       |
-| 213    |                                                | Microsoft-Windows-StorPort/Port/win:Stop                                                       | 8       |
-| 214    |                                                | Microsoft-Windows-StorPort/Isr/Completion                                                      | 2604    |
-| 215    | Microsoft-Windows-Search-Core                  |                                                                                                | 39      |
-| 216    |                                                | Microsoft-Windows-Search-Core/USN_Notify/win:Info                                              | 8       |
-| 217    |                                                | Microsoft-Windows-Search-Core/Gatherer_OnDataChange_Track_Url/win:Info                         | 8       |
-| 218    |                                                | Microsoft-Windows-Search-Core/ETWLogging/win:Info                                              | 9       |
-| 219    |                                                | Microsoft-Windows-Search-Core/FileChangeTracker_ProcessUSN/win:Start                           | 7       |
-| 220    |                                                | Microsoft-Windows-Search-Core/FileChangeTracker_ProcessUSN/win:Stop                            | 7       |
-| 221    | Microsoft-Windows-ReadyBoostDriver             | Microsoft-Windows-ReadyBoostDriver/GlobalStats/win:Info                                        | 2       |
-| 222    | Microsoft-Windows-RPC                          |                                                                                                | 2473    |
-| 223    |                                                | Microsoft-Windows-RPC/RpcClientCall/win:Start                                                  | 201     |
-| 224    |                                                | Microsoft-Windows-RPC/RpcServerCall/win:Start                                                  | 1036    |
-| 225    |                                                | Microsoft-Windows-RPC/RpcClientCall/win:Stop                                                   | 199     |
-| 226    |                                                | Microsoft-Windows-RPC/RpcServerCall/win:Stop                                                   | 1037    |
-| 227    | Microsoft-Windows-ProcessStateManager          | Microsoft-Windows-ProcessStateManager/StateChange/win:Info                                     | 124     |
-| 228    | Microsoft-Windows-Performance-Recorder-Control |                                                                                                | 96      |
-| 229    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_LoadProfileFromString/win:Start            | 3       |
-| 230    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_LoadProfileFromString/win:Stop             | 3       |
-| 231    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_AddProfileToCollection/win:Start           | 3       |
-| 232    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_AddProfileToCollection/win:Stop            | 3       |
-| 233    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_LoadTraceMergePropertiesFromFile/win:Start | 3       |
-| 234    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_LoadTraceMergePropertiesFromFile/win:Stop  | 3       |
-| 235    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_StartProfiles/win:Stop                     | 1       |
-| 236    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_StopProfiles/win:Start                     | 1       |
-| 237    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_QueryProfiles/win:Start                    | 2       |
-| 238    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_QueryProfiles/win:Stop                     | 2       |
-| 239    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerBegin/win:Start      | 1       |
-| 240    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerBegin/win:Stop       | 1       |
-| 241    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerUpdate/win:Start     | 34      |
-| 242    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerUpdate/win:Stop      | 34      |
-| 243    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerEnd/win:Start        | 1       |
-| 244    |                                                | Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerEnd/win:Stop         | 1       |
-| 245    | Microsoft-Windows-Networking-Correlation       |                                                                                                | 3381    |
-| 246    |                                                | Microsoft-Windows-Networking-Correlation//win:Start                                            | 423     |
-| 247    |                                                | Microsoft-Windows-Networking-Correlation//win:Stop                                             | 376     |
-| 248    |                                                | Microsoft-Windows-Networking-Correlation//win:Send                                             | 2582    |
-| 249    | Microsoft-Windows-Kernel-StoreMgr              | Microsoft-Windows-Kernel-StoreMgr/StoreRundown/win:Info                                        | 30      |
-| 250    | Microsoft-Windows-Kernel-Processor-Power       |                                                                                                | 190     |
-| 251    |                                                | Microsoft-Windows-Kernel-Processor-Power/IdleAccountingRundown/win:Info                        | 4       |
-| 252    |                                                | Microsoft-Windows-Kernel-Processor-Power/ProcessorFirmwareRundown/win:Info                     | 4       |
-| 253    |                                                | Microsoft-Windows-Kernel-Processor-Power/PTStateDomainFirmwareRundown/win:Info                 | 1       |
-| 254    |                                                | Microsoft-Windows-Kernel-Processor-Power/Summary/win:Info                                      | 4       |
-| 255    |                                                | Microsoft-Windows-Kernel-Processor-Power/PerfStatesRundown/win:Info                            | 4       |
-| 256    |                                                | Microsoft-Windows-Kernel-Processor-Power/BiosPStatesRundown/win:Info                           | 4       |
-| 257    |                                                | Microsoft-Windows-Kernel-Processor-Power/BiosCStatesRundown/win:Info                           | 4       |
-| 258    |                                                | Microsoft-Windows-Kernel-Processor-Power/BiosTStatesRundown/win:Info                           | 4       |
-| 259    |                                                | Microsoft-Windows-Kernel-Processor-Power/LogicalProcessorIdlingRundown/win:Info                | 1       |
-| 260    |                                                | Microsoft-Windows-Kernel-Processor-Power/Summary2/win:Info                                     | 4       |
-| 261    |                                                | Microsoft-Windows-Kernel-Processor-Power/PepQueryCapabilities/win:Info                         | 4       |
-| 262    |                                                | Microsoft-Windows-Kernel-Processor-Power/ProcessorPerformanceRundown/win:Info                  | 4       |
-| 263    |                                                | Microsoft-Windows-Kernel-Processor-Power/ParkNodeRundown/win:Info                              | 1       |
-| 264    |                                                | Microsoft-Windows-Kernel-Processor-Power/ProcessorIdleRundown/win:Info                         | 4       |
-| 265    |                                                | Microsoft-Windows-Kernel-Processor-Power/ProcessorIdRundown/win:Info                           | 4       |
-| 266    |                                                | Microsoft-Windows-Kernel-Processor-Power/PepGetPlatformIdleStates/win:Info                     | 1       |
-| 267    |                                                | Microsoft-Windows-Kernel-Processor-Power/PlatformAccountingBucketIntervalsRundown/win:Info     | 1       |
-| 268    |                                                | Microsoft-Windows-Kernel-Processor-Power/StaticPolicyRundown/win:Info                          | 1       |
-| 269    |                                                | Microsoft-Windows-Kernel-Processor-Power/CoordinatedIdleRundown/win:Info                       | 1       |
-| 270    |                                                | Microsoft-Windows-Kernel-Processor-Power/ProfileRundown/win:Info                               | 10      |
-| 271    |                                                | Microsoft-Windows-Kernel-Processor-Power/ProfileSettingRundown/win:Info                        | 122     |
-| 272    |                                                | Microsoft-Windows-Kernel-Processor-Power/ProfileStatusRundown/win:Info                         | 1       |
-| 273    |                                                | Microsoft-Windows-Kernel-Processor-Power/HeterogeneousPoliciesRundown/win:Info                 | 1       |
-| 274    |                                                | Microsoft-Windows-Kernel-Processor-Power/QosSupportRundown/win:Info                            | 1       |
-| 275    | Microsoft-Windows-Kernel-Power                 |                                                                                                | 1344    |
-| 276    |                                                | Microsoft-Windows-Kernel-Power/SystemTimeResolutionChange/win:Info                             | 1046    |
-| 277    |                                                | Microsoft-Windows-Kernel-Power/SystemTimeResolutionRundown/win:Info                            | 1       |
-| 278    |                                                | Microsoft-Windows-Kernel-Power/SystemTimeResolutionRequestRundown/win:Info                     | 1       |
-| 279    |                                                | Microsoft-Windows-Kernel-Power/SystemTimeResolutionKernelChange/win:Info                       | 103     |
-| 280    |                                                | Microsoft-Windows-Kernel-Power/PowerRequestRundown/win:Info                                    | 8       |
-| 281    |                                                | Microsoft-Windows-Kernel-Power/SleepDisableReasonRundown/win:Info                              | 2       |
-| 282    |                                                | Microsoft-Windows-Kernel-Power/AcDcStateRundown/win:Info                                       | 1       |
-| 283    |                                                | Microsoft-Windows-Kernel-Power/SystemTimerResolutionStackRundown/win:Info                      | 14      |
-| 284    |                                                | Microsoft-Windows-Kernel-Power/FirmwarePlatformRoleRundown/win:Info                            | 1       |
-| 285    |                                                | Microsoft-Windows-Kernel-Power/DeviceRundown/win:Info                                          | 116     |
-| 286    |                                                | Microsoft-Windows-Kernel-Power/StandbyConnectivityRundown/win:Info                             | 1       |
-| 287    |                                                | Microsoft-Windows-Kernel-Power/CsComplianceRundown/win:Info                                    | 5       |
-| 288    |                                                | Microsoft-Windows-Kernel-Power/DeepSleepConstraintRundown/win:Info                             | 1       |
-| 289    |                                                | Microsoft-Windows-Kernel-Power/SystemLatencyRundown/win:Info                                   | 1       |
-| 290    |                                                | Microsoft-Windows-Kernel-Power/DynamicTickStatusRundown/win:Info                               | 1       |
-| 291    |                                                | Microsoft-Windows-Kernel-Power/PowerStateEventRundown/win:Info                                 | 42      |
-| 292    | Microsoft-Windows-Kernel-EventTracing          |                                                                                                | 1949    |
-| 293    |                                                | Microsoft-Windows-Kernel-EventTracing/ETW_TASK_STACK_TRACE/ETW_OPCODE_USER_MODE_STACK_TRACE    | 1109    |
-| 294    |                                                | Microsoft-Windows-Kernel-EventTracing/ETW_TASK_LOST_EVENT/win:Info                             | 840     |
-| 295    | Microsoft-Windows-DxgKrnl                      |                                                                                                | 23024   |
-| 296    |                                                | Microsoft-Windows-DxgKrnl/VSyncDPC/win:Info                                                    | 425     |
-| 297    |                                                | Microsoft-Windows-DxgKrnl/WorkerThread/win:Start                                               | 178     |
-| 298    |                                                | Microsoft-Windows-DxgKrnl/WorkerThread/win:Stop                                                | 179     |
-| 299    |                                                | Microsoft-Windows-DxgKrnl/ChangePriority/win:Info                                              | 51      |
-| 300    |                                                | Microsoft-Windows-DxgKrnl/AttemptPreemption/win:Info                                           | 75      |
-| 301    |                                                | Microsoft-Windows-DxgKrnl/Adapter/win:DC_Start                                                 | 2       |
-| 302    |                                                | Microsoft-Windows-DxgKrnl/Device/win:DC_Start                                                  | 38      |
-| 303    |                                                | Microsoft-Windows-DxgKrnl/Context/win:DC_Start                                                 | 51      |
-| 304    |                                                | Microsoft-Windows-DxgKrnl/AdapterAllocation/win:Start                                          | 1       |
-| 305    |                                                | Microsoft-Windows-DxgKrnl/AdapterAllocation/win:Stop                                           | 1       |
-| 306    |                                                | Microsoft-Windows-DxgKrnl/AdapterAllocation/win:DC_Start                                       | 979     |
-| 307    |                                                | Microsoft-Windows-DxgKrnl/DeviceAllocation/win:Start                                           | 2       |
-| 308    |                                                | Microsoft-Windows-DxgKrnl/DeviceAllocation/win:Stop                                            | 2       |
-| 309    |                                                | Microsoft-Windows-DxgKrnl/DeviceAllocation/win:DC_Start                                        | 1068    |
-| 310    |                                                | Microsoft-Windows-DxgKrnl/TerminateAllocation/win:Info                                         | 1       |
-| 311    |                                                | Microsoft-Windows-DxgKrnl/ProcessTerminateAllocation/win:Info                                  | 1       |
-| 312    |                                                | Microsoft-Windows-DxgKrnl/Lock/win:Info                                                        | 40      |
-| 313    |                                                | Microsoft-Windows-DxgKrnl/Unlock/win:Info                                                      | 40      |
-| 314    |                                                | Microsoft-Windows-DxgKrnl/ReferenceAllocations/win:Info                                        | 74      |
-| 315    |                                                | Microsoft-Windows-DxgKrnl/PatchLocationList/win:Info                                           | 87      |
-| 316    |                                                | Microsoft-Windows-DxgKrnl/ApertureMapping/win:Info                                             | 11      |
-| 317    |                                                | Microsoft-Windows-DxgKrnl/ApertureUnmapping/win:Info                                           | 1       |
-| 318    |                                                | Microsoft-Windows-DxgKrnl/PagingOpMapApertureSegment/win:Info                                  | 22      |
-| 319    |                                                | Microsoft-Windows-DxgKrnl/PagingOpUnmapApertureSegment/win:Info                                | 2       |
-| 320    |                                                | Microsoft-Windows-DxgKrnl/Preparation/win:Start                                                | 74      |
-| 321    |                                                | Microsoft-Windows-DxgKrnl/Preparation/win:Info                                                 | 13      |
-| 322    |                                                | Microsoft-Windows-DxgKrnl/Preparation/win:Stop                                                 | 74      |
-| 323    |                                                | Microsoft-Windows-DxgKrnl/ReserveResource/win:Start                                            | 11      |
-| 324    |                                                | Microsoft-Windows-DxgKrnl/ReserveResource/win:Stop                                             | 11      |
-| 325    |                                                | Microsoft-Windows-DxgKrnl/InnerIteration/win:Start                                             | 22      |
-| 326    |                                                | Microsoft-Windows-DxgKrnl/InnerIteration/win:Stop                                              | 22      |
-| 327    |                                                | Microsoft-Windows-DxgKrnl/AllocationFault/win:Info                                             | 32      |
-| 328    |                                                | Microsoft-Windows-DxgKrnl/MarkAllocation/win:Info                                              | 1       |
-| 329    |                                                | Microsoft-Windows-DxgKrnl/PageInAllocation/win:Info                                            | 11      |
-| 330    |                                                | Microsoft-Windows-DxgKrnl/AddDmaBuffer/win:Start                                               | 51      |
-| 331    |                                                | Microsoft-Windows-DxgKrnl/ReportSegment/win:Info                                               | 9       |
-| 332    |                                                | Microsoft-Windows-DxgKrnl/ReportCommittedAllocation/win:Info                                   | 43      |
-| 333    |                                                | Microsoft-Windows-DxgKrnl/Semaphore/win:DC_Start                                               | 45      |
-| 334    |                                                | Microsoft-Windows-DxgKrnl/Fence/win:Start                                                      | 1       |
-| 335    |                                                | Microsoft-Windows-DxgKrnl/Fence/win:Stop                                                       | 1       |
-| 336    |                                                | Microsoft-Windows-DxgKrnl/Fence/win:DC_Start                                                   | 57      |
-| 337    |                                                | Microsoft-Windows-DxgKrnl/SetDisplayMode/win:Info                                              | 2       |
-| 338    |                                                | Microsoft-Windows-DxgKrnl/BlockThread/win:Info                                                 | 3       |
-| 339    |                                                | Microsoft-Windows-DxgKrnl/Profiler/win:Start                                                   | 7151    |
-| 340    |                                                | Microsoft-Windows-DxgKrnl/Profiler/win:Stop                                                    | 7150    |
-| 341    |                                                | Microsoft-Windows-DxgKrnl/ExtendedProfiler/win:Start                                           | 189     |
-| 342    |                                                | Microsoft-Windows-DxgKrnl/ExtendedProfiler/win:Stop                                            | 189     |
-| 343    |                                                | Microsoft-Windows-DxgKrnl/SetPointerPosition/win:Info                                          | 190     |
-| 344    |                                                | Microsoft-Windows-DxgKrnl/DpiReportAdapter/win:Info                                            | 3       |
-| 345    |                                                | Microsoft-Windows-DxgKrnl/MMIOFlip/win:Info                                                    | 36      |
-| 346    |                                                | Microsoft-Windows-DxgKrnl/EtwVersion/win:Stop                                                  | 1       |
-| 347    |                                                | Microsoft-Windows-DxgKrnl/Flip/win:Info                                                        | 36      |
-| 348    |                                                | Microsoft-Windows-DxgKrnl/Render/win:Info                                                      | 36      |
-| 349    |                                                | Microsoft-Windows-DxgKrnl/RenderKm/win:Info                                                    | 38      |
-| 350    |                                                | Microsoft-Windows-DxgKrnl/PresentHistory/win:Info                                              | 37      |
-| 351    |                                                | Microsoft-Windows-DxgKrnl/PresentHistory/win:Stop                                              | 37      |
-| 352    |                                                | Microsoft-Windows-DxgKrnl/DmaPacket/win:Start                                                  | 74      |
-| 353    |                                                | Microsoft-Windows-DxgKrnl/DmaPacket/win:Stop                                                   | 73      |
-| 354    |                                                | Microsoft-Windows-DxgKrnl/DmaPacket/win:Info                                                   | 73      |
-| 355    |                                                | Microsoft-Windows-DxgKrnl/QueuePacket/win:Start                                                | 269     |
-| 356    |                                                | Microsoft-Windows-DxgKrnl/QueuePacket/win:Info                                                 | 316     |
-| 357    |                                                | Microsoft-Windows-DxgKrnl/QueuePacket/win:Stop                                                 | 267     |
-| 358    |                                                | Microsoft-Windows-DxgKrnl/VSyncInterrupt/win:Info                                              | 425     |
-| 359    |                                                | Microsoft-Windows-DxgKrnl/GetDeviceState/win:Info                                              | 216     |
-| 360    |                                                | Microsoft-Windows-DxgKrnl/Present/win:Info                                                     | 36      |
-| 361    |                                                | Microsoft-Windows-DxgKrnl/OfferAllocation/win:Start                                            | 40      |
-| 362    |                                                | Microsoft-Windows-DxgKrnl/OfferAllocation/win:Info                                             | 40      |
-| 363    |                                                | Microsoft-Windows-DxgKrnl/OfferAllocation/win:Stop                                             | 11      |
-| 364    |                                                | Microsoft-Windows-DxgKrnl/ReportOfferAllocation/win:Info                                       | 83      |
-| 365    |                                                | Microsoft-Windows-DxgKrnl/ReclaimAllocation/win:Info                                           | 40      |
-| 366    |                                                | Microsoft-Windows-DxgKrnl/PresentHistoryDetailed/win:Start                                     | 38      |
-| 367    |                                                | Microsoft-Windows-DxgKrnl/ReportCommittedGlobalAllocation/win:DC_Start                         | 6       |
-| 368    |                                                | Microsoft-Windows-DxgKrnl/SignalSynchronizationObject2/win:Info                                | 72      |
-| 369    |                                                | Microsoft-Windows-DxgKrnl/NodeMetadata/win:Info                                                | 5       |
-| 370    |                                                | Microsoft-Windows-DxgKrnl/VSyncDPCMultiPlane/win:Info                                          | 425     |
-| 371    |                                                | Microsoft-Windows-DxgKrnl/TotalBytesResidentInSegment/win:Info                                 | 12      |
-| 372    |                                                | Microsoft-Windows-DxgKrnl/Brightness/win:Info                                                  | 2       |
-| 373    |                                                | Microsoft-Windows-DxgKrnl/BacklightOptimizationLevel/win:Info                                  | 2       |
-| 374    |                                                | Microsoft-Windows-DxgKrnl/VidMmDereferenceObjectAsync/win:Start                                | 1       |
-| 375    |                                                | Microsoft-Windows-DxgKrnl/VidMmDereferenceObjectAsync/win:Stop                                 | 1       |
-| 376    |                                                | Microsoft-Windows-DxgKrnl/VidMmUnmapViewAsync/win:Start                                        | 2       |
-| 377    |                                                | Microsoft-Windows-DxgKrnl/VidMmUnmapViewAsync/win:Stop                                         | 2       |
-| 378    |                                                | Microsoft-Windows-DxgKrnl/PagingPreparation/win:Start                                          | 279     |
-| 379    |                                                | Microsoft-Windows-DxgKrnl/PagingPreparation/win:Stop                                           | 279     |
-| 380    |                                                | Microsoft-Windows-DxgKrnl/CddStandardAllocation/win:Info                                       | 1       |
-| 381    |                                                | Microsoft-Windows-DxgKrnl/MonitoredFence/win:DC_Start                                          | 63      |
-| 382    |                                                | Microsoft-Windows-DxgKrnl/SignalSynchronizationObjectFromGpu/win:Info                          | 72      |
-| 383    |                                                | Microsoft-Windows-DxgKrnl/UnwaitCpuWaiter/win:Info                                             | 19      |
-| 384    |                                                | Microsoft-Windows-DxgKrnl/DWMVsyncCountWait/win:Info                                           | 71      |
-| 385    |                                                | Microsoft-Windows-DxgKrnl/DWMVsyncSignal/win:Info                                              | 425     |
-| 386    |                                                | Microsoft-Windows-DxgKrnl/PagingQueuePacket/win:Start                                          | 21      |
-| 387    |                                                | Microsoft-Windows-DxgKrnl/PagingQueuePacket/win:Info                                           | 21      |
-| 388    |                                                | Microsoft-Windows-DxgKrnl/PagingQueuePacket/win:Stop                                           | 21      |
-| 389    |                                                | Microsoft-Windows-DxgKrnl/ClearFlipDevice/win:Info                                             | 1       |
-| 390    |                                                | Microsoft-Windows-DxgKrnl/ExtendedProfiler/win:Info                                            | 177     |
-| 391    |                                                | Microsoft-Windows-DxgKrnl/FlushScheduler/win:Info                                              | 4       |
-| 392    |                                                | Microsoft-Windows-DxgKrnl/LockAllocationBackingStore/win:Info                                  | 2       |
-| 393    |                                                | Microsoft-Windows-DxgKrnl/VidMmProcessBudgetChange/win:Info                                    | 8       |
-| 394    |                                                | Microsoft-Windows-DxgKrnl/VidMmProcessUsageChange/win:Info                                     | 8       |
-| 395    |                                                | Microsoft-Windows-DxgKrnl/VidMmProcessCommitmentChange/win:Info                                | 8       |
-| 396    |                                                | Microsoft-Windows-DxgKrnl/AssociateDxgSchedulerObject/win:Info                                 | 33      |
-| 397    |                                                | Microsoft-Windows-DxgKrnl/ReportSyncObject/win:Info                                            | 1       |
-| 398    |                                                | Microsoft-Windows-DxgKrnl/ReportSyncObject/win:Start                                           | 72      |
-| 399    | Microsoft-Windows-DotNETRuntimeRundown         |                                                                                                | 4662    |
-| 400    |                                                | Microsoft-Windows-DotNETRuntimeRundown/CLRMethodRundown/MethodDCEndVerbose                     | 1796    |
-| 401    |                                                | Microsoft-Windows-DotNETRuntimeRundown/CLRMethodRundown/DCEndComplete                          | 8       |
-| 402    |                                                | Microsoft-Windows-DotNETRuntimeRundown/CLRMethodRundown/DCEndInit                              | 8       |
-| 403    |                                                | Microsoft-Windows-DotNETRuntimeRundown/CLRMethodRundown/MethodDCEndILToNativeMap               | 1676    |
-| 404    |                                                | Microsoft-Windows-DotNETRuntimeRundown/CLRLoaderRundown/DomainModuleDCEnd                      | 378     |
-| 405    |                                                | Microsoft-Windows-DotNETRuntimeRundown/CLRLoaderRundown/ModuleDCEnd                            | 386     |
-| 406    |                                                | Microsoft-Windows-DotNETRuntimeRundown/CLRLoaderRundown/AssemblyDCEnd                          | 386     |
-| 407    |                                                | Microsoft-Windows-DotNETRuntimeRundown/CLRLoaderRundown/AppDomainDCEnd                         | 16      |
-| 408    |                                                | Microsoft-Windows-DotNETRuntimeRundown/CLRRuntimeInformationRundown/win:Start                  | 8       |
-| 409    | Microsoft-Windows-DotNETRuntime                |                                                                                                | 2584    |
-| 410    |                                                | Microsoft-Windows-DotNETRuntime/CLRMethod/MethodUnloadVerbose                                  | 1796    |
-| 411    |                                                | Microsoft-Windows-DotNETRuntime/CLRLoader/ModuleUnload                                         | 386     |
-| 412    |                                                | Microsoft-Windows-DotNETRuntime/CLRLoader/AssemblyUnload                                       | 386     |
-| 413    |                                                | Microsoft-Windows-DotNETRuntime/CLRLoader/AppDomainUnload                                      | 16      |
-| 414    | Microsoft-Windows-Direct3D11                   |                                                                                                | 1002    |
-| 415    |                                                | Microsoft-Windows-Direct3D11/Name/win:DC_Start                                                 | 237     |
-| 416    |                                                | Microsoft-Windows-Direct3D11/Device/win:DC_Start                                               | 29      |
-| 417    |                                                | Microsoft-Windows-Direct3D11/Buffer/win:DC_Start                                               | 250     |
-| 418    |                                                | Microsoft-Windows-Direct3D11/Texture2D/win:Start                                               | 1       |
-| 419    |                                                | Microsoft-Windows-Direct3D11/Texture2D/win:Stop                                                | 1       |
-| 420    |                                                | Microsoft-Windows-Direct3D11/Texture2D/win:DC_Start                                            | 431     |
-| 421    |                                                | Microsoft-Windows-Direct3D11/Texture2D/win:Info                                                | 31      |
-| 422    |                                                | Microsoft-Windows-Direct3D11/JournalEntry/win:Info                                             | 22      |
-| 423    | Microsoft-Windows-DXGI                         |                                                                                                | 384     |
-| 424    |                                                | Microsoft-Windows-DXGI/Factory/win:DC_Start                                                    | 40      |
-| 425    |                                                | Microsoft-Windows-DXGI/Adapter/win:DC_Start                                                    | 51      |
-| 426    |                                                | Microsoft-Windows-DXGI/Output/win:DC_Start                                                     | 29      |
-| 427    |                                                | Microsoft-Windows-DXGI/SwapChain/win:DC_Start                                                  | 2       |
-| 428    |                                                | Microsoft-Windows-DXGI/Present/win:Start                                                       | 64      |
-| 429    |                                                | Microsoft-Windows-DXGI/Present/win:Stop                                                        | 64      |
-| 430    |                                                | Microsoft-Windows-DXGI/GetFrameStatistics/win:Info                                             | 64      |
-| 431    |                                                | Microsoft-Windows-DXGI/JournalEntry/win:Info                                                   | 70      |
-| 432    | Microsoft-JScript                              |                                                                                                | 83376   |
-| 433    |                                                | Microsoft-JScript/MethodRundown/DCEndInit                                                      | 16      |
-| 434    |                                                | Microsoft-JScript/MethodRundown/DCEndComplete                                                  | 16      |
-| 435    |                                                | Microsoft-JScript/MethodRundown/MethodDCEnd                                                    | 16156   |
-| 436    |                                                | Microsoft-JScript/ScriptContextRundown/ScriptContextDCEnd                                      | 40      |
-| 437    |                                                | Microsoft-JScript/MethodRuntime/MethodLoad                                                     | 67070   |
-| 438    |                                                | Microsoft-JScript/ScriptContextRundown/SourceDCEnd                                             | 78      |
-| 439    | ImageId                                        |                                                                                                | 88017   |
-| 440    |                                                | ImageId: Info                                                                                  | 22513   |
-| 441    |                                                | DbgId: None                                                                                    | 294     |
-| 442    |                                                | DbgId: BIN                                                                                     | 6       |
-| 443    |                                                | DbgId: DBG                                                                                     | 6       |
-| 444    |                                                | DbgId: RSDS                                                                                    | 22207   |
-| 445    |                                                | DbgId: ILRSDS                                                                                  | 258     |
-| 446    |                                                | ImageId [Provider]                                                                             | 40920   |
-| 447    |                                                | ImageId: FileVersion                                                                           | 1813    |
-| 448    | Image                                          |                                                                                                | 22520   |
-| 449    |                                                | Image: Unload                                                                                  | 579     |
-| 450    |                                                | Image: Start Rundown                                                                           | 11227   |
-| 451    |                                                | Image: End Rundown                                                                             | 10681   |
-| 452    |                                                | Image: Load                                                                                    | 32      |
-| 453    |                                                | Image: Kernel Base                                                                             | 1       |
-| 454    | FileIo                                         |                                                                                                | 81561   |
-| 455    |                                                | Filename: Create                                                                               | 152     |
-| 456    |                                                | Filename: Delete                                                                               | 1680    |
-| 457    |                                                | Filename: Rundown                                                                              | 9839    |
-| 458    |                                                | FileIo: Create                                                                                 | 1108    |
-| 459    |                                                | FileIo: Cleanup                                                                                | 900     |
-| 460    |                                                | FileIo: Close                                                                                  | 3113    |
-| 461    |                                                | FileIo: Read                                                                                   | 5286    |
-| 462    |                                                | FileIo: Write                                                                                  | 475     |
-| 463    |                                                | FileIo: SetInfo                                                                                | 43      |
-| 464    |                                                | FileIo: Rename                                                                                 | 1       |
-| 465    |                                                | FileIo: DirEnum                                                                                | 222     |
-| 466    |                                                | FileIo: Flush                                                                                  | 7       |
-| 467    |                                                | FileIo: QueryInfo                                                                              | 23633   |
-| 468    |                                                | FileIo: FSCTL                                                                                  | 155     |
-| 469    |                                                | FileIo: OperationEnd                                                                           | 34941   |
-| 470    |                                                | FileIo: DirNotify                                                                              | 5       |
-| 471    |                                                | FileIo: RenamePath                                                                             | 1       |
-| 472    | EventTrace                                     |                                                                                                | 21      |
-| 473    |                                                | EventTrace: Header                                                                             | 1       |
-| 474    |                                                | EventTrace: Group Masks                                                                        | 4       |
-| 475    |                                                | EventTrace: Rundown Complete                                                                   | 3       |
-| 476    |                                                | EventTrace: Group Masks End                                                                    | 3       |
-| 477    |                                                | EventTrace: DbgId (RSDS)                                                                       | 2       |
-| 478    |                                                | EventTrace: Build Lab                                                                          | 1       |
-| 479    |                                                | EventTrace: Binary Path                                                                        | 2       |
-| 480    |                                                | EventTrace [Provider]                                                                          | 5       |
-| 481    | EventMetadata                                  |                                                                                                | 468     |
-| 482    |                                                | Event Metadata: Event Info                                                                     | 333     |
-| 483    |                                                | Event Metadata: Map Info                                                                       | 135     |
-| 484    | DiskIo                                         |                                                                                                | 8941    |
-| 485    |                                                | DiskIo: Read                                                                                   | 5329    |
-| 486    |                                                | DiskIo: Write                                                                                  | 438     |
-| 487    |                                                | DiskIo: Read Init                                                                              | 2994    |
-| 488    |                                                | DiskIo: Write Init                                                                             | 158     |
-| 489    |                                                | DiskIo: Flush                                                                                  | 18      |
-| 490    |                                                | DiskIo: Flush Init                                                                             | 4       |
-| 491    | 3044f61a-99b0-4c21-b203-d39423c73b00           | <Unknown>                                                                                      | 30      |
+<table>
+  <thead>
+    <tr>
+      <th>Line #</th>
+      <th>Provider Name</th>
+      <th>Event Name</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>d00792da-07b7-40f5-97eb-5d974e054740</td>
+      <td><Unknown></td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>a688ee40-d8d9-4736-b6f9-6b74935ba3b1</td>
+      <td><Unknown></td>
+      <td>652</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>WinSATAssessment</td>
+      <td>&nbsp;</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>&nbsp;</td>
+      <td>WinSAT: WinSPR Compressed Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>&nbsp;</td>
+      <td>WinSAT: Metrics Compressed Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>&nbsp;</td>
+      <td>WinSAT: SystemConfig Compressed Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Thread</td>
+      <td>&nbsp;</td>
+      <td>143991</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>&nbsp;</td>
+      <td>Thread: Create</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>&nbsp;</td>
+      <td>Thread: Delete</td>
+      <td>159</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>&nbsp;</td>
+      <td>Thread: Start Rundown</td>
+      <td>2490</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>&nbsp;</td>
+      <td>Thread: End Rundown</td>
+      <td>2428</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>&nbsp;</td>
+      <td>Thread: CSwitch</td>
+      <td>85467</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>&nbsp;</td>
+      <td>Thread: SetPriority</td>
+      <td>860</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>&nbsp;</td>
+      <td>Thread: SetBasePriority</td>
+      <td>5362</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>&nbsp;</td>
+      <td>Thread: ReadyThread</td>
+      <td>46270</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>&nbsp;</td>
+      <td>Thread: Set Page Priority</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>&nbsp;</td>
+      <td>Thread: Set I/O Priority</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>&nbsp;</td>
+      <td>Thread [Provider]</td>
+      <td>401</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>&nbsp;</td>
+      <td>Thread: Set Ideal Processor</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>&nbsp;</td>
+      <td>Thread: Set User Ideal Processor</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>SysConfigEx</td>
+      <td>&nbsp;</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>&nbsp;</td>
+      <td>SysConfigEx: BuildInfo</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>&nbsp;</td>
+      <td>SysConfigEx: SystemPaths</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>&nbsp;</td>
+      <td>SysConfigEx: UnknownVolume</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>&nbsp;</td>
+      <td>SysConfigEx: VolumeMapping</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>&nbsp;</td>
+      <td>SysConfigEx: NetworkInterface</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>&nbsp;</td>
+      <td>SysConfigEx [Provider]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>SysConfig</td>
+      <td>&nbsp;</td>
+      <td>455</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: CPUs</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Physical Disks</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Logical Disks</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Network Cards</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Video Adapters</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Services</td>
+      <td>283</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Power Management</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: IRQs</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: PnP Devices</td>
+      <td>117</td>
+    </tr>
+    <tr>
+      <td>38</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: NUMA Nodes</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Platform</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Processor Group Configuration</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Processor Mapping</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Display DPI</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Code Integrity</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>&nbsp;</td>
+      <td>SysConfig: Machine Id</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>&nbsp;</td>
+      <td>SysConfig [Provider]</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>StackWalk</td>
+      <td>Stack Walk</td>
+      <td>1260641</td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>Process</td>
+      <td>&nbsp;</td>
+      <td>594</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>&nbsp;</td>
+      <td>Process: Create</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>49</td>
+      <td>&nbsp;</td>
+      <td>Process: Delete</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>&nbsp;</td>
+      <td>Process: Start Rundown</td>
+      <td>154</td>
+    </tr>
+    <tr>
+      <td>51</td>
+      <td>&nbsp;</td>
+      <td>Process: End Rundown</td>
+      <td>149</td>
+    </tr>
+    <tr>
+      <td>52</td>
+      <td>&nbsp;</td>
+      <td>Process [Provider]</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>53</td>
+      <td>&nbsp;</td>
+      <td>Process: PerfCounters: End</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>54</td>
+      <td>&nbsp;</td>
+      <td>Process: PerfCounters: Rundown</td>
+      <td>149</td>
+    </tr>
+    <tr>
+      <td>55</td>
+      <td>&nbsp;</td>
+      <td>Process: Zombie</td>
+      <td>123</td>
+    </tr>
+    <tr>
+      <td>56</td>
+      <td>Power</td>
+      <td>&nbsp;</td>
+      <td>113</td>
+    </tr>
+    <tr>
+      <td>57</td>
+      <td>&nbsp;</td>
+      <td>Power: Perf State Change</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>58</td>
+      <td>&nbsp;</td>
+      <td>Power: Idle State Change</td>
+      <td>109</td>
+    </tr>
+    <tr>
+      <td>59</td>
+      <td>Pool</td>
+      <td>&nbsp;</td>
+      <td>626357</td>
+    </tr>
+    <tr>
+      <td>60</td>
+      <td>&nbsp;</td>
+      <td>Pool: Allocate</td>
+      <td>241999</td>
+    </tr>
+    <tr>
+      <td>61</td>
+      <td>&nbsp;</td>
+      <td>Pool: Allocate Session</td>
+      <td>7365</td>
+    </tr>
+    <tr>
+      <td>62</td>
+      <td>&nbsp;</td>
+      <td>Pool: Free</td>
+      <td>368975</td>
+    </tr>
+    <tr>
+      <td>63</td>
+      <td>&nbsp;</td>
+      <td>Pool: Free Session</td>
+      <td>7643</td>
+    </tr>
+    <tr>
+      <td>64</td>
+      <td>&nbsp;</td>
+      <td>Pool: PoolSnap Start Rundown</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>65</td>
+      <td>&nbsp;</td>
+      <td>Pool: PoolSnap End Rundown</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>66</td>
+      <td>&nbsp;</td>
+      <td>Pool: BigPoolSnap Start Rundown</td>
+      <td>149</td>
+    </tr>
+    <tr>
+      <td>67</td>
+      <td>&nbsp;</td>
+      <td>Pool: BigPoolSnap End Rundown</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <td>68</td>
+      <td>&nbsp;</td>
+      <td>Pool: PoolSnap Session Start Rundown</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>69</td>
+      <td>&nbsp;</td>
+      <td>Pool: PoolSnap Session End Rundown</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>70</td>
+      <td>&nbsp;</td>
+      <td>Pool: BigPoolSnap Session Start Rundown</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>71</td>
+      <td>&nbsp;</td>
+      <td>Pool: BigPoolSnap Session End Rundown</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>72</td>
+      <td>Perfinfo</td>
+      <td>&nbsp;</td>
+      <td>1568074</td>
+    </tr>
+    <tr>
+      <td>73</td>
+      <td>&nbsp;</td>
+      <td>Mark</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>74</td>
+      <td>&nbsp;</td>
+      <td>Sampled Profile</td>
+      <td>13853</td>
+    </tr>
+    <tr>
+      <td>75</td>
+      <td>&nbsp;</td>
+      <td>Message Signaled Interrupt</td>
+      <td>5468</td>
+    </tr>
+    <tr>
+      <td>76</td>
+      <td>&nbsp;</td>
+      <td>SysCall: Enter</td>
+      <td>769129</td>
+    </tr>
+    <tr>
+      <td>77</td>
+      <td>&nbsp;</td>
+      <td>SysCall: Exit</td>
+      <td>767373</td>
+    </tr>
+    <tr>
+      <td>78</td>
+      <td>&nbsp;</td>
+      <td>Interrupt</td>
+      <td>190</td>
+    </tr>
+    <tr>
+      <td>79</td>
+      <td>&nbsp;</td>
+      <td>Dpc</td>
+      <td>12056</td>
+    </tr>
+    <tr>
+      <td>80</td>
+      <td>&nbsp;</td>
+      <td>Sampled Profile Freq: Start Rundown</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>81</td>
+      <td>&nbsp;</td>
+      <td>Sampled Profile Freq: End Rundown</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>82</td>
+      <td>PageFault</td>
+      <td>&nbsp;</td>
+      <td>135319</td>
+    </tr>
+    <tr>
+      <td>83</td>
+      <td>&nbsp;</td>
+      <td>PageFault: Transition</td>
+      <td>38820</td>
+    </tr>
+    <tr>
+      <td>84</td>
+      <td>&nbsp;</td>
+      <td>PageFault: Demand Zero</td>
+      <td>47925</td>
+    </tr>
+    <tr>
+      <td>85</td>
+      <td>&nbsp;</td>
+      <td>PageFault: Copy on Write</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <td>86</td>
+      <td>&nbsp;</td>
+      <td>PageFault: Guard Page</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>87</td>
+      <td>&nbsp;</td>
+      <td>PageFault: Hard Page Fault</td>
+      <td>16401</td>
+    </tr>
+    <tr>
+      <td>88</td>
+      <td>&nbsp;</td>
+      <td>PageFault [Provider]</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>89</td>
+      <td>&nbsp;</td>
+      <td>Hardfault</td>
+      <td>5150</td>
+    </tr>
+    <tr>
+      <td>90</td>
+      <td>&nbsp;</td>
+      <td>Memory: VirtualAlloc</td>
+      <td>1269</td>
+    </tr>
+    <tr>
+      <td>91</td>
+      <td>&nbsp;</td>
+      <td>Memory: VirtualFree</td>
+      <td>855</td>
+    </tr>
+    <tr>
+      <td>92</td>
+      <td>&nbsp;</td>
+      <td>Memory: MemInfo</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>93</td>
+      <td>&nbsp;</td>
+      <td>Memory: MMStat</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>94</td>
+      <td>&nbsp;</td>
+      <td>Memory: MemInfoExWS</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>95</td>
+      <td>&nbsp;</td>
+      <td>Memory: MemInfoExSessionWS</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>96</td>
+      <td>&nbsp;</td>
+      <td>Memory: VirtualAlloc Start Rundown</td>
+      <td>12434</td>
+    </tr>
+    <tr>
+      <td>97</td>
+      <td>&nbsp;</td>
+      <td>Memory: VirtualAlloc End Rundown</td>
+      <td>12213</td>
+    </tr>
+    <tr>
+      <td>98</td>
+      <td>Microsoft-Windows-Win32k</td>
+      <td>&nbsp;</td>
+      <td>13925</td>
+    </tr>
+    <tr>
+      <td>99</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/ThreadInfoRundown/win:Info</td>
+      <td>778</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/QueuePostMessage/win:Info</td>
+      <td>4994</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/SendMessage/win:Start</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/RetrievePostMessage/win:Info</td>
+      <td>7296</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/RetrieveSendMessage/win:Start</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/RetrieveInputMessage/win:Info</td>
+      <td>201</td>
+    </tr>
+    <tr>
+      <td>105</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/RetrievePseudoMessage/win:Info</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <td>106</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/WakePump/win:Info</td>
+      <td>228</td>
+    </tr>
+    <tr>
+      <td>107</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/SendMessage/win:Stop</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/RetrieveSendMessage/win:Stop</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <td>109</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/QueueInputMessage/win:Info</td>
+      <td>196</td>
+    </tr>
+    <tr>
+      <td>110</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/DispatchMessage/win:Start</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>111</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/DispatchMessage/win:Stop</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>112</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Win32k/QueueNullPostMessage/win:Info</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>113</td>
+      <td>Microsoft-Windows-UserModePowerService</td>
+      <td>&nbsp;</td>
+      <td>310</td>
+    </tr>
+    <tr>
+      <td>114</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownPlatformRole/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>115</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownPowerScheme/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>116</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownAcPowerSetting/win:Info</td>
+      <td>140</td>
+    </tr>
+    <tr>
+      <td>117</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownDcPowerSetting/win:Info</td>
+      <td>140</td>
+    </tr>
+    <tr>
+      <td>118</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownBatteryInformation/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>119</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownBatteryStatus/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>120</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownBrightnessCapability/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>121</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownPowerSource/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>122</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownOverrideConfiguration/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>123</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownPowerProfileSetting/win:Info</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>124</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownSmartUserPresenceState/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>125</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownOverlaySchemePowerSetting/win:Info</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>126</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownActualOverlayPowerScheme/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>127</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownEffectiveOverlayPowerScheme/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>128</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-UserModePowerService/RundownOverlaySuspendReason/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>129</td>
+      <td>Microsoft-Windows-TCPIP</td>
+      <td>&nbsp;</td>
+      <td>1930</td>
+    </tr>
+    <tr>
+      <td>130</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpEndpointCreation/win:Info</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>131</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpRequestConnect/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>132</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpInspectConnectComplete/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>133</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpTcbSynSend/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>134</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpBindEndpointComplete/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>135</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpCloseEndpoint/win:Info</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>136</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpCreateEndpointComplete/win:Info</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>137</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpConnectTcbProceeding/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>138</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpConnectTcbComplete/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>139</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpConnectTcbFailure/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>140</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpCloseTcbRequest/win:Info</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>141</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpAbortTcbRequest/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>142</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpAbortTcbComplete/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>143</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpShutdownTcb/win:Info</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>144</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpDisconnectTcbRtoTimeout/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>145</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpTcbStateChange/win:Info</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>146</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpTcbStartTimer/win:Info</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <td>147</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpTcbStopTimer/win:Info</td>
+      <td>124</td>
+    </tr>
+    <tr>
+      <td>148</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpTcbExpireTimer/win:Info</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>149</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpDataTransferReceive/win:Info</td>
+      <td>118</td>
+    </tr>
+    <tr>
+      <td>150</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpSetTcpOption/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>151</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpReceiveRequest/win:Info</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>152</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpDeliveryIndicated/win:Info</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <td>153</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpDeliverySatisfied/win:Info</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>154</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpSendPosted/win:Info</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <td>155</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpSendTransmitted/win:Info</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <td>156</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpSendAdvance/win:Info</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <td>157</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpSrttMeasurementStarted/win:Info</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>158</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpSrttMeasurementComplete/win:Info</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <td>159</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpSrttMeasurementCancelled/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>160</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/UdpEndpointSendMessages/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>161</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/UdpEndpointReceiveMessages/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>162</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpDeliveryFlush/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>163</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpConnectRestransmit/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>164</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpAcquirePort/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>165</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpAcquireWeakRefPort/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>166</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpReleasePort/win:Info</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>167</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpFlushSack/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>168</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/IpInterfaceRundown/win:Info</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>169</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpipReceiveSlowPath/win:Info</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>170</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpipSendSlowPath/win:Info</td>
+      <td>141</td>
+    </tr>
+    <tr>
+      <td>171</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpTemplateParameters/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>172</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpTemplateChanged/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>173</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpCwndRestart/win:Info</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <td>174</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/RssBindingRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>175</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/RssPortRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>176</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpConnectionRundown/win:Info</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>177</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP//win:Info</td>
+      <td>136</td>
+    </tr>
+    <tr>
+      <td>178</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/IpNeighborState/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>179</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/IpNeighborDiscovery/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>180</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/IpSourceAddressSelection/win:Info</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>181</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/IpSortedAddressPairs/win:Info</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>182</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpDataTransferCumAck/win:Info</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <td>183</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpDataTransferSend/win:Info</td>
+      <td>123</td>
+    </tr>
+    <tr>
+      <td>184</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpDataTransferRttSample/win:Info</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <td>185</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpDataTransferRetransmitRound/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>186</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpipNblOob/win:Info</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <td>187</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpipRouteLookup/win:Info</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <td>188</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpipSrcAddrLookup/win:Info</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>189</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/Memory/win:Info</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>190</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpAssociateNameResContext/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>191</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpInspectConnectWithNameResContext/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>192</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/IpRouteBlocked/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>193</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpTailLossProbe/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>194</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpRack/win:Info</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>195</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/UdpCreateEndpointComplete/win:Info</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>196</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/UdpBindEndpointComplete/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>197</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/UdpCloseEndpointBound/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>198</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/UdpCloseEndpointUnBound/win:Info</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>199</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/IcmpSendRecv/win:Info</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>200</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpSendComplete/win:Info</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <td>201</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpCubicDataTransferCumAck/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>202</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/IpRouteDGDStateChange/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>203</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/IpRouteRundown/win:Info</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>204</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/InetInspect/win:Info</td>
+      <td>171</td>
+    </tr>
+    <tr>
+      <td>205</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/TcpipSourceConstraint/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>206</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-TCPIP/RemoteEndpoint/win:Info</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>207</td>
+      <td>Microsoft-Windows-StorPort</td>
+      <td>&nbsp;</td>
+      <td>15747</td>
+    </tr>
+    <tr>
+      <td>208</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-StorPort/Port/win:Info</td>
+      <td>2632</td>
+    </tr>
+    <tr>
+      <td>209</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-StorPort/Port/Dispatch</td>
+      <td>2615</td>
+    </tr>
+    <tr>
+      <td>210</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-StorPort/Port/Completion</td>
+      <td>2615</td>
+    </tr>
+    <tr>
+      <td>211</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-StorPort/Port/Queue</td>
+      <td>5265</td>
+    </tr>
+    <tr>
+      <td>212</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-StorPort/Port/win:Start</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>213</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-StorPort/Port/win:Stop</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>214</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-StorPort/Isr/Completion</td>
+      <td>2604</td>
+    </tr>
+    <tr>
+      <td>215</td>
+      <td>Microsoft-Windows-Search-Core</td>
+      <td>&nbsp;</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <td>216</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Search-Core/USN_Notify/win:Info</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>217</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Search-Core/Gatherer_OnDataChange_Track_Url/win:Info</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>218</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Search-Core/ETWLogging/win:Info</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>219</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Search-Core/FileChangeTracker_ProcessUSN/win:Start</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>220</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Search-Core/FileChangeTracker_ProcessUSN/win:Stop</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>221</td>
+      <td>Microsoft-Windows-ReadyBoostDriver</td>
+      <td>Microsoft-Windows-ReadyBoostDriver/GlobalStats/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>222</td>
+      <td>Microsoft-Windows-RPC</td>
+      <td>&nbsp;</td>
+      <td>2473</td>
+    </tr>
+    <tr>
+      <td>223</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-RPC/RpcClientCall/win:Start</td>
+      <td>201</td>
+    </tr>
+    <tr>
+      <td>224</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-RPC/RpcServerCall/win:Start</td>
+      <td>1036</td>
+    </tr>
+    <tr>
+      <td>225</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-RPC/RpcClientCall/win:Stop</td>
+      <td>199</td>
+    </tr>
+    <tr>
+      <td>226</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-RPC/RpcServerCall/win:Stop</td>
+      <td>1037</td>
+    </tr>
+    <tr>
+      <td>227</td>
+      <td>Microsoft-Windows-ProcessStateManager</td>
+      <td>Microsoft-Windows-ProcessStateManager/StateChange/win:Info</td>
+      <td>124</td>
+    </tr>
+    <tr>
+      <td>228</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control</td>
+      <td>&nbsp;</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <td>229</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_LoadProfileFromString/win:Start</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>230</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_LoadProfileFromString/win:Stop</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>231</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_AddProfileToCollection/win:Start</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>232</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_AddProfileToCollection/win:Stop</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>233</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_LoadTraceMergePropertiesFromFile/win:Start</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>234</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_LoadTraceMergePropertiesFromFile/win:Stop</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>235</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_StartProfiles/win:Stop</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>236</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_StopProfiles/win:Start</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>237</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_QueryProfiles/win:Start</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>238</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_QueryProfiles/win:Stop</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>239</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerBegin/win:Start</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>240</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerBegin/win:Stop</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>241</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerUpdate/win:Start</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>242</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerUpdate/win:Stop</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>243</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerEnd/win:Start</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>244</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Performance-Recorder-Control/Perf_ControlProgressHandlerEnd/win:Stop</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>245</td>
+      <td>Microsoft-Windows-Networking-Correlation</td>
+      <td>&nbsp;</td>
+      <td>3381</td>
+    </tr>
+    <tr>
+      <td>246</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Networking-Correlation//win:Start</td>
+      <td>423</td>
+    </tr>
+    <tr>
+      <td>247</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Networking-Correlation//win:Stop</td>
+      <td>376</td>
+    </tr>
+    <tr>
+      <td>248</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Networking-Correlation//win:Send</td>
+      <td>2582</td>
+    </tr>
+    <tr>
+      <td>249</td>
+      <td>Microsoft-Windows-Kernel-StoreMgr</td>
+      <td>Microsoft-Windows-Kernel-StoreMgr/StoreRundown/win:Info</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>250</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power</td>
+      <td>&nbsp;</td>
+      <td>190</td>
+    </tr>
+    <tr>
+      <td>251</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/IdleAccountingRundown/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>252</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/ProcessorFirmwareRundown/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>253</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/PTStateDomainFirmwareRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>254</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/Summary/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>255</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/PerfStatesRundown/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>256</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/BiosPStatesRundown/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>257</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/BiosCStatesRundown/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>258</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/BiosTStatesRundown/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>259</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/LogicalProcessorIdlingRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>260</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/Summary2/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>261</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/PepQueryCapabilities/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>262</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/ProcessorPerformanceRundown/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>263</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/ParkNodeRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>264</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/ProcessorIdleRundown/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>265</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/ProcessorIdRundown/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>266</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/PepGetPlatformIdleStates/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>267</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/PlatformAccountingBucketIntervalsRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>268</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/StaticPolicyRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>269</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/CoordinatedIdleRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>270</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/ProfileRundown/win:Info</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>271</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/ProfileSettingRundown/win:Info</td>
+      <td>122</td>
+    </tr>
+    <tr>
+      <td>272</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/ProfileStatusRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>273</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/HeterogeneousPoliciesRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>274</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Processor-Power/QosSupportRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>275</td>
+      <td>Microsoft-Windows-Kernel-Power</td>
+      <td>&nbsp;</td>
+      <td>1344</td>
+    </tr>
+    <tr>
+      <td>276</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/SystemTimeResolutionChange/win:Info</td>
+      <td>1046</td>
+    </tr>
+    <tr>
+      <td>277</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/SystemTimeResolutionRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>278</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/SystemTimeResolutionRequestRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>279</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/SystemTimeResolutionKernelChange/win:Info</td>
+      <td>103</td>
+    </tr>
+    <tr>
+      <td>280</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/PowerRequestRundown/win:Info</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>281</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/SleepDisableReasonRundown/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>282</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/AcDcStateRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>283</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/SystemTimerResolutionStackRundown/win:Info</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>284</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/FirmwarePlatformRoleRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>285</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/DeviceRundown/win:Info</td>
+      <td>116</td>
+    </tr>
+    <tr>
+      <td>286</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/StandbyConnectivityRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>287</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/CsComplianceRundown/win:Info</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>288</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/DeepSleepConstraintRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>289</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/SystemLatencyRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>290</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/DynamicTickStatusRundown/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>291</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-Power/PowerStateEventRundown/win:Info</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>292</td>
+      <td>Microsoft-Windows-Kernel-EventTracing</td>
+      <td>&nbsp;</td>
+      <td>1949</td>
+    </tr>
+    <tr>
+      <td>293</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-EventTracing/ETW_TASK_STACK_TRACE/ETW_OPCODE_USER_MODE_STACK_TRACE</td>
+      <td>1109</td>
+    </tr>
+    <tr>
+      <td>294</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Kernel-EventTracing/ETW_TASK_LOST_EVENT/win:Info</td>
+      <td>840</td>
+    </tr>
+    <tr>
+      <td>295</td>
+      <td>Microsoft-Windows-DxgKrnl</td>
+      <td>&nbsp;</td>
+      <td>23024</td>
+    </tr>
+    <tr>
+      <td>296</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/VSyncDPC/win:Info</td>
+      <td>425</td>
+    </tr>
+    <tr>
+      <td>297</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/WorkerThread/win:Start</td>
+      <td>178</td>
+    </tr>
+    <tr>
+      <td>298</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/WorkerThread/win:Stop</td>
+      <td>179</td>
+    </tr>
+    <tr>
+      <td>299</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ChangePriority/win:Info</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <td>300</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/AttemptPreemption/win:Info</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <td>301</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Adapter/win:DC_Start</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>302</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Device/win:DC_Start</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <td>303</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Context/win:DC_Start</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <td>304</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/AdapterAllocation/win:Start</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>305</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/AdapterAllocation/win:Stop</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>306</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/AdapterAllocation/win:DC_Start</td>
+      <td>979</td>
+    </tr>
+    <tr>
+      <td>307</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/DeviceAllocation/win:Start</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>308</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/DeviceAllocation/win:Stop</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>309</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/DeviceAllocation/win:DC_Start</td>
+      <td>1068</td>
+    </tr>
+    <tr>
+      <td>310</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/TerminateAllocation/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>311</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ProcessTerminateAllocation/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>312</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Lock/win:Info</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>313</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Unlock/win:Info</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>314</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ReferenceAllocations/win:Info</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <td>315</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PatchLocationList/win:Info</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <td>316</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ApertureMapping/win:Info</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>317</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ApertureUnmapping/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>318</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PagingOpMapApertureSegment/win:Info</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>319</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PagingOpUnmapApertureSegment/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>320</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Preparation/win:Start</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <td>321</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Preparation/win:Info</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>322</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Preparation/win:Stop</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <td>323</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ReserveResource/win:Start</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>324</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ReserveResource/win:Stop</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>325</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/InnerIteration/win:Start</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>326</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/InnerIteration/win:Stop</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>327</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/AllocationFault/win:Info</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>328</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/MarkAllocation/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>329</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PageInAllocation/win:Info</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>330</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/AddDmaBuffer/win:Start</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <td>331</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ReportSegment/win:Info</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>332</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ReportCommittedAllocation/win:Info</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <td>333</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Semaphore/win:DC_Start</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <td>334</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Fence/win:Start</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>335</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Fence/win:Stop</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>336</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Fence/win:DC_Start</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <td>337</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/SetDisplayMode/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>338</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/BlockThread/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>339</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Profiler/win:Start</td>
+      <td>7151</td>
+    </tr>
+    <tr>
+      <td>340</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Profiler/win:Stop</td>
+      <td>7150</td>
+    </tr>
+    <tr>
+      <td>341</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ExtendedProfiler/win:Start</td>
+      <td>189</td>
+    </tr>
+    <tr>
+      <td>342</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ExtendedProfiler/win:Stop</td>
+      <td>189</td>
+    </tr>
+    <tr>
+      <td>343</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/SetPointerPosition/win:Info</td>
+      <td>190</td>
+    </tr>
+    <tr>
+      <td>344</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/DpiReportAdapter/win:Info</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>345</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/MMIOFlip/win:Info</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>346</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/EtwVersion/win:Stop</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>347</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Flip/win:Info</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>348</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Render/win:Info</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>349</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/RenderKm/win:Info</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <td>350</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PresentHistory/win:Info</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <td>351</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PresentHistory/win:Stop</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <td>352</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/DmaPacket/win:Start</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <td>353</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/DmaPacket/win:Stop</td>
+      <td>73</td>
+    </tr>
+    <tr>
+      <td>354</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/DmaPacket/win:Info</td>
+      <td>73</td>
+    </tr>
+    <tr>
+      <td>355</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/QueuePacket/win:Start</td>
+      <td>269</td>
+    </tr>
+    <tr>
+      <td>356</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/QueuePacket/win:Info</td>
+      <td>316</td>
+    </tr>
+    <tr>
+      <td>357</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/QueuePacket/win:Stop</td>
+      <td>267</td>
+    </tr>
+    <tr>
+      <td>358</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/VSyncInterrupt/win:Info</td>
+      <td>425</td>
+    </tr>
+    <tr>
+      <td>359</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/GetDeviceState/win:Info</td>
+      <td>216</td>
+    </tr>
+    <tr>
+      <td>360</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Present/win:Info</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>361</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/OfferAllocation/win:Start</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>362</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/OfferAllocation/win:Info</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>363</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/OfferAllocation/win:Stop</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>364</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ReportOfferAllocation/win:Info</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <td>365</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ReclaimAllocation/win:Info</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>366</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PresentHistoryDetailed/win:Start</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <td>367</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ReportCommittedGlobalAllocation/win:DC_Start</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>368</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/SignalSynchronizationObject2/win:Info</td>
+      <td>72</td>
+    </tr>
+    <tr>
+      <td>369</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/NodeMetadata/win:Info</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>370</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/VSyncDPCMultiPlane/win:Info</td>
+      <td>425</td>
+    </tr>
+    <tr>
+      <td>371</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/TotalBytesResidentInSegment/win:Info</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>372</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/Brightness/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>373</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/BacklightOptimizationLevel/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>374</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/VidMmDereferenceObjectAsync/win:Start</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>375</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/VidMmDereferenceObjectAsync/win:Stop</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>376</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/VidMmUnmapViewAsync/win:Start</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>377</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/VidMmUnmapViewAsync/win:Stop</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>378</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PagingPreparation/win:Start</td>
+      <td>279</td>
+    </tr>
+    <tr>
+      <td>379</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PagingPreparation/win:Stop</td>
+      <td>279</td>
+    </tr>
+    <tr>
+      <td>380</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/CddStandardAllocation/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>381</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/MonitoredFence/win:DC_Start</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <td>382</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/SignalSynchronizationObjectFromGpu/win:Info</td>
+      <td>72</td>
+    </tr>
+    <tr>
+      <td>383</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/UnwaitCpuWaiter/win:Info</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>384</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/DWMVsyncCountWait/win:Info</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <td>385</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/DWMVsyncSignal/win:Info</td>
+      <td>425</td>
+    </tr>
+    <tr>
+      <td>386</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PagingQueuePacket/win:Start</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>387</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PagingQueuePacket/win:Info</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>388</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/PagingQueuePacket/win:Stop</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>389</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ClearFlipDevice/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>390</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ExtendedProfiler/win:Info</td>
+      <td>177</td>
+    </tr>
+    <tr>
+      <td>391</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/FlushScheduler/win:Info</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>392</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/LockAllocationBackingStore/win:Info</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>393</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/VidMmProcessBudgetChange/win:Info</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>394</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/VidMmProcessUsageChange/win:Info</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>395</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/VidMmProcessCommitmentChange/win:Info</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>396</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/AssociateDxgSchedulerObject/win:Info</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <td>397</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ReportSyncObject/win:Info</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>398</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DxgKrnl/ReportSyncObject/win:Start</td>
+      <td>72</td>
+    </tr>
+    <tr>
+      <td>399</td>
+      <td>Microsoft-Windows-DotNETRuntimeRundown</td>
+      <td>&nbsp;</td>
+      <td>4662</td>
+    </tr>
+    <tr>
+      <td>400</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntimeRundown/CLRMethodRundown/MethodDCEndVerbose</td>
+      <td>1796</td>
+    </tr>
+    <tr>
+      <td>401</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntimeRundown/CLRMethodRundown/DCEndComplete</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>402</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntimeRundown/CLRMethodRundown/DCEndInit</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>403</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntimeRundown/CLRMethodRundown/MethodDCEndILToNativeMap</td>
+      <td>1676</td>
+    </tr>
+    <tr>
+      <td>404</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntimeRundown/CLRLoaderRundown/DomainModuleDCEnd</td>
+      <td>378</td>
+    </tr>
+    <tr>
+      <td>405</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntimeRundown/CLRLoaderRundown/ModuleDCEnd</td>
+      <td>386</td>
+    </tr>
+    <tr>
+      <td>406</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntimeRundown/CLRLoaderRundown/AssemblyDCEnd</td>
+      <td>386</td>
+    </tr>
+    <tr>
+      <td>407</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntimeRundown/CLRLoaderRundown/AppDomainDCEnd</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>408</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntimeRundown/CLRRuntimeInformationRundown/win:Start</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>409</td>
+      <td>Microsoft-Windows-DotNETRuntime</td>
+      <td>&nbsp;</td>
+      <td>2584</td>
+    </tr>
+    <tr>
+      <td>410</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntime/CLRMethod/MethodUnloadVerbose</td>
+      <td>1796</td>
+    </tr>
+    <tr>
+      <td>411</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntime/CLRLoader/ModuleUnload</td>
+      <td>386</td>
+    </tr>
+    <tr>
+      <td>412</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntime/CLRLoader/AssemblyUnload</td>
+      <td>386</td>
+    </tr>
+    <tr>
+      <td>413</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DotNETRuntime/CLRLoader/AppDomainUnload</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>414</td>
+      <td>Microsoft-Windows-Direct3D11</td>
+      <td>&nbsp;</td>
+      <td>1002</td>
+    </tr>
+    <tr>
+      <td>415</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Direct3D11/Name/win:DC_Start</td>
+      <td>237</td>
+    </tr>
+    <tr>
+      <td>416</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Direct3D11/Device/win:DC_Start</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <td>417</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Direct3D11/Buffer/win:DC_Start</td>
+      <td>250</td>
+    </tr>
+    <tr>
+      <td>418</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Direct3D11/Texture2D/win:Start</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>419</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Direct3D11/Texture2D/win:Stop</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>420</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Direct3D11/Texture2D/win:DC_Start</td>
+      <td>431</td>
+    </tr>
+    <tr>
+      <td>421</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Direct3D11/Texture2D/win:Info</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <td>422</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-Direct3D11/JournalEntry/win:Info</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>423</td>
+      <td>Microsoft-Windows-DXGI</td>
+      <td>&nbsp;</td>
+      <td>384</td>
+    </tr>
+    <tr>
+      <td>424</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DXGI/Factory/win:DC_Start</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>425</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DXGI/Adapter/win:DC_Start</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <td>426</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DXGI/Output/win:DC_Start</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <td>427</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DXGI/SwapChain/win:DC_Start</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>428</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DXGI/Present/win:Start</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <td>429</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DXGI/Present/win:Stop</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <td>430</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DXGI/GetFrameStatistics/win:Info</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <td>431</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-Windows-DXGI/JournalEntry/win:Info</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <td>432</td>
+      <td>Microsoft-JScript</td>
+      <td>&nbsp;</td>
+      <td>83376</td>
+    </tr>
+    <tr>
+      <td>433</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-JScript/MethodRundown/DCEndInit</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>434</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-JScript/MethodRundown/DCEndComplete</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>435</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-JScript/MethodRundown/MethodDCEnd</td>
+      <td>16156</td>
+    </tr>
+    <tr>
+      <td>436</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-JScript/ScriptContextRundown/ScriptContextDCEnd</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>437</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-JScript/MethodRuntime/MethodLoad</td>
+      <td>67070</td>
+    </tr>
+    <tr>
+      <td>438</td>
+      <td>&nbsp;</td>
+      <td>Microsoft-JScript/ScriptContextRundown/SourceDCEnd</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <td>439</td>
+      <td>ImageId</td>
+      <td>&nbsp;</td>
+      <td>88017</td>
+    </tr>
+    <tr>
+      <td>440</td>
+      <td>&nbsp;</td>
+      <td>ImageId: Info</td>
+      <td>22513</td>
+    </tr>
+    <tr>
+      <td>441</td>
+      <td>&nbsp;</td>
+      <td>DbgId: None</td>
+      <td>294</td>
+    </tr>
+    <tr>
+      <td>442</td>
+      <td>&nbsp;</td>
+      <td>DbgId: BIN</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>443</td>
+      <td>&nbsp;</td>
+      <td>DbgId: DBG</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>444</td>
+      <td>&nbsp;</td>
+      <td>DbgId: RSDS</td>
+      <td>22207</td>
+    </tr>
+    <tr>
+      <td>445</td>
+      <td>&nbsp;</td>
+      <td>DbgId: ILRSDS</td>
+      <td>258</td>
+    </tr>
+    <tr>
+      <td>446</td>
+      <td>&nbsp;</td>
+      <td>ImageId [Provider]</td>
+      <td>40920</td>
+    </tr>
+    <tr>
+      <td>447</td>
+      <td>&nbsp;</td>
+      <td>ImageId: FileVersion</td>
+      <td>1813</td>
+    </tr>
+    <tr>
+      <td>448</td>
+      <td>Image</td>
+      <td>&nbsp;</td>
+      <td>22520</td>
+    </tr>
+    <tr>
+      <td>449</td>
+      <td>&nbsp;</td>
+      <td>Image: Unload</td>
+      <td>579</td>
+    </tr>
+    <tr>
+      <td>450</td>
+      <td>&nbsp;</td>
+      <td>Image: Start Rundown</td>
+      <td>11227</td>
+    </tr>
+    <tr>
+      <td>451</td>
+      <td>&nbsp;</td>
+      <td>Image: End Rundown</td>
+      <td>10681</td>
+    </tr>
+    <tr>
+      <td>452</td>
+      <td>&nbsp;</td>
+      <td>Image: Load</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>453</td>
+      <td>&nbsp;</td>
+      <td>Image: Kernel Base</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>454</td>
+      <td>FileIo</td>
+      <td>&nbsp;</td>
+      <td>81561</td>
+    </tr>
+    <tr>
+      <td>455</td>
+      <td>&nbsp;</td>
+      <td>Filename: Create</td>
+      <td>152</td>
+    </tr>
+    <tr>
+      <td>456</td>
+      <td>&nbsp;</td>
+      <td>Filename: Delete</td>
+      <td>1680</td>
+    </tr>
+    <tr>
+      <td>457</td>
+      <td>&nbsp;</td>
+      <td>Filename: Rundown</td>
+      <td>9839</td>
+    </tr>
+    <tr>
+      <td>458</td>
+      <td>&nbsp;</td>
+      <td>FileIo: Create</td>
+      <td>1108</td>
+    </tr>
+    <tr>
+      <td>459</td>
+      <td>&nbsp;</td>
+      <td>FileIo: Cleanup</td>
+      <td>900</td>
+    </tr>
+    <tr>
+      <td>460</td>
+      <td>&nbsp;</td>
+      <td>FileIo: Close</td>
+      <td>3113</td>
+    </tr>
+    <tr>
+      <td>461</td>
+      <td>&nbsp;</td>
+      <td>FileIo: Read</td>
+      <td>5286</td>
+    </tr>
+    <tr>
+      <td>462</td>
+      <td>&nbsp;</td>
+      <td>FileIo: Write</td>
+      <td>475</td>
+    </tr>
+    <tr>
+      <td>463</td>
+      <td>&nbsp;</td>
+      <td>FileIo: SetInfo</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <td>464</td>
+      <td>&nbsp;</td>
+      <td>FileIo: Rename</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>465</td>
+      <td>&nbsp;</td>
+      <td>FileIo: DirEnum</td>
+      <td>222</td>
+    </tr>
+    <tr>
+      <td>466</td>
+      <td>&nbsp;</td>
+      <td>FileIo: Flush</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>467</td>
+      <td>&nbsp;</td>
+      <td>FileIo: QueryInfo</td>
+      <td>23633</td>
+    </tr>
+    <tr>
+      <td>468</td>
+      <td>&nbsp;</td>
+      <td>FileIo: FSCTL</td>
+      <td>155</td>
+    </tr>
+    <tr>
+      <td>469</td>
+      <td>&nbsp;</td>
+      <td>FileIo: OperationEnd</td>
+      <td>34941</td>
+    </tr>
+    <tr>
+      <td>470</td>
+      <td>&nbsp;</td>
+      <td>FileIo: DirNotify</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>471</td>
+      <td>&nbsp;</td>
+      <td>FileIo: RenamePath</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>472</td>
+      <td>EventTrace</td>
+      <td>&nbsp;</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>473</td>
+      <td>&nbsp;</td>
+      <td>EventTrace: Header</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>474</td>
+      <td>&nbsp;</td>
+      <td>EventTrace: Group Masks</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>475</td>
+      <td>&nbsp;</td>
+      <td>EventTrace: Rundown Complete</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>476</td>
+      <td>&nbsp;</td>
+      <td>EventTrace: Group Masks End</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>477</td>
+      <td>&nbsp;</td>
+      <td>EventTrace: DbgId (RSDS)</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>478</td>
+      <td>&nbsp;</td>
+      <td>EventTrace: Build Lab</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>479</td>
+      <td>&nbsp;</td>
+      <td>EventTrace: Binary Path</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>480</td>
+      <td>&nbsp;</td>
+      <td>EventTrace [Provider]</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>481</td>
+      <td>EventMetadata</td>
+      <td>&nbsp;</td>
+      <td>468</td>
+    </tr>
+    <tr>
+      <td>482</td>
+      <td>&nbsp;</td>
+      <td>Event Metadata: Event Info</td>
+      <td>333</td>
+    </tr>
+    <tr>
+      <td>483</td>
+      <td>&nbsp;</td>
+      <td>Event Metadata: Map Info</td>
+      <td>135</td>
+    </tr>
+    <tr>
+      <td>484</td>
+      <td>DiskIo</td>
+      <td>&nbsp;</td>
+      <td>8941</td>
+    </tr>
+    <tr>
+      <td>485</td>
+      <td>&nbsp;</td>
+      <td>DiskIo: Read</td>
+      <td>5329</td>
+    </tr>
+    <tr>
+      <td>486</td>
+      <td>&nbsp;</td>
+      <td>DiskIo: Write</td>
+      <td>438</td>
+    </tr>
+    <tr>
+      <td>487</td>
+      <td>&nbsp;</td>
+      <td>DiskIo: Read Init</td>
+      <td>2994</td>
+    </tr>
+    <tr>
+      <td>488</td>
+      <td>&nbsp;</td>
+      <td>DiskIo: Write Init</td>
+      <td>158</td>
+    </tr>
+    <tr>
+      <td>489</td>
+      <td>&nbsp;</td>
+      <td>DiskIo: Flush</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>490</td>
+      <td>&nbsp;</td>
+      <td>DiskIo: Flush Init</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>491</td>
+      <td>3044f61a-99b0-4c21-b203-d39423c73b00</td>
+      <td><Unknown></td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
 
 </details>
 
