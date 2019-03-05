@@ -72,6 +72,18 @@ CPU执行的基本单元是线程，线程有三种状态：wait（不可执行�
 
 如果线程处于同步等待，会影响性能，可能不能充分利用多个CPU核，另外UI线程如果同步等待，会导致UI线程卡顿，界面绘制卡顿。  
 
+与CPU相关的视图，有很多个，主要分为以下几个：  
+（1）Power/CPU Idle States：主要是分析CPU每个核心的空闲状态。如果对于一个后台服务，需要CPU尽可能跑满，这里CPU空闲态应该尽可能少。如果分析一个笔记本的CPU运转模式，应该使得空闲尽可能多，尽可能进入省电模式。  
+（2）Power/CPU Frequency：主要分析CPU每个核心的运转频率情况。之所以频率可变，是因为P-State（Performance）和T-State（Throttle ）机制。这里曲线表示的是P-State的频率变化，常规状态下是一条直线，如果发生变化，就是可能有多重不同的P-State在做切换。  
+（3）Computation/CPU Usage (Sampled)：每1ms对CPU的每一个核做一次采样，获取对应的进程、线程执行情况，统计出执行次数和时间。因为采样间隔为1ms，其实很长了，很多DPCs和ISRs是非常短的，可能都无法采样到。另外，这里由于CPU的状态切换，所以采样计算到的时间并不一定精确，其中weight都是直接采用当前采样时间减去上一次采样时间的。其中分为如下几个子视图：  
+Utilization by CPU：描述了每个CPU核上跑了哪些任务  
+Utilization by Priority：描述了高优先级的如何影响低优先级的任务，以及不同优先级任务执行情况  
+Utilization by Process：描述了哪些进程占用了更多的CPU  
+Utilization by Process and Thread：描述了哪些进程的那些线程占用了更多的CPU  
+Utilization by Process，Stacks：描述了进程的哪些栈帧对CPU有更高的占用。这里不同线程可能调用同一个api，有相同的栈帧。  
+Utilization by Process，Thread，Stacks：描述了进程的哪些线程的哪些栈对CPU有更高的占用  
+DPC and ISR Usage by Module，Stack：描述了DPC和ISR的原子级别对CPU的占用，某模块（驱动模块）的栈帧级别的CPU占用。过多的占用也是性能影响点之一。  
+（4）Computation/CPU Usage (Precise)：精确记录了上下文切换的情况，特别适合用于分析父子关系链，追溯源头。例如发现某个线程栈帧大量占用CPU，但是这个不是主动触发的，触发的场景又非常多，需要精确定位到是谁，就需要用这里的精确统计，记录的上下文切换情况来分析看待。
 
 
 ### 分析UI卡顿
