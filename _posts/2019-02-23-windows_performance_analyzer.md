@@ -64,7 +64,7 @@ Step5：定制要分析观测的数据Data Table维度
 
 <br/>
 
-### 分析CPU高占用
+### 分析CPU相关
 
 CPU执行的基本单元是线程，线程有三种状态：wait（不可执行且未运行，需要SetEvent或者timer到来）、ready（可执行但未运行，等待执行线程的时间片消耗完）、running（可执行且正在运行）。当然，影响这三个状态的，还有线程优先级，处于ready状态下的高优先线程，会比处于ready状态下的低优先级线程先执行。Foreground Windows线程优先级会被动态提升得很高，且时间片分配得更多。  
 
@@ -72,10 +72,19 @@ CPU执行的基本单元是线程，线程有三种状态：wait（不可执行�
 
 如果线程处于同步等待，会影响性能，可能不能充分利用多个CPU核，另外UI线程如果同步等待，会导致UI线程卡顿，界面绘制卡顿。  
 
-与CPU相关的视图，有很多个，主要分为以下几个：  
-（1）Power/CPU Idle States：主要是分析CPU每个核心的空闲状态。如果对于一个后台服务，需要CPU尽可能跑满，这里CPU空闲态应该尽可能少。如果分析一个笔记本的CPU运转模式，应该使得空闲尽可能多，尽可能进入省电模式。  
-（2）Power/CPU Frequency：主要分析CPU每个核心的运转频率情况。之所以频率可变，是因为P-State（Performance）和T-State（Throttle ）机制。这里曲线表示的是P-State的频率变化，常规状态下是一条直线，如果发生变化，就是可能有多重不同的P-State在做切换。  
-（3）Computation/CPU Usage (Sampled)：每1ms对CPU的每一个核做一次采样，获取对应的进程、线程执行情况，统计出执行次数和时间。因为采样间隔为1ms，其实很长了，很多DPCs和ISRs是非常短的，可能都无法采样到。另外，这里由于CPU的状态切换，所以采样计算到的时间并不一定精确，其中weight都是直接采用当前采样时间减去上一次采样时间的。其中分为如下几个子视图：  
+与CPU相关的视图，有很多个
+
+#### Power/CPU Idle States
+
+主要是分析CPU每个核心的空闲状态。如果对于一个后台服务，需要CPU尽可能跑满，这里CPU空闲态应该尽可能少。如果分析一个笔记本的CPU运转模式，应该使得空闲尽可能多，尽可能进入省电模式。  
+
+#### Power/CPU Frequency
+
+主要分析CPU每个核心的运转频率情况。之所以频率可变，是因为P-State（Performance）和T-State（Throttle ）机制。这里曲线表示的是P-State的频率变化，常规状态下是一条直线，如果发生变化，就是可能有多重不同的P-State在做切换。  
+
+#### Computation/CPU Usage (Sampled)
+
+每1ms对CPU的每一个核做一次采样，获取对应的进程、线程执行情况，统计出执行次数和时间。因为采样间隔为1ms，其实很长了，很多DPCs和ISRs是非常短的，可能都无法采样到。另外，这里由于CPU的状态切换，所以采样计算到的时间并不一定精确，其中weight都是直接采用当前采样时间减去上一次采样时间的。其中分为如下几个子视图：  
 Utilization by CPU：描述了每个CPU核上跑了哪些任务  
 Utilization by Priority：描述了高优先级的如何影响低优先级的任务，以及不同优先级任务执行情况  
 Utilization by Process：描述了哪些进程占用了更多的CPU  
@@ -83,8 +92,29 @@ Utilization by Process and Thread：描述了哪些进程的那些线程占用�
 Utilization by Process，Stacks：描述了进程的哪些栈帧对CPU有更高的占用。这里不同线程可能调用同一个api，有相同的栈帧。  
 Utilization by Process，Thread，Stacks：描述了进程的哪些线程的哪些栈对CPU有更高的占用  
 DPC and ISR Usage by Module，Stack：描述了DPC和ISR的原子级别对CPU的占用，某模块（驱动模块）的栈帧级别的CPU占用。过多的占用也是性能影响点之一。  
-（4）Computation/CPU Usage (Precise)：精确记录了上下文切换的情况，特别适合用于分析父子关系链，追溯源头。例如发现某个线程栈帧大量占用CPU，但是这个不是主动触发的，触发的场景又非常多，需要精确定位到是谁，就需要用这里的精确统计，记录的上下文切换情况来分析看待。
 
+#### Computation/CPU Usage (Precise)
+
+精确记录了上下文切换的情况，特别适合用于分析父子关系链，追溯源头。例如发现某个线程栈帧大量占用CPU，但是这个不是主动触发的，触发的场景又非常多，需要精确定位到是谁，就需要用这里的精确统计，记录的上下文切换情况来分析看待。  
+上下文线程切换的事件序列如下图：
+
+![jpg](/images/post/wpt/6.jpg)
+
+几个概念：
+New thread：线程切换刚切换进来的线程，也是当前采样点所在的线程，通常以它作为分析核心，围绕着谁把它拉起来的来分析。  
+NewPrev thread：New thread的上一次切入进来的时刻状态  
+Readying thread：这个就是唤醒New thread的线程，也可以认为是父关系的线程。这个和New thread常用来作为核心分析对象，指明谁拉起了某个线程（SetEvent之类的，或PostTask之类的）  
+Old thread：当新线程被切换进入之前被切换出去的线程，这个看起来没啥价值。  
+
+在这个视图中，可以看到任意有关上下文的信息。比如将当前线程拉起来的Reading Thread的详细调用栈、起始函数、模块、以及线程退出的原因等等。
+
+（1）Timeline by CPU：标识了每一个CPU核心的整个时间片的消耗序列  
+（2）Timeline by Process, Thread：进程线程的生命周期。比如有时候分析UI卡顿，在卡顿的那段时间Zoom，可以查看这段时间点的进程在干嘛  
+（3）Usage by Priority at Context Switch Begin：不同优先级的任务分布  
+（4）Utilization by CPU：不同CPU核的进程线程切换状态分布  
+（5）Utilization by Process, Thread：进程线程维度的详细唤醒分布等  
+
+剩下其他的，就自由发挥了
 
 ### 分析UI卡顿
 
