@@ -120,6 +120,51 @@ $ sz test.py
 弹出对话框，选择一个目录，用来存放下载的test.py文件
 ```
 
+## ubuntu设置代理
+
+/etc/apt/sources.list，修改这个文件里面所有deb 相关的，替换位自己的代理镜像源
+
+## 查看系统设备的相关命令
+
+lspci -v        查看PCI设备信息，比如设备驱动等
+
+```txt
+02:00.0 USB controller: VMware USB1.1 UHCI Controller (prog-if 00 [UHCI])
+	Subsystem: VMware USB1.1 UHCI Controller
+	Physical Slot: 32
+	Flags: bus master, medium devsel, latency 64, IRQ 18
+	I/O ports at 2080 [size=32]
+	Capabilities: <access denied>
+	Kernel driver in use: uhci_hcd
+```
+
+ifconfig        查看网卡信息，使用前，需要安装网卡设备工具。sudo apt install net-tools
+
+```txt
+ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.2.129  netmask 255.255.255.0  broadcast 192.168.2.255
+        inet6 fe80::aeca:330c:2369:d3fa  prefixlen 64  scopeid 0x20<link>
+        ether 00:0c:29:14:55:7a  txqueuelen 1000  (Ethernet)
+        RX packets 297597  bytes 403950303 (403.9 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 125403  bytes 9052634 (9.0 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
+## 系统及性能监控相关工具
+
+```txt
+top：Linux Process Monitoring
+vmstat：Virtual Memory Statistics
+lsof：List Open Files
+tcpdump：Network Packet Analyzer
+netstat：Network Statistics
+Htop – Linux Process Monitoring
+Iotop – Monitor Linux Disk I/O
+Iostat – Input/Output Statistics
+iptraf-ng – Real Time IP LAN Monitoring
+```
+
 # 2 shell内使用的常用命令
 ## $0表示当前sh脚本的文件路径（相对路径），这个本身输出的是一个字符串，可以用echo打印出来
 ```
@@ -213,4 +258,10 @@ e           移动到下一个单词尾部
 ```
 o           向下插入一行，并进入插入模式
 O           向前插入一行，并进入插入模式
+```
+
+## 替换字符串
+
+```txt
+:%s/[str1]/[str2]/g      全局替换str1为str2，例如%s/deb http:\/\/us.archive.ubuntu.com\/ubuntu\//deb xxxxxxx/g，会将所有的http://us.archive.ubuntu.com/ubuntu/替换位xxxxxxx
 ```

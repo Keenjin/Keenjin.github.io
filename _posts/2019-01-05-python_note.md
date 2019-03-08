@@ -256,3 +256,175 @@ def test_basic():
 网络爬虫
 量化交易
 ```
+
+# python中logging模块的使用
+
+```python
+import logging
+
+# 全局单实例，通过它来打日志
+logger = logging.getLogger()
+
+# 觉得日志文件是输出到控制台，还是文件
+def add_log_handler(log_file_name=''):
+    logger.setLevel(logging.DEBUG)
+
+    log_handler = None
+    if log_file_name != '':
+        dirpath = os.path.dirname(log_file_name)
+        if not os.path.exists(dirpath):
+            os.mkdir(dirpath)
+
+        log_handler = logging.FileHandler(log_file_name)
+        log_handler.setLevel(logging.INFO)
+    else:
+        log_handler = logging.StreamHandler()
+        log_handler.setLevel(logging.DEBUG)
+
+    log_handler.setFormatter(logging.Formatter('%(asctime)-15s (%(filename)s)[%(levelname)s] %(message)s'))
+    logger.addHandler(log_handler)
+
+# 使用方式
+def main():
+    logger.error('errorxxxx')
+    logger.info('info....')
+    logger.warning('warning....')
+```
+
+# python中ConfigParser模块的使用
+
+ConfigParser解析的配置文件，类似ini文件  
+
+```ini
+[db]
+section1 = 10
+section2 = testttttt
+
+[cfg]
+key1 = 3
+key2 = test
+```
+
+```python
+from ConfigParser import ConfigParser
+
+Config = {}
+
+def load_cfg(conf):
+    global Config
+
+    try:
+        parser = ConfigParser()
+        parser.read(conf)
+
+        Config['section1'] = int(parser.get('db', 'section1'))
+    except Exception, e:
+        logger.error(str(e))
+```
+
+# python中MySQLdb模块的使用
+
+```python
+import MySQLdb
+
+def load_db():
+    conn = MySQLdb.connect(host='xxxxxxx', port=xxxx, user='xxxx', passwd='xxxxxx', db='xxxx', charset='utf8')
+    cursor = conn.cursor()
+    try:
+        cursor.execute('select xxx from xx where xxx')
+        result = cursor.fetchall()
+    except:
+        logger.error('error db')
+    conn.close()
+    return result
+```
+
+# python中os模块的使用
+
+```python
+os.path.dirname('c:\\test.txt')     # c:\\
+if not os.path.exists('c:\\test.txt'):
+    pass
+os.mkdir('c:\\test\\')
+if not os.path.isfile('c:\\test.txt'):
+    pass
+os.remove('c:\\test.txt')
+os.symlink('c:\\test1','d:\\test1')
+os.system('python c:\\test.py')
+os.path.join('c:\\test\\','file.txt')
+```
+
+# python中hashlib模块的使用
+
+```python
+import hashlib
+
+a = "I am huoty"
+print hashlib.md5(a).hexdigest()
+print hashlib.sha1(a).hexdigest()
+print hashlib.sha224(a).hexdigest()
+print hashlib.sha256(a).hexdigest()
+print hashlib.sha384(a).hexdigest()
+print hashlib.sha512(a).hexdigest()
+```
+
+# python中json模块的使用
+
+```python
+import json
+
+a = "{key1:1,key2:3}"
+new_dict = json.loads(a)    # 将字符串转换为字典
+
+file1.json:
+{key1:1,key2:3}
+通过读json文件
+with open('file1.json','r') as f:
+    new_dict = json.loads(f)
+
+写一个json文件
+with open('file1.json','w') as f:
+    json.dump(new_dict, f)
+```
+
+# python中xlsx相关模块的使用
+
+```python
+from openpyxl.workbook import Workbook
+from openpyxl.writer.excel import ExcelWriter
+
+def main():
+    excel_wb = Workbook()
+    excel_ws = excel_wb.active
+
+    excel_ws.cell(row=1, column=1).value = "head1"
+    excel_ws.cell(row=1, column=2).value = "head2"
+    excel_ws.cell(row=1, column=3).value = "head3"
+
+    excel_ws.cell(row=2, column=1).value = "xxxx"
+    excel_ws.cell(row=2, column=2).value = "xx"
+    excel_ws.cell(row=2, column=3).value = "xxxxxx"
+
+    excel_wb.save(filename='xxx.xlsx')
+```
+
+# python中threading模块的使用
+
+```python
+import threading
+
+class WorkThread(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+    
+    def run(self):
+        while True:
+            xxxx
+
+def main():
+    w = WorkThread()
+    w.setDaemon(True)   # 当主线程结束时，子线程也跟着结束，无论是否执行完毕。另外，join则是等待子线程结束
+    w.Start()
+```
+
+# 
