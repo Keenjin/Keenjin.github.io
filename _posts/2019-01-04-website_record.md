@@ -26,3 +26,8 @@ vscode编辑、编译、调试python官方教程：https://code.visualstudio.com
 ### 在线转换工具
 
 可以方便将CSV转markdown格式，及其他各种格式互转：https://tableconvert.com/
+
+### 问题解决
+
+VirtualBox + WinDbg + VirtualKD进行双击调试无法连接问题：http://virtualkd.sysprogs.org/tutorials/install/manualvm
+
