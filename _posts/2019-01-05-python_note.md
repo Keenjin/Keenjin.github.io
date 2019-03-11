@@ -7,8 +7,8 @@ tags: python
 
 # py资源
 
-python流行库：https://github.com/jobbole/awesome-python-cn/blob/master/README.md
-官方模块查询（支持的python版本等）：https://pypi.org/
+python流行库：[https://github.com/jobbole/awesome-python-cn/blob/master/README.md](https://github.com/jobbole/awesome-python-cn/blob/master/README.md)
+官方模块查询（支持的python版本等）：[https://pypi.org/](https://pypi.org/)
 
 # py符号
 
@@ -416,7 +416,6 @@ import threading
 class WorkThread(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
-    
     def run(self):
         while True:
             xxxx
@@ -426,5 +425,3 @@ def main():
     w.setDaemon(True)   # 当主线程结束时，子线程也跟着结束，无论是否执行完毕。另外，join则是等待子线程结束
     w.Start()
 ```
-
-# 
