@@ -425,3 +425,43 @@ def main():
     w.setDaemon(True)   # 当主线程结束时，子线程也跟着结束，无论是否执行完毕。另外，join则是等待子线程结束
     w.Start()
 ```
+
+# Python中subprocess模块的使用
+
+```python
+import subprocess
+
+class TcpDump():
+    def __init__(self, program, name, num):
+        self.program = program
+        self.tcpdump_pcap = name
+        self.tcpdump_limit = num
+        self.p_tcpdump = None
+
+    def start_tcpdump(self):
+        cmd = [self.program, "-iany", "-n", "-s0", "-c%d" % (self.tcpdump_limit), "-w%s" % (self.tcpdump_pcap)]
+        log = 'start tcpdump with cmd: %s' % (' '.join(cmd))
+        logger.info(log)
+        self.p_tcpdump = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return self.p_tcpdump.pid
+
+    def stop_tcpdump(self):
+        self.p_tcpdump.send_signal(signal.SIGINT)
+        (stdoutdata, stderrdata) = self.p_tcpdump.communicate()
+        retcode = self.p_tcpdump.returncode
+        logger.info('tcpdump exit with retcode:%d', retcode)
+        return retcode
+
+    def caculate_sha256(self):
+        fd = open(self.tcpdump_pcap, 'rb')
+        content = fd.read()
+        p_sha256 = hashlib.sha256(content).hexdigest()
+        return p_sha256
+
+def main():
+    pTcpDump = TcpDump("/usr/bin/tcpdump", "/home/testtcpdump.pcap", 5000)
+    pTcpDump.start_tcpdump()
+    while True:
+        xxx
+    pTcpDump.stop_tcpdump()
+```
