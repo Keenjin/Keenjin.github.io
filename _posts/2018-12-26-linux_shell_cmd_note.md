@@ -2,7 +2,7 @@
 layout: post
 title: linux常用操作及问题笔记
 date: 2018-12-26 
-tags: 经验  
+tags: linux  
 ---
   
 > 实际操作过程中的积累
@@ -336,3 +336,16 @@ O           向前插入一行，并进入插入模式
 ```txt
 :%s/[str1]/[str2]/g      全局替换str1为str2，例如%s/deb http:\/\/us.archive.ubuntu.com\/ubuntu\//deb xxxxxxx/g，会将所有的http://us.archive.ubuntu.com/ubuntu/替换位xxxxxxx
 ```
+
+# 5 ubuntu中python安装MYSQL模块问题
+
+环境是python2.7  
+安装命令：pip install mysql-python  
+出现第一个问题：
+
+```txt
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-_Livdw/mysql-python/
+```
+
+首先，需要升级setuptools，安装命令：pip install --upgrade setuptools  
+然后，安装mysql环境，安装命令：sudo apt-get install libmysqlclient-dev
