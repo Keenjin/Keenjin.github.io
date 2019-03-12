@@ -17,35 +17,35 @@ tags: 经验
 
 # chukwa（Apache）
 
-[jpg](/images/post/file_collector/1.jpg)
+![jpg](/images/post/file_collector/1.jpg)
 
 囊括了日志收集、数据分析、可视化等功能  
 
 # scribe（Facebook）
 
-[jpg](/images/post/file_collector/2.jpg)
+![jpg](/images/post/file_collector/2.jpg)
 
 网络不通的情况下存储到本地，通了的情况下，还能重发，类似git
 
 # flume（Apache）
 
-[jpg](/images/post/file_collector/3.jpg)
+![jpg](/images/post/file_collector/3.jpg)
 
 flume-ng：
-[jpg](/images/post/file_collector/4.jpg)
+![jpg](/images/post/file_collector/4.jpg)
 
 # logstash
 
-[jpg](/images/post/file_collector/5.jpg)
+![jpg](/images/post/file_collector/5.jpg)
 
 # kafka（Linkedin）
 
-[jpg](/images/post/file_collector/6.jpg)
+![jpg](/images/post/file_collector/6.jpg)
 
 数据传输功能，非日志采集功能，大吞吐量
 
 # TT(Timetunel)（阿里）
 
-[jpg](/images/post/file_collector/7.jpg)
+![jpg](/images/post/file_collector/7.jpg)
 
 数据传输功能，非日志采集功能，大吞吐量

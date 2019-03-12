@@ -23,20 +23,20 @@ tags: 经验
 
 # GlusterFS（Cluster公司开发的POSIX分布式文件系统）
 
-[png](/images/post/filesystem/1.png)  
+![png](/images/post/filesystem/1.png)  
 整体组成：存储服务器（Brick Server）、客户端、NFS/Samba存储网关（有装GlusterFS客户端的，通过TCP/IP和InfiniBand RDMA告诉网络互连；没有安装的，通过NFS网关连接）  
 
 特点：无元数据管理，所有存储节点都会保存完整的数据目录结构  
 
 # GFS（Google，适合大文件存储）
 
-[png](/images/post/filesystem/2.png)  
+![png](/images/post/filesystem/2.png)  
 文件被划分为64MB的Chunk存储到几个ChunkServer上  
 
 # HDFS（参照GFS设计的）
 
-[png](/images/post/filesystem/3.png)
-[png](/images/post/filesystem/4.png)
+![png](/images/post/filesystem/3.png)
+![png](/images/post/filesystem/4.png)
 
 # MooseFS（参照GFS设计的）
 
@@ -48,7 +48,7 @@ GFS、HDFS、MooseFS是针对硬件设备，需要考虑多副本存储。但是
 
 # 几大架构出现的时间线
 
-[png](/images/post/filesystem/5.png)
+![png](/images/post/filesystem/5.png)
 
 以GFS为代表的元数据和数据分离的系统搞设计，和以JuiceFS为代表的对象存储方式，避免分布式系统时的双层冗余。  
 
