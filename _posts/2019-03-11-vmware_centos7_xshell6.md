@@ -1,6 +1,6 @@
 ---
 layout: post
-title: VMware + CenterOS7 + XShell6环境配置
+title: VMware + CentOS7 + XShell6环境配置
 date: 2019-03-11 
 tags: 经验  
 ---
