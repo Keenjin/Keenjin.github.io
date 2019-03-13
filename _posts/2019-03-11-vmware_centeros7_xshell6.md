@@ -28,6 +28,8 @@ yum代理：vi /etc/yum.conf
 wget代理：vi /etc/wgetrc  
 ![jpg](/images/post/vmware_centeros/5.jpg)
 
+让profile生效：source /etc/profile
+
 （3）网络命令支持（比如ifconfig、netstat）  
 yum -y install net-tools
 
