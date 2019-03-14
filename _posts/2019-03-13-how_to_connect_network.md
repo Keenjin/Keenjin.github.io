@@ -7,8 +7,8 @@ tags: 网络
 
 # 0 探索线路
 
-![jpg](/images/post/network_connect/01.jpg)
-![jpg](/images/post/network_connect/02.jpg)
+![jpg](/images/post/network_connect/1/01.jpg)
+![jpg](/images/post/network_connect/1/02.jpg)
 
 # 1 Web浏览器
 
@@ -16,50 +16,50 @@ tags: 网络
 
 ### 1.1.1 网址结构
 
-![jpg](/images/post/network_connect/03.jpg)
+![jpg](/images/post/network_connect/1/03.jpg)
 
 ### 1.1.2 网址解析
 
-![jpg](/images/post/network_connect/4.jpg)
+![jpg](/images/post/network_connect/1/4.jpg)
 
 如果访问类似 <http://www.lab.glasscom.com/dir/> 这种以"/"结尾的，相当有访问index.html或default.html
 
 ### 1.1.3 HTTP的基本思路
 
-![jpg](/images/post/network_connect/1.jpg)
+![jpg](/images/post/network_connect/1/1.jpg)
 
 请求消息表达的意思：对什么（URI，是指/dir1/file1.html或/dir1/program1.cgi文件名，也可以是整个url）进行怎么样的操作（方法）  
 
 方法：  
-![jpg](/images/post/network_connect/5.jpg)
+![jpg](/images/post/network_connect/1/5.jpg)
 PUT和DELETE方法，出于安全考虑，一般是不支持的。  
 
 ### 1.1.4 浏览器生成HTTP请求消息和收到的消息响应
 
 请求消息及收到响应格式：
-![jpg](/images/post/network_connect/6.jpg)
+![jpg](/images/post/network_connect/1/6.jpg)
 消息头：
-![jpg](/images/post/network_connect/7.jpg)
-![jpg](/images/post/network_connect/8.jpg)
+![jpg](/images/post/network_connect/1/7.jpg)
+![jpg](/images/post/network_connect/1/8.jpg)
 
 消息响应的HTTP状态码概要：
-![jpg](/images/post/network_connect/9.jpg)
+![jpg](/images/post/network_connect/1/9.jpg)
 
 HTTP消息示例：
-![jpg](/images/post/network_connect/10.jpg)
-![jpg](/images/post/network_connect/11.jpg)
-![jpg](/images/post/network_connect/12.jpg)
+![jpg](/images/post/network_connect/1/10.jpg)
+![jpg](/images/post/network_connect/1/11.jpg)
+![jpg](/images/post/network_connect/1/12.jpg)
 
 ## 1.2 向DNS服务器查询Web服务器的IP地址
 
 ### 1.2.1 IP地址基本知识
 
-![jpg](/images/post/network_connect/13.jpg)
+![jpg](/images/post/network_connect/1/13.jpg)
 接入同一个集线器的机器，组成了子网；  
 通过路由器，把多个子网连接起来。  
 
 IP地址表示方法：
-![jpg](/images/post/network_connect/14.jpg)
+![jpg](/images/post/network_connect/1/14.jpg)
 每一台设备的IP地址，都包括网络号+主机号。网络号是掩码部分 & IP地址；主机号是~掩码 & IP地址。  
 主机号全0，表示的是整个子网，不能表示某个设备；  
 主机号全1，表示向子网上所有设备发送包，即广播。
@@ -68,20 +68,20 @@ IP地址表示方法：
 ### 1.2.2 DNS服务器
 
 通过域名来查询IP，提供此服务的是DNS服务器。计算机上，则安装有DNS客户端，通过调用Socket库，来进行解析，常见的api：IP地址 = gethostbyname("www.baidu.com")，就是用来查询IP地址的。  
-![jpg](/images/post/network_connect/15.jpg)
+![jpg](/images/post/network_connect/1/15.jpg)
 
 这里的前提是，我们需要先知道DNS服务器的IP地址，这个是作为TCP/IP的一个设置项目，事先设置好的，不需要再去查询。我机器上，是我的小米路由器的IP地址，小米路由器作为我的DNS服务器。
-![jpg](/images/post/network_connect/3.jpg)
+![jpg](/images/post/network_connect/1/3.jpg)
 
 ## 1.3 全世界DNS服务器的大接力
 
 ### 1.3.1 DNS服务器的基本工作
 
-![jpg](/images/post/network_connect/16.jpg)
+![jpg](/images/post/network_connect/1/16.jpg)
 
 ### 1.3.2 DNS服务器寻找IP的过程
 
-![jpg](/images/post/network_connect/17.jpg)
+![jpg](/images/post/network_connect/1/17.jpg)
 然而，实际的查询过程，并非每一个域都有一个DNS服务器，可能是共享服务器设备，部分查询可以简化，少查询一层两层等。另外，也会缓存未查询到的结果，下一次请求，直接返回，或者查询到了，直接存储到本地，当数据到达有效期，就删除。我上面的小米路由器作为DNS服务器，应该也是有这些功能，目的就是响应时间优化。
 
 ## 1.4 委托协议栈发送消息
@@ -89,12 +89,12 @@ IP地址表示方法：
 ### 1.4.1 数据收发操作概览
 
 消息要能传达出去，首先要建立一个通信管道，建立的基础，是两个管道出口的套接字。
-![jpg](/images/post/network_connect/18.jpg)
+![jpg](/images/post/network_connect/1/18.jpg)
 
 ### 1.4.2 套接字使用过程
 
 创建套接字 ——> 连接服务器 ——> 发送数据 ——> 接收数据 ——> 断开连接
-![jpg](/images/post/network_connect/19.jpg)
+![jpg](/images/post/network_connect/1/19.jpg)
 
 描述符socket句柄：应用程序用来识别套接字的机制  
 IP地址和端口号：客户端和服务器之间，用来识别对方套接字的机制  
@@ -109,7 +109,7 @@ IP地址和端口号：客户端和服务器之间，用来识别对方套接字
 
 ### 2.1.1 协议栈内部结构
 
-![jpg](/images/post/network_connect/20.jpg)
+![jpg](/images/post/network_connect/2/20.jpg)
 
 浏览器、邮件等一般应用程序收发数据用TCP；  
 DNS查询等收发较短的控制数据用UDP。  
@@ -123,11 +123,11 @@ IP层以下是网卡驱动程序负责控制网卡硬件，更下面是网卡，
 套接字实体，包含IP地址和端口号（源和目标），以及控制信息（包括是否收到响应、多长时间了、是否重试了等）。协议栈根据套接字存储的信息，判断下一步的行动。  
 
 windows中netstat命令，展示了所有套接字：
-![jpg](/images/post/network_connect/21.jpg)
+![jpg](/images/post/network_connect/2/21.jpg)
 
 ### 2.1.3 调用socket时的操作
 
-![jpg](/images/post/network_connect/22.jpg)
+![jpg](/images/post/network_connect/2/22.jpg)
 
 ## 2.2 连接服务器
 
@@ -137,9 +137,9 @@ windows中netstat命令，展示了所有套接字：
 
 ### 2.2.2 控制信息头部
 
-![jpg](/images/post/network_connect/24.jpg)
+![jpg](/images/post/network_connect/2/24.jpg)
 TCP头部格式：
-![jpg](/images/post/network_connect/23.jpg)
+![jpg](/images/post/network_connect/2/23.jpg)
 
 ### 2.2.3 连接操作的实际过程
 
@@ -158,12 +158,12 @@ TCP头部格式：
 （1）MTU（最大传输单元）。在以太网中一般是1500 Bytes，包含包头长度。MSS（最大分段大小）是MTU-len（包头）  
 （2）时间。协议栈内部有一个计时器，达到这个时间后，即使包大小不到MTU，依旧发送  
 （3）应用程序可以指定选项：不等待填满缓冲区直接发送（浏览器一般是如此）  
-![jpg](/images/post/network_connect/25.jpg)
+![jpg](/images/post/network_connect/2/25.jpg)
 
 ### 2.3.2 对较大的数据进行拆分
 
 包太大，TCP会将包拆分成小包发送
-![jpg](/images/post/network_connect/26.jpg)
+![jpg](/images/post/network_connect/2/26.jpg)
 
 ### 2.3.3 使用ACK号确认网络包已收到
 
@@ -172,10 +172,10 @@ TCP头部格式：
 ![jpg](/images/post/network_connect/27.jpg)
 
 数据双向传输：  
-![jpg](/images/post/network_connect/28.jpg)
+![jpg](/images/post/network_connect/2/28.jpg)
 
 连接操作 + 收发操作：  
-![jpg](/images/post/network_connect/29.jpg)
+![jpg](/images/post/network_connect/2/29.jpg)
 
 ### 2.3.4 动态调整ACK号等待时间（超时时间）
 
@@ -185,10 +185,10 @@ TCP采用动态调整等待ACK号返回的方法，在数据发送过程中，�
 
 一个简单的异步调用过程，在等待ACK号这段时间内，继续发送后续的一系列包。  
 一个问题：如果一直收不到ACK号，却依旧一直发送后续的包，会导致发送包频率超过接收方能处理能力的情况。
-![jpg](/images/post/network_connect/30.jpg)
+![jpg](/images/post/network_connect/2/30.jpg)
 
 因此，需要采用滑动窗口的方式，来动态平衡发送和接收频率。具体做法：接收方需要告诉发送方自己最多能接收多少数据（比如此刻队列已快满了，最多能接收的数据就比较少），发送方根据这个大小来发送数据。
-![jpg](/images/post/network_connect/31.jpg)
+![jpg](/images/post/network_connect/2/31.jpg)
 
 更新窗口大小的时机：接收方从缓冲区中取出数据给应用程序之后，需要告知发送方。通常会将ACK包和更新窗口大小的包合并在一起发送，会有一个等待时间，不是立刻发送，这样也可以省略中间过程。
 
@@ -200,7 +200,7 @@ TCP采用动态调整等待ACK号返回的方法，在数据发送过程中，�
 
 ### 2.4.1 数据发送完毕后断开连接
 
-![jpg](/images/post/network_connect/32.jpg)
+![jpg](/images/post/network_connect/2/32.jpg)
 
 ### 2.4.2 删除套接字
 
@@ -208,7 +208,7 @@ TCP采用动态调整等待ACK号返回的方法，在数据发送过程中，�
 
 ### 2.4.3 TCP整体流程
 
-![jpg](/images/post/network_connect/33.jpg)
+![jpg](/images/post/network_connect/2/33.jpg)
 
 ## 2.5 IP与以太网的包收发操作
 
