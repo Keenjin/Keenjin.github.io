@@ -8,10 +8,14 @@ tags: Linux
 # 客户机安装FileBeat
 
 ```txt
-
+简单的安装，以及配置需要监控的日志目录，以及输出采用logstash还是其他，如果是logstash，需要配置输出的IP
 ```
 
 # 服务器安装logstash
+
+```txt
+主要是需要配置beats的监听端口，以及输出的IP
+```
 
 # 打通FileBeat和logstash
 
@@ -21,28 +25,13 @@ tags: Linux
 
 # 准备Elasticsearch
 
-## 下载安装Elasticsearch
-
 ```txt
-wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.6.1.rpm
-wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.6.1.rpm.sha512
-shasum -a 512 -c elasticsearch-6.6.1.rpm.sha512
-sudo rpm --install elasticsearch-6.6.1.rpm
+安装需要在非root权限下进行，root权限无法运行
 ```
 
-## 启动Elasticsearch服务
+# 安装kibana（web服务器）
 
 ```txt
-sudo /bin/systemctl daemon-reload
-sudo /bin/systemctl enable elasticsearch.service
-sudo systemctl start elasticsearch.service
+这里启动了一个web服务器，设置了一个特定的端口，然后可以在我们自己的客户机的浏览器中，访问这个IP:端口，即可
 ```
-
-## 检查Elasticsearch服务运行状态
-
-```txt
-curl http://localhost:9200
-```
-
-![jpg](/images/post/elk/1.jpg)
 
