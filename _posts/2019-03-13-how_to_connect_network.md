@@ -637,8 +637,23 @@ Web服务器数据有更新时，通知缓存服务器。
 
 ## 6.1 服务器概览
 
-## 6.2 服务器的接收操作
+### 6.1.1 服务器程序的结构
 
-## 6.3 Web服务器程序解释请求消息并作出响应
+![jpg](/images/post/network_connect/6/88.jpg)
 
-## 6.4 浏览器接收响应消息并显示内容
+### 6.1.2 服务器端的套接字和端口号
+
+![jpg](/images/post/network_connect/6/89.jpg)
+
+## 6.2 浏览器接收响应消息并显示内容
+
+### 6.2.1 通过响应的数据类型判断其中的内容
+
+中间的过程由于跟客户端发送端基本对称，全部省略，直接到最后这一步。  
+HTTP的Content-Type定义的数据类型：
+![jpg](/images/post/network_connect/6/90.jpg)
+
+## 7 网络包旅程
+
+![jpg](/images/post/network_connect/6/91.jpg)
+![jpg](/images/post/network_connect/6/92.jpg)
