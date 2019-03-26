@@ -153,7 +153,7 @@ self只用在对象调用中：A a; a.foo2('testname')
 ## Step1:安装virtualenv
 
 ```bash
-> pip install virtual
+> pip install virtualenv
 ```
 
 ## Step2:创建总工程根目录（根据特定python版本）
@@ -306,6 +306,8 @@ key2 = test
 ```
 
 ```python
+#!/usr/bin/env python2
+# coding=utf-8
 from ConfigParser import ConfigParser
 
 Config = {}
@@ -322,9 +324,30 @@ def load_cfg(conf):
         logger.error(str(e))
 ```
 
+```python
+#!/usr/bin/env python3
+# coding=utf-8
+import configParser
+
+Config = {}
+
+def load_cfg(conf):
+    global Config
+
+    try:
+        parser = configParser.ConfigParser()
+        parser.read(conf)
+
+        Config['section1'] = int(parser.get('db', 'section1'))
+    except Exception, e:
+        logger.error(str(e))
+```
+
 # python中MySQLdb模块的使用
 
 ```python
+#!/usr/bin/env python2
+# coding=utf-8
 import MySQLdb
 
 def load_db():
@@ -464,4 +487,182 @@ def main():
     while True:
         xxx
     pTcpDump.stop_tcpdump()
+```
+
+# Python中urllib模块的使用
+
+```python
+#!/usr/bin/env python2
+#coding=utf-8
+import urllib, urllib2
+
+class FileUpload():
+    def __init(self, host, port):
+
+url = "http://xxxxxx?param"
+req = urllib2.Request(url)
+boundary = hashlib.md5('%s' % hex(int(time.time() * 1000))).hexdigest()
+boundary = boundary.encode('base64').strip('=\r\n')[:16]
+mpdata = '\r\n'.join([
+        '--%s' % boundary,
+        'Content-Disposition: form-data; name="file"; filename="hidden"',
+        'Content-Type: application/octet-stream',
+        '',
+        data,
+        '--%s--' % boundary,
+        ''
+        ])
+req.add_header('Content-Type', 'multipart/form-data; boundary=%s' % boundary)
+req.add_header('Content-length', str(len(mpdata)))
+req.add_data(mpdata)
+resp = urllib2.urlopen(req,timeout=5).read()
+logger.info('Post data of channel "%s" to API with response of: %s', channel, resp)
+```
+
+# python文件上传
+
+client：
+
+```python
+#!/usr/bin/env python3
+# coding=utf-8
+
+import os
+import logging
+import urllib
+import json
+import codecs
+
+logger = logging.getLogger(__name__)
+
+class FileSend(object):
+    def __init__(self, host, port):
+        self.host = host
+        self.port = port
+        self.url = host + ":" + str(port)
+    def post_file(self, channel, filename, encoding, offset):
+        if not os.path.exists(filename):
+            logger.warning("file:%s not exist.", filename)
+            return None
+        data = {}
+        data["channel"] = channel
+        with codecs.open(filename, 'r', encoding) as f:
+            f.seek(offset, 0)
+            data["data"] = f.read()
+        req = urllib.request.Request(self.url)
+        req.add_header('Content-Type', 'application/json')
+        sendbytes = urllib.parse.urlencode(data).encode("utf-8")
+
+        try:
+            resq = urllib.request.urlopen(req, data = sendbytes, timeout = 5).read()
+            logger.info("Post channel:%s File to Url:%s Respond:%s. filename:%s, encoding:%s, offset:%d", channel, self.url, resq, filename, encoding, offset)
+            return resq
+        except Exception as e:
+            logger.warning("Post channel:%s File to Url:%s failed. err(%s), filename:%s, encoding:%s, offset:%d", channel, self.url, str(e), filename, encoding, offset)
+            return None
+```
+
+server：
+
+```python
+#!/usr/bin/env python3
+# coding=utf-8
+
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import json
+import logging
+
+logger = logging.getLogger(__name__)
+
+g_OnLogReceive = None
+
+class RequestHandler(BaseHTTPRequestHandler):
+    def _set_headers(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+
+    def set_CallBack(self, OnFileReceive):
+        self.OnFileReceive = OnFileReceive
+
+    def do_GET(self):
+        response = {
+            'status':'SUCCESS',
+            'data':'hello from server'
+        }
+
+        self._set_headers()
+        self.wfile.write(json.dumps(response))
+
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length).decode('utf-8')
+        logger.debug('获取到的数据：%s', post_data)
+        if g_OnLogReceive != None:
+            g_OnLogReceive(post_data)
+
+        response = {
+            'status':'SUCCESS',
+            'data':'server got your post data'
+        }
+        self._set_headers()
+        self.wfile.write(json.dumps(response).encode("utf-8"))
+
+def run(OnLogReceive, port):
+    global g_OnLogReceive
+    g_OnLogReceive = OnLogReceive
+    print('Listening on port:%s' % port)
+    server = HTTPServer(('', port), RequestHandler)
+    server.serve_forever()
+
+```
+
+# python中文件遍历及重命名
+
+```python
+#!/usr/bin/env python3
+#coding=utf-8
+
+'''
+注意，调试的话，vscode需要参数，可以直接在.vscode所在的launch.json配置中，配置一下参数
+"configurations": [
+        {
+            "name": "Python: Current File (Integrated Terminal)",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args":[
+                "C:\\Users\\xxxxx\\Desktop\\sssss",
+                "keen",
+                "lml"
+            ]
+        }
+'''
+
+import os
+from sys import argv
+
+def main(argv):
+    path = argv[1]
+    if not os.path.exists(path):
+        return
+    if len(argv) < 4:
+        return
+    if argv[2] == None or argv[2] == "":
+        return
+    if argv[3] == None or argv[3] == "":
+        return
+    for dirpath,dirnames,filenames in os.walk(path):
+        for file in filenames:
+            if file[0:len(argv[2])] == argv[2]:
+                src = os.path.join(dirpath, file)
+                dst = os.path.join(dirpath, argv[3] + file[len(argv[2]):])
+                print("src:",src,"dst:",dst)
+                os.rename(src,dst)
+
+# rename_filexxx.py c:\test\ keen lml
+if __name__ == "__main__":
+    main(argv)
+
 ```
