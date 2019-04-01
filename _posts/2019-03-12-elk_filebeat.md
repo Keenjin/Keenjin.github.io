@@ -5,6 +5,16 @@ date: 2019-03-12
 tags: Linux  
 ---
 
+<!-- TOC -->
+
+- [客户机安装FileBeat](#客户机安装filebeat)
+- [服务器安装logstash](#服务器安装logstash)
+- [打通FileBeat和logstash](#打通filebeat和logstash)
+- [准备Elasticsearch](#准备elasticsearch)
+- [安装kibana（web服务器）](#安装kibanaweb服务器)
+
+<!-- /TOC -->
+
 # 客户机安装FileBeat
 
 ```txt

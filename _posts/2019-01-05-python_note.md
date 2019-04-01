@@ -5,6 +5,41 @@ date: 2019-01-04
 tags: python  
 ---
 
+<!-- TOC -->
+
+- [py资源](#py资源)
+- [py符号](#py符号)
+- [py脚本传参（类似exe传参）](#py脚本传参类似exe传参)
+- [py读文件](#py读文件)
+- [py写文件](#py写文件)
+- [py函数加doc说明，以便help(xxxfunc)能展示出来。另外，演示另一个文件如何引用前一个文件写的函数](#py函数加doc说明以便helpxxxfunc能展示出来另外演示另一个文件如何引用前一个文件写的函数)
+- [py中cls和self的区别](#py中cls和self的区别)
+- [virtualenv创建python工程](#virtualenv创建python工程)
+    - [Step1:安装virtualenv](#step1安装virtualenv)
+    - [Step2:创建总工程根目录（根据特定python版本）](#step2创建总工程根目录根据特定python版本)
+    - [Step3:激活Proj1](#step3激活proj1)
+    - [Step4:安装nose（自动化单元测试）](#step4安装nose自动化单元测试)
+    - [Step5:进入Proj1，创建一个主线版本trunk](#step5进入proj1创建一个主线版本trunk)
+    - [Step6:创建项目框架](#step6创建项目框架)
+    - [Step7:编辑setup.py](#step7编辑setuppy)
+    - [Step8:编辑tests/MyModule_tests.py](#step8编辑testsmymodule_testspy)
+    - [Step9:测试nose有效](#step9测试nose有效)
+- [Python学习的未来方向](#python学习的未来方向)
+- [python中logging模块的使用](#python中logging模块的使用)
+- [python中ConfigParser模块的使用](#python中configparser模块的使用)
+- [python中MySQLdb模块的使用](#python中mysqldb模块的使用)
+- [python中os模块的使用](#python中os模块的使用)
+- [python中hashlib模块的使用](#python中hashlib模块的使用)
+- [python中json模块的使用](#python中json模块的使用)
+- [python中xlsx相关模块的使用](#python中xlsx相关模块的使用)
+- [python中threading模块的使用](#python中threading模块的使用)
+- [Python中subprocess模块的使用](#python中subprocess模块的使用)
+- [Python中urllib模块的使用](#python中urllib模块的使用)
+- [python文件上传](#python文件上传)
+- [python中文件遍历及重命名](#python中文件遍历及重命名)
+
+<!-- /TOC -->
+
 # py资源
 
 python流行库：[https://github.com/jobbole/awesome-python-cn/blob/master/README.md](https://github.com/jobbole/awesome-python-cn/blob/master/README.md)
