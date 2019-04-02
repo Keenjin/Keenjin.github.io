@@ -5,6 +5,18 @@ date: 2019-03-12
 tags: 经验  
 ---
 
+<!-- TOC -->
+
+- [数据收集系统架构设计要点](#数据收集系统架构设计要点)
+- [chukwa（Apache）](#chukwaapache)
+- [scribe（Facebook）](#scribefacebook)
+- [flume（Apache）](#flumeapache)
+- [logstash](#logstash)
+- [kafka（Linkedin）](#kafkalinkedin)
+- [TT(Timetunel)（阿里）](#tttimetunel阿里)
+
+<!-- /TOC -->
+
 # 数据收集系统架构设计要点
 
 （1）低延迟：从Log数据产生到能够对其做分析，希望尽可能快的完成数据的收集。在批处理或者离线分析中，对数据的实时性要求并不高，但是随着大数据的发展，实时计算的能力越来越强，实时分析的场景也越来越多，所以对日志收容的实时性要求也越来越高。  

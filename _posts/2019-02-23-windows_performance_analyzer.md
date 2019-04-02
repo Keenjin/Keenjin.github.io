@@ -5,6 +5,22 @@ date: 2019-02-23
 tags: 调试 性能
 ---
 
+<!-- TOC -->
+
+- [概述](#概述)
+- [ETW技术架构](#etw技术架构)
+- [Data Table](#data-table)
+- [WPA使用步骤](#wpa使用步骤)
+- [各种Event Provider一览](#各种event-provider一览)
+- [分析CPU相关](#分析cpu相关)
+    - [Power/CPU Idle States](#powercpu-idle-states)
+    - [Power/CPU Frequency](#powercpu-frequency)
+    - [Computation/CPU Usage (Sampled)](#computationcpu-usage-sampled)
+    - [Computation/CPU Usage (Precise)](#computationcpu-usage-precise)
+- [分析UI卡顿](#分析ui卡顿)
+
+<!-- /TOC -->
+
 ### 概述
 
 基本过程：WPA是辅助WPR使用，WPR（Windows Performance Record）用来录制ETL（包括CPU使用率、IO、文件、网络、GPU、堆等），借助ETW技术框架实现，WPA用来可视化分析ETL文件。  

@@ -5,6 +5,21 @@ date: 2018-12-25
 tags: 经验  
 ---
 
+<!-- TOC -->
+
+- [1 概述](#1-概述)
+- [2 准备工作](#2-准备工作)
+- [3 异常处理](#3-异常处理)
+    - [3.1 配置gem源](#31-配置gem源)
+    - [3.2 配置bundle源](#32-配置bundle源)
+    - [3.3 配置msys源](#33-配置msys源)
+    - [3.4 生成blog以后，jekyll serve异常](#34-生成blog以后jekyll-serve异常)
+- [4 总结](#4-总结)
+- [5 评论系统](#5-评论系统)
+- [6 本地启动jekyll](#6-本地启动jekyll)
+
+<!-- /TOC -->
+
 # 1 概述
 
 > 本博客基于[Jekyll搭建个人博客](http://baixin.io/2016/10/jekyll_tutorials1/)作为模板创建而成，非常感谢作者！
@@ -115,3 +130,9 @@ valine_comment:
   leancloud_appkey: xxxxxxxxxx              # app_key
   placeholder: "欢迎提出您的宝贵意见"         # placeholder
 ```  
+
+# 6 本地启动jekyll
+
+```txt
+jekyll serve
+```
