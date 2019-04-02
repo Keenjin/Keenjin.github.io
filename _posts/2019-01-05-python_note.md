@@ -666,3 +666,17 @@ if __name__ == "__main__":
     main(argv)
 
 ```
+
+# Python中select和epoll异步网络模型的使用
+
+<https://www.cnblogs.com/JohnABC/p/6076006.html>
+
+# Python中scapy模块的使用
+
+scapy是一个万能的网络工具  
+安装命令：pip install scapy --proxy=http://web-proxy.oa.com:8080  
+
+# CentOS7.2中安装Python3.6.8
+
+<https://blog.csdn.net/lovefengruoqing/article/details/79284573>
+
