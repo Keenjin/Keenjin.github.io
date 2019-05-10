@@ -4,3 +4,5 @@ _site/
 .idea
 *.swp
 .Trashes
+_posts/.vscode/settings.json
+.gitignore
