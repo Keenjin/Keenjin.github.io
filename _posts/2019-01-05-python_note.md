@@ -35,8 +35,12 @@ tags: python
 - [python中threading模块的使用](#python中threading模块的使用)
 - [Python中subprocess模块的使用](#python中subprocess模块的使用)
 - [Python中urllib模块的使用](#python中urllib模块的使用)
+- [python中大文件MD5](#python中大文件md5)
 - [python文件上传](#python文件上传)
 - [python中文件遍历及重命名](#python中文件遍历及重命名)
+- [Python中select和epoll异步网络模型的使用](#python中select和epoll异步网络模型的使用)
+- [Python中scapy模块的使用](#python中scapy模块的使用)
+- [CentOS7.2中安装Python3.6.8](#centos72中安装python368)
 
 <!-- /TOC -->
 
@@ -552,6 +556,20 @@ req.add_header('Content-length', str(len(mpdata)))
 req.add_data(mpdata)
 resp = urllib2.urlopen(req,timeout=5).read()
 logger.info('Post data of channel "%s" to API with response of: %s', channel, resp)
+```
+
+# python中大文件MD5
+
+```python
+def big_file_md5(file):
+    md5_value = hashlib.md5()
+    with open(file, 'rb') as f:
+        while True:
+            data_flow = f.read(8096)
+            if not data_flow:
+                break
+            md5_value.update(data_flow)
+    return md5_value.hexdigest()
 ```
 
 # python文件上传
