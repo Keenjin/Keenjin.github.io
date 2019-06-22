@@ -291,4 +291,7 @@ virbr0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 # 第一个就是我们的网桥信息。这样，就可以用我们自定义的网桥，来设置固定ip
 docker run -d --rm --hostname keen-master --name rabbit-01 -p 8080:15672 --network keennet --ip 192.168.0.100 rabbitmq:3-management
+
+# 因为默认的账户guest，只能localhost访问（宿主机内的虚拟机访问除外），所以我们也需要设置用户名和密码
+docker run -d --rm --hostname keen-master --name rabbit-01 -p 8080:15672 --network keennet --ip 192.168.0.100 --env RABBITMQ_DEFAULT_USER=keen-rabbit --env RABBITMQ_DEFAULT_PASS=keen123 rabbitmq:3-management
 ```
