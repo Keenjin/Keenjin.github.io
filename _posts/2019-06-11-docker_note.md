@@ -13,7 +13,8 @@ tags: docker
 - [4. 通过Dockerfile管理系统部署](#4-通过dockerfile管理系统部署)
 - [5. Docker不要跑多个进程](#5-docker不要跑多个进程)
 - [6. Docker的常用命令](#6-docker的常用命令)
-- [7. Docker下rabbitmq](#7-docker下rabbitmq)
+- [7. Docker下rabbitmq实战](#7-docker下rabbitmq实战)
+- [8. Docker镜像迁移](#8-docker镜像迁移)
 
 <!-- /TOC -->
 
@@ -150,7 +151,7 @@ docker ps -a
 docker inspect 容器id
 ```
 
-# 7. Docker下rabbitmq
+# 7. Docker下rabbitmq实战
 
 ```bash
 # 对于一般场景，使用rabbitmq:latest即可，但是如果想要management，能通过web访问rabbitmq，就需要使用rabbitmq:3-management
@@ -306,4 +307,21 @@ docker run -d --rm --hostname keen-master --name rabbit-01 -p 8080:15672 --netwo
 
 # 因为默认的账户guest，只能localhost访问（宿主机内的虚拟机访问除外），所以我们也需要设置用户名和密码
 docker run -d --rm --hostname keen-master --name rabbit-01 -p 8080:15672 --network keennet --ip 192.168.0.100 --env RABBITMQ_DEFAULT_USER=keen-rabbit --env RABBITMQ_DEFAULT_PASS=keen123 rabbitmq:3-management
+```
+
+# 8. Docker镜像迁移
+
+```bash
+# 列出已有镜像
+[root@client-centos7 centos7.6]# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+rabbitmq            3-management        6ffc11daa8d0        5 days ago          186MB
+rabbitmq            latest              35d90e3cc645        5 days ago          156MB
+centos              latest              9f38484d220f        3 months ago        202MB
+
+# 镜像备份
+[root@client-centos7 centos7.6]# docker save 6ffc11daa8d0 | gzip > rabbitmq-3-management.tar.gz
+
+# 镜像还原
+[root@localhost ~]# docker load -i rabbitmq-3-management.tar.gz
 ```
