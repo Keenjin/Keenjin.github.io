@@ -5,7 +5,19 @@ date: 2019-06-11
 tags: docker
 ---
 
-# CentOS下安装docker教程
+<!-- TOC -->
+
+- [1. CentOS下安装docker教程](#1-centos下安装docker教程)
+- [2. docker使用的代理问题](#2-docker使用的代理问题)
+- [3. 通过docker安装一个centos系统](#3-通过docker安装一个centos系统)
+- [4. 通过Dockerfile管理系统部署](#4-通过dockerfile管理系统部署)
+- [5. Docker不要跑多个进程](#5-docker不要跑多个进程)
+- [6. Docker的常用命令](#6-docker的常用命令)
+- [7. Docker下rabbitmq](#7-docker下rabbitmq)
+
+<!-- /TOC -->
+
+# 1. CentOS下安装docker教程
 
 参考：<https://docs.docker.com/install/linux/docker-ce/centos/>
 
@@ -24,7 +36,7 @@ $ systemctl start docker
 
 ```
 
-# docker使用的代理问题
+# 2. docker使用的代理问题
 
 ```bash
 # 在centos中，/etc/profile中可以设置全局的网络代理，但是docker却不会使用此代理上网。需要设置单独的代理
@@ -40,7 +52,7 @@ Environment="HTTPS_PROXY=http://proxy.example.com:80/"
 Environment="NO_PROXY=localhost,127.0.0.0/8,docker-registry.somecorporation.com"
 ```
 
-# 通过docker安装一个centos系统
+# 3. 通过docker安装一个centos系统
 
 ```bash
 # 安装7.3的centos版本
@@ -50,7 +62,7 @@ $ docker pull centos:7.3.1611
 $ docker run -t -i centos:7.3.1611 /bin/bash
 ```
 
-# 通过Dockerfile管理系统部署
+# 4. 通过Dockerfile管理系统部署
 
 ```bash
 # 在host机器任意地方，建一个目录DockerApp1
@@ -118,14 +130,14 @@ RUN curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-serve
     && yum -y install rabbitmq-server
 ```
 
-# Docker不要跑多个进程
+# 5. Docker不要跑多个进程
 
 ```bash
 # 今天本来想把docker当作虚拟机使用，发现这里踩坑比较严重。
 # docker本质是当作一个微服务使用，本质而言，一个docker运行一个服务，只是我们把所有的相关依赖，全部可以通过Dockerfile打包起来，这样一个容器一个服务，就可以跑在所有其他任何地方。
 ```
 
-# Docker的常用命令
+# 6. Docker的常用命令
 
 ```bash
 # 查看当前有哪些镜像（通过docker pull拉取下来的，以及通过docker build根据Dockerfile构造的）
@@ -138,7 +150,7 @@ docker ps -a
 docker inspect 容器id
 ```
 
-# Docker下rabbitmq
+# 7. Docker下rabbitmq
 
 ```bash
 # 对于一般场景，使用rabbitmq:latest即可，但是如果想要management，能通过web访问rabbitmq，就需要使用rabbitmq:3-management
