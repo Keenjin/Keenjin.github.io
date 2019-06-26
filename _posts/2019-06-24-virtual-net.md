@@ -29,7 +29,7 @@ tags: 网络 虚拟化
             - [3.1.2 tap与tun的对比](#312-tap与tun的对比)
             - [3.1.3 linux下的应用](#313-linux下的应用)
         - [3.2 veth-pair](#32-veth-pair)
-    - [4 Linux网卡虚拟化：macvlan](#4-linux网卡虚拟化macvlan)
+        - [3.3 Linux网卡虚拟化：macvlan](#33-linux网卡虚拟化macvlan)
 
 <!-- /TOC -->
 
@@ -529,7 +529,7 @@ veth-pair技术出现的前提，是linux namespace技术的出现，而namespac
 
 veth-pair所做的事情，就是连接两个容器，彼此互通。
 
-## 4 Linux网卡虚拟化：macvlan
+### 3.3 Linux网卡虚拟化：macvlan
 
 linux内核4.0支持的新特性。（这是一个相当新的内核版本才有的特性，我们现在流行的CentOS7.6的内核版本，也才3.10，CentOS6的内核版本，是2.6）  
 
