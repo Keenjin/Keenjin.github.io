@@ -317,7 +317,9 @@ net.ipv4.ip_forward=1
 
 ##### 2.2.2.2 使用iptables配置临时转发策略（重启后失效）
 
-（1）SNAT配置
+一般而言，SNAT是必要配置的，确保能正确上网，或者配置通用的转发规则，如[2.2.2.1 使用libvirt命令配置永久生效](#2221-使用libvirt命令配置永久生效)，让一个网段的ip都能正常转发，或者配置临时转发规则。  
+
+（1）SNAT配置（使用POSTROUTING，在路由选择之后进行处理），用来共享上网
 
 ```bash
 # 添加SNAT策略的防火墙规则（192.168.2.2是我机器vmware为内部虚拟机创建的网关）
@@ -344,13 +346,21 @@ Chain POSTROUTING (policy ACCEPT 11 packets, 660 bytes)
     0     0 SNAT       all  --  *      eth0    192.168.3.0/24       0.0.0.0/0            to:192.168.2.2
 ```
 
-（2）DNAT配置
+（2）DNAT配置（使用PREROUTING，在路由选择之前进行处理），用来做端口转发策略
 
 ```bash
 # 添加DNAT策略的防火墙规则（10.16.104.67是vmware所在的主机的ip地址）
 # 这里的含义是：当外网（对vmware而言，外网就是vmware所在的主机）10.16.104.67的数据包（tcp包端口号是80），通过网关eth0进入虚拟机，会被映射到192.168.3.10上去（没有填目标端口号，表示不更改端口映射关系）
 # 如果想将ip和端口都修改掉，则输入这条命令即可：iptables -t nat -A PREROUTING -i eth0 -d 10.16.104.67 -p tcp --dport 80 -j DNAT --to-destination 192.168.3.10:10080
 iptables -t nat -A PREROUTING -i eth0 -d 10.16.104.67 -p tcp --dport 80 -j DNAT --to-destination 192.168.3.10
+
+# 校验
+iptables -t nat -L -nv
+
+Chain PREROUTING (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    5   260 DOCKER     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ADDRTYPE match dst-type LOCAL
+    0     0 DNAT       tcp  --  eth0   *       0.0.0.0/0            10.16.104.67         tcp dpt:80 to:192.168.3.10
 
 # 应用案例（公司路由策略）：
 # 从Internet中访问网关主机（120.196.122.145）的8888端口时，实际由运行在局域网主机（192.168.3.10）的8080端口应用程序提供服务。
