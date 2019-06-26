@@ -20,9 +20,14 @@ tags: 网络 虚拟化
             - [2.2.2 NAT的配置实现](#222-nat的配置实现)
                 - [2.2.2.1 使用libvirt命令配置永久生效](#2221-使用libvirt命令配置永久生效)
                 - [2.2.2.2 使用iptables配置临时转发策略（重启后失效）](#2222-使用iptables配置临时转发策略重启后失效)
+            - [2.2.3 利用tun/tap设备手动创建NAT网络（libvirt内部实现原理）](#223-利用tuntap设备手动创建nat网络libvirt内部实现原理)
         - [2.3 主机网络（Host-only Adapter）](#23-主机网络host-only-adapter)
         - [2.4 内部网络（Internal）](#24-内部网络internal)
     - [3 Linux虚拟网络设备：tap/tun、veth-pair](#3-linux虚拟网络设备taptunveth-pair)
+        - [3.1 tap/tun](#31-taptun)
+            - [3.1.1 传统网络与tap/tun网络对比](#311-传统网络与taptun网络对比)
+            - [3.1.2 tap与tun的对比](#312-tap与tun的对比)
+        - [3.2 veth-pair](#32-veth-pair)
     - [4 Linux网卡虚拟化：macvlan](#4-linux网卡虚拟化macvlan)
 
 <!-- /TOC -->
@@ -368,6 +373,100 @@ Chain PREROUTING (policy ACCEPT 0 packets, 0 bytes)
 # 后续可以写脚本，一键配置n条策略，参考：https://blog.51cto.com/liweizhong/976183
 ```
 
+#### 2.2.3 利用tun/tap设备手动创建NAT网络（libvirt内部实现原理）
+
+tun/tap设备原理，参见[3.1 tap/tun](#31-taptun)
+
+```bash
+# 在主机上创建一个桥
+brctl addbr br1
+brctl show
+
+bridge name	bridge id		STP enabled	interfaces
+br1		8000.000000000000	no		# 新创建的，还没有任何网卡接口关联上来
+keenbr0		8000.525400e14e00	yes		keenbr0-nic
+virbr0		8000.5254007b4de7	yes		virbr0-nic
+
+# 创建tap设备（以太网层设备），命名为tap1。一个tap设备，就是一个虚拟网卡接口
+ip tuntap add dev tap1 mode tap
+# 将tap设备tap1加到桥br1，实现与虚拟机互联
+brctl addif br1 tap1
+ip link set tap1 up
+
+# 查看创建完成的interface
+# 可以看到，tap1被加到了br1桥上
+ip tuntap
+ifconfig
+brctl show
+
+tap1: tap UNKNOWN_FLAGS:800
+
+ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether 00:0c:29:49:2a:69  txqueuelen 1000  (Ethernet)
+        RX packets 12510  bytes 1429004 (1.3 MiB)
+        RX errors 0  dropped 100  overruns 0  frame 0
+        TX packets 86406  bytes 5757427 (5.4 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 43087  bytes 3795284 (3.6 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 43087  bytes 3795284 (3.6 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+tap1: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether 72:14:68:98:fd:d1  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+bridge name	bridge id		STP enabled	interfaces
+br1		8000.72146898fdd1	no		tap1
+
+# 给br1桥添加ip地址
+ifconfig br1 192.168.142.1
+ifconfig
+
+br1: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        inet 192.168.142.1  netmask 255.255.255.0  broadcast 192.168.142.255
+        ether 72:14:68:98:fd:d1  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether 00:0c:29:49:2a:69  txqueuelen 1000  (Ethernet)
+        RX packets 12638  bytes 1439858 (1.3 MiB)
+        RX errors 0  dropped 100  overruns 0  frame 0
+        TX packets 86538  bytes 5773535 (5.5 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 43117  bytes 3797924 (3.6 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 43117  bytes 3797924 (3.6 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+tap1: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether 72:14:68:98:fd:d1  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+# 后续启动虚拟机，直接设置-net使用tap1的tap设备即可
+qemu -m 1024 -hda /home/royce/isorepo/ubuntu-vm1.img -netdev tap,ifname=tap1,id=hostnet0,script=no,downscript=no -device virtio-net-pci,netdev=hostnet0,id=net0, ac=00:16:3e:a5:fb:48 --cdrom /home/royce/isorepo/Fedora-19-x86_64-DVD.iso
+
+# 配置主机的iptables规则，保证从虚拟机发出的包做源地址伪装，允许虚拟机上网
+iptables -t nat -A POSTROUTING -o eth0 -s 192.168.142.0/24 -j MASQUERADE
+```
+
 ### 2.3 主机网络（Host-only Adapter）
 
 仅限主机内部访问的网络：主机和虚拟机可以互通，虚拟机之间可以互通（如果需要虚拟机能访问外网，需要单独设置一下，将物理网卡和虚拟网卡桥接上）  
@@ -380,6 +479,34 @@ Chain PREROUTING (policy ACCEPT 0 packets, 0 bytes)
 最后一种网络模型是内部网络，这种模型是相对最简单的一种，虚拟机与外部环境完全断开，只允许虚拟机之间互相访问，这种模型一般不怎么用
 
 ## 3 Linux虚拟网络设备：tap/tun、veth-pair
+
+### 3.1 tap/tun
+
+linux内核2.4.x版本之后实现的虚拟网络设备。tap/tun对应的网络驱动：/dev/net/tun  
+
+#### 3.1.1 传统网络与tap/tun网络对比
+
+![jpg](/images/post/virtual_network/tun.jpg)
+![jpg](/images/post/virtual_network/tap.jpg)
+
+#### 3.1.2 tap与tun的对比
+
+模拟网络层：
+
+- tun设备是三层设备，只模拟到IP层。我们可以通过/dev/net/tun收发IP层数据包。可以使用ifconfig设置ip地址
+- tap设备是二层设备，比tun更深入，可以通过/dev/net/tun文件收发mac层数据包。可以使用ifconfig设置ip地址，也可以设置mac地址
+
+网桥功能：
+
+- tun设备无法与物理网卡做bridge，但是可以通过ip_forward与物理网卡连通
+- tap设备拥有mac层功能，可以与物理网卡做bridge，支持mac层广播
+
+应用场景：
+
+- tun设备常用于vpn、tunnel、ipsec之类的隧道（openvpn、vtun都是利用此机制实现的隧道封装）
+- tap设备常用于虚拟交换机、网桥等
+
+### 3.2 veth-pair
 
 ## 4 Linux网卡虚拟化：macvlan
 
