@@ -20,7 +20,7 @@ tags: 网络 虚拟化
             - [2.2.2 NAT的配置实现](#222-nat的配置实现)
                 - [2.2.2.1 使用libvirt命令配置永久生效](#2221-使用libvirt命令配置永久生效)
                 - [2.2.2.2 使用iptables配置临时转发策略（重启后失效）](#2222-使用iptables配置临时转发策略重启后失效)
-        - [2.3 主机（Host-only Adapter）](#23-主机host-only-adapter)
+        - [2.3 主机网络（Host-only Adapter）](#23-主机网络host-only-adapter)
         - [2.4 内部网络（Internal）](#24-内部网络internal)
     - [3 Linux虚拟网络设备：tap/tun、veth-pair](#3-linux虚拟网络设备taptunveth-pair)
     - [4 Linux网卡虚拟化：macvlan](#4-linux网卡虚拟化macvlan)
@@ -368,9 +368,16 @@ Chain PREROUTING (policy ACCEPT 0 packets, 0 bytes)
 # 后续可以写脚本，一键配置n条策略，参考：https://blog.51cto.com/liweizhong/976183
 ```
 
-### 2.3 主机（Host-only Adapter）
+### 2.3 主机网络（Host-only Adapter）
+
+仅限主机内部访问的网络：主机和虚拟机可以互通，虚拟机之间可以互通（如果需要虚拟机能访问外网，需要单独设置一下，将物理网卡和虚拟网卡桥接上）  
+
+![png](/images/post/virtual_network/hostonly.png)
+![png](/images/post/virtual_network/hostnotonly.png)
 
 ### 2.4 内部网络（Internal）
+
+最后一种网络模型是内部网络，这种模型是相对最简单的一种，虚拟机与外部环境完全断开，只允许虚拟机之间互相访问，这种模型一般不怎么用
 
 ## 3 Linux虚拟网络设备：tap/tun、veth-pair
 
