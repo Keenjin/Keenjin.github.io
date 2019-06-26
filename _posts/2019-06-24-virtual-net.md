@@ -27,6 +27,7 @@ tags: 网络 虚拟化
         - [3.1 tap/tun](#31-taptun)
             - [3.1.1 传统网络与tap/tun网络对比](#311-传统网络与taptun网络对比)
             - [3.1.2 tap与tun的对比](#312-tap与tun的对比)
+            - [3.1.3 linux下的应用](#313-linux下的应用)
         - [3.2 veth-pair](#32-veth-pair)
     - [4 Linux网卡虚拟化：macvlan](#4-linux网卡虚拟化macvlan)
 
@@ -506,7 +507,27 @@ linux内核2.4.x版本之后实现的虚拟网络设备。tap/tun对应的网络
 - tun设备常用于vpn、tunnel、ipsec之类的隧道（openvpn、vtun都是利用此机制实现的隧道封装）
 - tap设备常用于虚拟交换机、网桥等
 
+#### 3.1.3 linux下的应用
+
+参考[2.2.3 利用tun/tap设备手动创建NAT网络（libvirt内部实现原理）](#223-利用tuntap设备手动创建nat网络libvirt内部实现原理)  
+
+OpenVPN的实现，后续总结
+
 ### 3.2 veth-pair
+
+linux内核2.6版本支持的特性。  
+
+veth-pair技术出现的前提，是linux namespace技术的出现，而namespace技术，也正是docker技术出现的底层基础。  
+
+本文参考：<https://www.cnblogs.com/bakari/p/8560437.html>  
+
+安全技术上，我们有沙箱概念，就是将程序运行的环境隔离。一个虚拟机就是一个完全隔离的环境。但是虚拟机本身隔离的实现，是非常重的，需要实现指令集的支持，完整实现操作系统底层技术实现。而隔离技术，通过将一些全局资源很轻量的隔离起来，就实现前述所想实现的原理。docker就是利用此技术而产生的。  
+
+所谓隔离，就是将一些全局资源（一个操作系统的基本运行要素，但非所有，而是几个必要的）划分namespace，每一个namespace都包含了一个小型操作系统的基本运行要素，包括：主机名、用户权限、文件系统、网络、进程号、进程间通信。（我们在docker中，可以运行一个操作系统，也证明了要素对于linux系统的完备性。而与此同时，我们可以看到，docker内部的资源，不太适合再次嵌套docker或者虚拟机）  
+
+此课题比较高级，需要研究一下linux内核实现，后续再慢慢研究。  
+
+veth-pair所做的事情，就是连接两个容器，彼此互通。
 
 ## 4 Linux网卡虚拟化：macvlan
 
