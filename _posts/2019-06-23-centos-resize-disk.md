@@ -66,6 +66,7 @@ VBoxManage modifyhd 74fda9b9-81c3-4b15-a51a-dab1b3b12001 --resize 35960
 # 4. 磁盘分区
 
 ```bash
+# 这里的每一步，要看清选项，不同系统或者不同fdisk版本，选项可能不一样。
 [root@localhost ~]# fdisk /dev/sda
 
 p       # 查看已分区数量（我看到有两个 /dev/sda1 和/dev/sda2） 
@@ -75,11 +76,11 @@ p       # 分区类型，选择主分区
 回车     # 默认选择（起始扇区） 
 回车     # 默认选择（结束扇区） 
 t       # 修改分区类型 
-        # 选分区3 
-8e      # 修改为LVM（8e就是LVM） 
+        # 选分区3（要修改的分区号，上面新增的） 
+8e      # 修改为LVM（这里最好使用L去list所有type，找到LVM。不一定8e就是LVM） 
 w       # 写分区表，完成后退出fdisk命令
 
-# 重启机器，并格式化分区
+# 重启机器（注意，这一步要慎重，对于线上系统而言，可能重启系统会导致一些问题。这里可以推荐使用partprobe -s来动态扫描分区表），并格式化分区
 [root@localhost ~]# reboot
 [root@localhost ~]# mkfs.ext3 /dev/sda3
 ```
@@ -124,7 +125,7 @@ lvm> quit                       # 退出
 # 6. 文件系统扩容
 
 ```bash
-# centos7使用xfs_growfs命令；centos6使用resize2fs命令
+# 优先使用xfs_growfs命令；如果出现“is not a mounted XFS filesystem”，则尝试使用resize2fs命令：resize2fs /dev/mapper/centos-root
 [root@localhost ~]# xfs_growfs /dev/mapper/centos-root
 [root@localhost ~]# df -h
 文件系统                 容量  已用  可用 已用% 挂载点
