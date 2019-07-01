@@ -158,14 +158,14 @@ docker inspect 容器id
 docker pull rabbitmq:3-management
 
 # 运行rabbitmq容器（-d表示后台运行，-rm表示容器退出后自动清除，--hostname是由于rabbitmq会根据主机名创建节点，如果用默认，可能多个节点名一致不好区分。）
-docker run -d -rm --hostname keen-master --name rabbit-01 rabbitmq:3-management
+docker run -d --rm --hostname keen-master --name rabbit-01 rabbitmq:3-management
 
 # 按照上面的方式，如果想要访问docker内的rabbitmqmgr，在虚拟机外部（windows机器），建立路由表，能将172.17.0.0网段的所有请求，都转到192.168.2.132（docker宿主机）上去。
 # 这种方式，直接访问http://172.17.0.2:15672即可
 route add 172.17.0.0 mask 255.255.255.0 192.168.2.132
 
 # 如果不使用路由表，也可以直接建立端口转发，使用-p参数，如下，直接使用http://192.168.2.132:8080，就可以访问docker内的rabbitmq web服务
-docker run -d -rm --hostname keen-master --name rabbit-01 -p 8080:15672 rabbitmq:3-management
+docker run -d --rm --hostname keen-master --name rabbit-01 -p 8080:15672 rabbitmq:3-management
 
 # 如果不设置ip，docker会自动分配172号段的ip地址给每一个容器。如果想要ip自己可控，则可以自己传递一个固定ip地址进去
 # 参考这里的：https://www.jianshu.com/p/19cd3654e4a4
@@ -215,7 +215,7 @@ NETWORK ID          NAME                DRIVER              SCOPE
     }
 ]
 # 可以看到，子网是172.17号段，如果使用这个默认的网桥，来设置固定ip地址，如下：
-[root@client-centos7 dockerhome]# docker run -d -rm --hostname keen-master --name rabbit-01 -p 8080:15672 --network bridge --ip 172.17.0.100 rabbitmq:3-management
+[root@client-centos7 dockerhome]# docker run -d --rm --hostname keen-master --name rabbit-01 -p 8080:15672 --network bridge --ip 172.17.0.100 rabbitmq:3-management
 07da4b8138ae70d8760f30643d1dcb88b9145c458a5e429db87774d5819458ad
 docker: Error response from daemon: user specified IP address is supported on user defined networks only.
 # 很明显，可以看到，我们就不能使用默认的网桥，如果要指定固定ip，就必须使用自定义网桥。这里大概意思是，默认网桥留给自动分配ip使用。
