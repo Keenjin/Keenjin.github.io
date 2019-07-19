@@ -21,6 +21,7 @@ tags: vscode
         - [3.1 在宿主机上，安装OpenSSH](#31-在宿主机上安装openssh)
         - [3.2 目标机器，需要开启SSH服务](#32-目标机器需要开启ssh服务)
         - [3.3 在宿主机的VSCode中，安装并配置Remote - SSH插件](#33-在宿主机的vscode中安装并配置remote---ssh插件)
+        - [3.4 SSH免密登录](#34-ssh免密登录)
 
 <!-- /TOC -->
 
@@ -185,3 +186,41 @@ systemctl start sshd.service
 安装结束后，reload一下go插件，这样，就可以正常调试里，跟在本地调试代码完全一样的体验。查看此时的terminal，可以看到链接到远端去了。
 
 ![jpg](/images/post/vscode/remote_debugging.jpg)
+
+### 3.4 SSH免密登录
+
+生成密钥对，我这里选择在Win10机器上生成。
+
+```bash
+# 生成MyLinuxRsa私钥和MyLinuxRsa.pub公钥
+ssh-keygen -t rsa -f c:\Users\keenjin\.ssh\MyLinuxRsa
+
+# 将公钥，拷贝到服务器上
+cd ~/.ssh/
+ls
+# 如果authorized_keys文件不存在，则创建
+vim authorized_keys
+chmod 600 authorized_keys
+
+rz  # 在CentOS中执行rz命令，然后将c:\Users\keenjin\.ssh\MyLinuxRsa.pub文件，上传过去
+cat MyLinuxRsa.pub >> authorized_keys
+
+# 更改CentOS上的ssh的配置，确保支持密钥登录/etc/ssh/sshd_config
+# 注意，以下几项必须要有
+···sshd_config
+PubkeyAuthentication yes
+AuthorizedKeysFile  .ssh/authorized_keys
+···
+
+# 在Win10机器上，配置ssh的私钥文件
+# 编辑c:\users\keenjin\.ssh\config，设置私钥文件
+···config
+# Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+Host Linux
+    HostName 192.168.2.132
+    User root
+    IdentityFile C:\Users\keenjin\.ssh\MyLinuxRsa
+···
+
+# 远程连接选用c:\users\keenjin\.ssh\config配置登录
+```
