@@ -22,6 +22,8 @@ tags: boost
 
 参考：https://www.boost.org/doc/libs/1_55_0/doc/html/bbv2/reference.html
 
+## Windows下编译
+
 ```txt
 1、运行bootstrap.bat，生成b2.exe
 2、查看需要编译的库
@@ -34,6 +36,12 @@ b2.exe --toolset=msvc-14.0 --with-regex stage
 b2.exe -j4 toolset=msvc-14.0_xp cxxflags="/Zc:threadSafeInit- "  
 2、如果发现编译问题，是由于cl导致的，可以直接打开vs2015命令行工具来编译，这里包含了所有可用的编译工具  
 
+```
+
+## Unix下编译
+
+```txt
+1、运行bootstrap.sh，生成b2
 ```
 
 # 信号槽signals2和单实例
