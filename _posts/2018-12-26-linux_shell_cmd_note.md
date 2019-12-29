@@ -27,6 +27,7 @@ tags: linux
     - [``或者$()，表示把命令框起来，shell解释的时候优先执行，并把结果作为输出](#或者表示把命令框起来shell解释的时候优先执行并把结果作为输出)
     - [dirname，取当前sh脚本](#dirname取当前sh脚本)
     - [$var或${var}，用于变量替换，var是一个变量，类似宏](#var或var用于变量替换var是一个变量类似宏)
+    - [type、test辅助判断命令](#typetest辅助判断命令)
 - [3 其他问题](#3-其他问题)
     - [windows下mingw64无法设置sh文件可执行（chmod失效）](#windows下mingw64无法设置sh文件可执行chmod失效)
 - [4 vim常用操作](#4-vim常用操作)
@@ -277,6 +278,21 @@ date=$(date +%Y%m%d)
 echo "现在时间:${date}"
 结果：
 现在时间是:20181227
+```
+
+## type、test辅助判断命令
+
+```bash
+# type用于判断命令类型，是内部命令还是外部命令。如果命令不存在，type命令的退出错误码，就会执行if条件判断失败
+# test用于测试后面的条件是否满足
+print_cmd=""
+if type printf > /dev/null; then
+    print_cmd="printf"
+elif test -x /usr/ucb/echo; then
+    print_cmd="/usr/ucb/echo"
+else
+    print_cmd="echo"
+fi
 ```
 
 # 3 其他问题

@@ -149,6 +149,8 @@ docker image rm -f xxx（这里xxx可以是repository:tag，也可以是imageid�
 docker ps -a
 # 查看容器的所有配置信息（比如网络、ip等）
 docker inspect 容器id
+# 进入已有容器
+docker exec -it containerid /bin/bash
 ```
 
 # 7. Docker下rabbitmq实战

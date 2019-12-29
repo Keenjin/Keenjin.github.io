@@ -41,6 +41,7 @@ tags: python
 - [Python中select和epoll异步网络模型的使用](#python中select和epoll异步网络模型的使用)
 - [Python中scapy模块的使用](#python中scapy模块的使用)
 - [CentOS7.2中安装Python3.6.8](#centos72中安装python368)
+- [Python解析xml](#python解析xml)
 
 <!-- /TOC -->
 
@@ -359,7 +360,7 @@ def load_cfg(conf):
         parser.read(conf)
 
         Config['section1'] = int(parser.get('db', 'section1'))
-    except Exception, e:
+    except Exception as e:
         logger.error(str(e))
 ```
 
@@ -733,3 +734,129 @@ scapy是一个万能的网络工具
 
 <https://blog.csdn.net/lovefengruoqing/article/details/79284573>
 
+# Python解析xml
+
+```python
+#!python3
+
+import os
+from sys import argv
+import sys
+import platform
+import logging
+import xml.etree.ElementTree as ET
+import json
+import time
+
+logger = logging.getLogger()
+
+
+def InitLogger(log_file_name=''):
+    logger.setLevel(logging.DEBUG)
+
+    log_handler = None
+    if log_file_name != '':
+        dirpath = os.path.dirname(log_file_name)
+        if not os.path.exists(dirpath):
+            os.mkdir(dirpath)
+        log_handler = logging.FileHandler(log_file_name)
+    log_handler.setFormatter(logging.Formatter('%(asctime)-15s (%(filename)s)[%(levelname)s] %(message)s'))
+    logger.addHandler(log_handler)
+    log_handler = logging.StreamHandler()
+    log_handler.setFormatter(logging.Formatter('%(asctime)-15s (%(filename)s)[%(levelname)s] %(message)s'))
+    logger.addHandler(log_handler)
+    logger.info('logfile is %s', log_file_name)
+
+
+def ParseVCProj(proj):
+    logger.info('parse vcproj %s', proj)
+    xmlParser = ET.XMLParser(encoding='utf-8')
+    tree = ET.parse(proj, parser=xmlParser)
+    root = tree.getroot()
+    for cfg in root.iterfind('Configurations/Configuration'):
+        if cfg.get('Name') == 'Release|Win32':
+            for tool in cfg.iterfind('Tool'):
+                if tool.get('Name') == 'VCCLCompilerTool':
+                    clInfo = {'Project': proj, 'VCCLCompilerTool': tool.attrib}
+                    return clInfo
+
+
+def RemoveCodeAnalysis(proj):
+    logger.info('parse vcproj %s', proj)
+    shutil.copyfile(proj, proj+'.bak')
+    xmlParser = ET.XMLParser(encoding='utf-8')
+    tree = ET.parse(proj, parser=xmlParser)
+    root = tree.getroot()
+    for cfg in root.iterfind('Configurations/Configuration'):
+        if cfg.get('Name') == 'Release|Win32':
+            for tool in cfg.iterfind('Tool'):
+                if tool.get('Name') == 'VCCLCompilerTool':
+                    preprocessor = tool.get('PreprocessorDefinitions')
+                    newPreprocessor = ''
+                    pos = preprocessor.find('CODE_ANALYSIS')
+                    if pos != -1 :
+                        pl = preprocessor.split(';')
+                        for item in pl:
+                            if item != 'CODE_ANALYSIS':
+                                newPreprocessor = newPreprocessor + item + ';'
+                    if newPreprocessor.endswith(';'):
+                        newPreprocessor = newPreprocessor[0:-1]
+                    tool.set('PreprocessorDefinitions', newPreprocessor)
+                    tree.write(proj, 'gb2312', True)
+                    return
+
+
+def Run():
+    # get dir
+    path = ''
+    if len(argv) > 1:
+        path = argv[1]
+    else:
+        path = os.path.dirname(script)
+    logger.info('path: %s', path)
+
+    # iterate dir
+    projFiles = []
+    for dirpath, dirnames, filenames in os.walk(path):
+        # do not search like .vscode path
+        if os.path.basename(dirpath).startswith('.'):
+            continue
+        for f in filenames:
+            if f.endswith('.vcproj'):
+                projFiles.append(os.path.join(dirpath, f))
+
+    # parse
+    clInfos = []
+    for proj in projFiles:
+        clInfo = ParseVCProj(proj)
+        clInfos.append(clInfo)
+
+    # output
+    outFile = os.path.join(os.path.dirname(script), os.path.basename(script).split('.')[0] + '.json')
+    with open(outFile, 'w') as f:
+        f.writelines(json.dumps(clInfos, indent=4, separators=(', ', ': ')))
+        logger.info('output: %s', outFile)
+
+
+if __name__ == "__main__":
+    print(sys.version)
+    pythonV = platform.python_version()
+    if pythonV[0] != '3':
+        print('error, please use python3 !!!!!!')
+        time.sleep(3)
+        exit(-1)
+
+    # print log
+    script = argv[0]
+    InitLogger(os.path.join(os.path.dirname(script), os.path.basename(script).split('.')[0] + '.log'))
+
+    try:
+        Run()
+    except Exception as e:
+        logger.error(str(e))
+
+    logger.info('success finish !!!!!!')
+    time.sleep(3)
+    exit(0)
+
+```
