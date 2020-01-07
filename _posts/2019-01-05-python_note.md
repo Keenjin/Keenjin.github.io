@@ -42,13 +42,15 @@ tags: python
 - [Python中scapy模块的使用](#python中scapy模块的使用)
 - [CentOS7.2中安装Python3.6.8](#centos72中安装python368)
 - [Python解析xml](#python解析xml)
+- [Python版本兼容](#python版本兼容)
 
 <!-- /TOC -->
 
 # py资源
 
 python流行库：[https://github.com/jobbole/awesome-python-cn/blob/master/README.md](https://github.com/jobbole/awesome-python-cn/blob/master/README.md)
-官方模块查询（支持的python版本等）：[https://pypi.org/](https://pypi.org/)
+官方模块查询（支持的python版本等）：[https://pypi.org/](https://pypi.org/)  
+python版本不兼容的第三方库：<https://www.lfd.uci.edu/~gohlke/pythonlibs/>
 
 # py符号
 
@@ -859,4 +861,50 @@ if __name__ == "__main__":
     time.sleep(3)
     exit(0)
 
+```
+
+# Python版本兼容
+
+```python
+def Run():
+    try:
+        # todo
+    except Exception as e:
+        logger.error(str(e))
+
+    logger.info('success finish !!!!!!')
+    time.sleep(sleepTime)
+    exit(0)
+
+
+def UsePython3():
+    pythonV = platform.python_version()
+    if pythonV[0] != '3':
+        # use python3 to do again!!!
+        try:
+            cmd = ['python3', argv[0]]
+            p = subprocess.Popen(cmd)
+            logger.info('use python3 to run againt. new pid: %d', p.pid)
+            retCode = p.wait()
+            if retCode != 0:
+                time.sleep(sleepTime)
+        except Exception as e:
+            if e.args[0] == 2:
+                logger.error('python3 cmd is not found.')
+            logger.error(str(e))
+            time.sleep(sleepTime)
+        exit(-1)
+
+
+if __name__ == "__main__":
+    # print log
+    script = argv[0]
+    InitLogger(os.path.join(os.path.dirname(script), os.path.basename(script).split('.')[0] + '.log'))
+    logger.info(sys.version)
+
+    # makesure use python3 to run
+    UsePython3()
+
+    # run service
+    Run()
 ```

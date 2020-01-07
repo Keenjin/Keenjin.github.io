@@ -42,13 +42,13 @@ C:.
 │              unicode.pf2
 │
 ├─images    # 
-│  │  efiboot.img
+│  │  efiboot.img       # 解压后，就是EFI/BOOT里面的东西
 │  │
-│  └─pxeboot
+│  └─pxeboot            # 提供网络接口启动计算机的机制，不依赖本地数据存储设备或已安装的操作系统
 │          initrd.img
 │          vmlinuz
 │
-├─isolinux  # 一个轻量级的linux系统，硬件无关性较强，用来做引导安装使用
+├─isolinux  # 一个轻量级的linux系统，硬件无关性较强，用来做引导安装使用，相当于PE系统
 │      boot.cat
 │      boot.msg
 │      grub.conf
@@ -83,5 +83,15 @@ C:.
        fa095a8e52d5d2f81f1947b3a25f10608250d40b14b579469a93c28fced5d60e
        repomd.xml
        repomd.xml.asc
+
+```
+
+# linux文件系统作用
+
+```bash
+# 分区相关
+/etc/mtab：记录了当前挂在的分区信息
+/etc/fstab：开机启动后，可以根据此配置来自动挂在分区
+
 
 ```
