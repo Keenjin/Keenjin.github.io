@@ -2,7 +2,7 @@
 layout: post
 title: 白话大数据与机器学习
 date: 2019-02-17 
-tags: 机器学习  
+tags: AI 
 ---
 
 <!-- TOC -->
