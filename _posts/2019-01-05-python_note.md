@@ -43,6 +43,7 @@ tags: python
 - [CentOS7.2中安装Python3.6.8](#centos72中安装python368)
 - [Python解析xml](#python解析xml)
 - [Python版本兼容](#python版本兼容)
+- [正则表达式](#正则表达式)
 
 <!-- /TOC -->
 
@@ -907,4 +908,43 @@ if __name__ == "__main__":
 
     # run service
     Run()
+```
+
+# 正则表达式
+
+```python
+import re
+
+# 匹配单行的例子
+def test(self, ethname):
+    src = "/etc/sysconfig/network-scripts/ifcfg-" + ethname
+    # 确认BOOTPROTO是否存在，如果不存在，则说明当前这个配置异常，直接返回失败，否则，修改为static
+    with open(src, "r") as f:
+        txt = f.read()
+    if re.search('BOOTPROTO=\w+', txt) is None:
+        return False
+    txt = re.sub('BOOTPROTO=\w+', 'BOOTPROTO=static', txt)
+    txt = re.sub('DEVICE=\w+', 'DEVICE='+ethname+":"+new_name_num, txt)
+    txt = re.sub('ONBOOT=\w+', 'ONBOOT=yes', txt)
+    if re.search('IPADDR=\w+', txt) is None:
+        if txt[::-1][0] == '\n':
+            txt = txt+"IPADDR="+ip+'\n'
+        else:
+            txt = txt+"\nIPADDR="+ip+'\n'
+    else:
+        txt = re.sub('IPADDR=\w+', 'IPADDR='+ip, txt)
+
+# 匹配多行的例子
+def get_all_ethname(self, real):
+    out = os.popen('ifconfig').read()
+    findarray = re.findall('(^\w+(:\d)*)', out, flags=re.MULTILINE)
+    all = []
+    for item in findarray:
+        if real:
+            if not self.eth_is_virtual(item[0]):
+                all.append(item[0])
+        else:
+            all.append(item[0])
+    return all
+
 ```
