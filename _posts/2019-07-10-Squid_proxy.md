@@ -1,13 +1,31 @@
 ---
 layout: post
-title: Squid代理服务器搭建
+title: Squid代理服务器
 date: 2019-07-10
 tags: Linux
 ---
 
-# Squid代理服务器搭建
+<!-- TOC -->
 
-## 代理服务器
+- [1. 代理服务器](#1-代理服务器)
+- [2. Squid安装](#2-squid安装)
+- [3. Squid配置详解](#3-squid配置详解)
+    - [3.1. Squid多进程使用CPU多核](#31-squid多进程使用cpu多核)
+    - [3.2. 代理服务器登录认证相关](#32-代理服务器登录认证相关)
+    - [3.3. 访问控制](#33-访问控制)
+    - [3.4. Squid的网络配置选项](#34-squid的网络配置选项)
+    - [3.5. 缓存配置](#35-缓存配置)
+    - [3.6. 附件A：squid_external_acl_helper.py](#36-附件asquid_external_acl_helperpy)
+- [4. squid源码分析](#4-squid源码分析)
+    - [4.1. 准备环境](#41-准备环境)
+    - [4.2. 安装必备工具](#42-安装必备工具)
+    - [4.3. squid源码编译](#43-squid源码编译)
+    - [4.4. CLion远程调试squid](#44-clion远程调试squid)
+    - [4.5. squid源码解析](#45-squid源码解析)
+
+<!-- /TOC -->
+
+# 1. 代理服务器
 
 基本作用，是代理网络用户，去请求获取网络信息  
 
@@ -21,7 +39,7 @@ tags: Linux
 - 正向代理：包括普通代理（最常用代理，通过/etc/profile指定代理服务器地址，实现网络请求的转发）、透明代理（一般用于网关主机，不需要用户设置代理服务器地址）
 - 反向代理：通常是企业的服务部署在内网机器，反向代理的作用就是支持外网对企业服务的请求，转发到内网，并把回包从内网回传给互联网上的用户
 
-## Squid安装
+# 2. Squid安装
 
 ```bash
 # 安装
@@ -34,11 +52,11 @@ systemctl start squid.service
 squid -v
 ```
 
-## Squid配置详解
+# 3. Squid配置详解
 
 参考<http://www.squid-cache.org/Versions/v3/3.5/cfgman/>  
 
-### Squid多进程使用CPU多核
+## 3.1. Squid多进程使用CPU多核
 
 Squid3.2之后，开始支持多核模式，有两种多核支持方式可选：workers或者cpu_affinity_map。csdn上说的，经过测试，cpu_affinity_map的方式比workers方式更佳
 
@@ -50,7 +68,7 @@ workers 4   # 设置cpu核心数为4个
 cpu_affinity_map process_numbers 1,2,3,4 cores 1,2,3,4  # 把四个squid进程，分别绑定到4个核心上，注意核心数0留给操作系统使用，从1开始
 ```
 
-### 代理服务器登录认证相关
+## 3.2. 代理服务器登录认证相关
 
 代理如果需要身份认证才能访问，则需要添加这里的选项。这里参考<https://maoxian.de/2016/06/1415.html>
 
@@ -62,7 +80,7 @@ auth_param basic credentialsttl 2 hours                 # 用户名密码缓存�
 auth_param basic casesensitive off                      # 用户名是否需要匹配大小写
 ```
 
-### 访问控制
+## 3.3. 访问控制
 
 访问控制相关的，允许某些流量的通过，类似防火墙，可以选择过滤掉不想要的东西  
 这里的squid_external_acl_helper.py参考[附件A：squid_external_acl_helper.py](附件A：squid_external_acl_helper.py)
@@ -82,7 +100,7 @@ http_access deny CONNECT !SSL_ports     # 拒绝连接到非SSL的端口请求
 http_reply_access SSL_ports
 ```
 
-### Squid的网络配置选项
+## 3.4. Squid的网络配置选项
 
 ```bash
 # http_port用来配置Squid监听http请求的服务程序端口号
@@ -95,7 +113,7 @@ https_port 3129
 ftp_port 3130
 ```
 
-### 缓存配置
+## 3.5. 缓存配置
 
 ```bash
 # refresh_pattern配置缓存策略有效期，usage: refresh_pattern [-i] regex min percent max [options]
@@ -106,7 +124,7 @@ ftp_port 3130
 refresh_pattern ^ftp:		1440	20%	10080   
 ```
 
-### 附件A：squid_external_acl_helper.py
+## 3.6. 附件A：squid_external_acl_helper.py
 
 ```python
 # coding: utf-8
@@ -143,3 +161,130 @@ if __name__ == '__main__':
         sys.stdout.flush()
 
 ```
+
+# 4. squid源码分析
+
+## 4.1. 准备环境
+
+- centos7.6
+- vim
+
+## 4.2. 安装必备工具
+
+```bash
+yum update
+
+# 准备工具
+## make工具
+yum install libtool autoconf automake libtool-ltdl-devel
+## 解压工具
+yum install zip unzip bzip2
+## 基础gcc g++工具
+yum install gcc gcc-g++
+
+# 安装gcc新版本
+## 下载gcc新版本
+curl -OL "http://mirrors.nju.edu.cn/gnu/gcc/gcc-9.3.0/gcc-9.3.0.tar.gz"
+tar -xzf gcc-9.3.0.tar.gz
+cd gcc-9.3.0
+## 预下载前置安装包（如果网络不好，可能出现文件校验失败，实际是文件没有完整下载，需要删除缓存文件，重新下载）；另外，如果这里下载一只超时，可能是下载路径不行，搜索download_prerequisites中的base_url，将链接替换为：http://mirror.linux-ia64.org/gnu/gcc/infrastructure/
+contrib/download_prerequisites
+## 新建临时目录，以便不污染源代码
+mkdir build
+cd build
+## 收集系统信息，自动生成配置头。这里只编译64位库。
+../configure --disable-multilib
+## 开始编译，这个时间相当长，花费了一上午编译完成。（设置并行编译应该会更快）
+make
+## 开始安装
+make install
+## 安装完成，需要新建一个bash才能生效，查看gcc版本
+gcc -v
+
+## gcc编译完成，还需要链接新的动态链接库
+cp /usr/local/lib64/libstdc++.so.6.0.28 /usr/lib64
+rm -rf /usr/lib64/libstdc++.so.6
+ln -s /usr/lib64/libstdc++.so.6.0.28 /usr/lib64/libstdc++.so.6
+```
+
+## 4.3. squid源码编译
+
+```bash
+
+# 源码同步
+git clone -b v5 https://github.com/squid-cache/squid.git
+cd squid
+
+# 一堆的工具检测、配置检测、配置生成，依赖autoconf、automake等，最后会根据configure.ac和makefile.in生成configure和makefile文件
+./bootstrap.sh
+
+# 运行configure
+mkdir build
+cd build
+../configure
+
+# 编译
+make
+```
+
+## 4.4. CLion远程调试squid
+
+> Step1：准备环境
+
+```bash
+# 远程机器是mac（CLion在这里），被远程主机是centos
+# 需要在被远程主机上，执行以下动作
+yum install openssl openssl-devel
+
+# 需要在被远程主机上，安装cmake。由于yum中自带等cmake版本过低，所以使用这里等源码安装，可以先试试yum install cmake
+curl -OL https://github.com/Kitware/CMake/releases/download/v3.17.0/cmake-3.17.0.tar.gz
+tar -xzf cmake*
+cd cmake-3.17.0
+mkdir build
+cd build
+../bootstrap
+make && make install
+
+# 需要在被远程主机上，安装gdb和gdbserver（源码编译时，这俩在一块儿）。注意的是，CLion只支持7.6到8.3版本，不要用太高的版本
+curl -OL http://ftp.gnu.org/gnu/gdb/gdb-8.3.tar.gz
+tar -xzf gdb-8.3*
+cd gdb-8.3
+mkdir build
+cd build
+../configure
+make && make install
+
+# 需要将远程主机的防火墙关闭
+systemctl stop firewalld
+systemctl disable firewalld
+```
+
+> Step2：配置CLion代码同步  
+这里，首先需要利用CLion的deployment去同步代码  
+![png](/images/post/squid/clion_deployment1.png)
+![png](/images/post/squid/clion_deployment2.png)
+![png](/images/post/squid/clion_deployment3.png)
+
+> Step3：配置CLion进行代码调试
+- 首先，需要配置调试目标
+![png](/images/post/squid/clion_debug_remote.png)
+- 然后，需要配置工具链
+![png](/images/post/squid/clion_debug_toolchain.png)
+
+> Step4：在远程主机上，写一个脚本，方便在启动时候，自动运行gdbserver调试
+```bash
+##startdebug.sh
+#! /bin/bash
+
+# 杀死历史所有的gdbserver
+ps -ef | grep gdbserver | grep -v grep | awk '{print($2)}' | xargs kill -9
+# 有可能一时半会儿杀不死，需要确保杀死，这里简单延时1s
+sleep 1
+# 后台运行gdbserver
+nohup gdbserver :1234 build/src/squid -f build/src/squid.conf.default &
+# 确保后台启动成功
+sleep 1
+```
+
+## 4.5. squid源码解析
+
