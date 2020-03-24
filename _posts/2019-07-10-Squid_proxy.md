@@ -167,7 +167,7 @@ if __name__ == '__main__':
 ## 4.1. 准备环境
 
 - centos7.6
-- vim
+- CLion
 
 ## 4.2. 安装必备工具
 
@@ -260,18 +260,21 @@ systemctl disable firewalld
 ```
 
 > Step2：配置CLion代码同步  
+
 这里，首先需要利用CLion的deployment去同步代码  
 ![png](/images/post/squid/clion_deployment1.png)
 ![png](/images/post/squid/clion_deployment2.png)
 ![png](/images/post/squid/clion_deployment3.png)
 
 > Step3：配置CLion进行代码调试
+
 - 首先，需要配置调试目标
 ![png](/images/post/squid/clion_debug_remote.png)
 - 然后，需要配置工具链
 ![png](/images/post/squid/clion_debug_toolchain.png)
 
 > Step4：在远程主机上，写一个脚本，方便在启动时候，自动运行gdbserver调试
+
 ```bash
 ##startdebug.sh
 #! /bin/bash
