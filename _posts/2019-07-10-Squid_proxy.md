@@ -288,6 +288,7 @@ nohup gdbserver :1234 build/src/squid -f build/src/squid.conf.default &
 # 确保后台启动成功
 sleep 1
 ```
+![png](/images/post/squid/clion_debug_tool.png)
 
 ## 4.5. squid源码解析
 
