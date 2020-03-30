@@ -225,6 +225,9 @@ cd build
 
 # 编译
 make
+
+# 安装（为了能够正常调试，需要先安装，释放必要的配置文件）
+make install
 ```
 
 ## 4.4. CLion远程调试squid
@@ -284,7 +287,7 @@ ps -ef | grep gdbserver | grep -v grep | awk '{print($2)}' | xargs kill -9
 # 有可能一时半会儿杀不死，需要确保杀死，这里简单延时1s
 sleep 1
 # 后台运行gdbserver
-nohup gdbserver :1234 build/src/squid -f build/src/squid.conf.default &
+nohup gdbserver :1234 build/src/squid &
 # 确保后台启动成功
 sleep 1
 ```
