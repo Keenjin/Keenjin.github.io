@@ -96,4 +96,4 @@ ReadFile卡死，就可以YY出很多可能性，是读某个过大文件？文�
 ![png](/images/post/windbg/vs2015_uninst_hung6.png)
 ![png](/images/post/windbg/vs2015_uninst_hung7.png)
 
-找到了Cancel控件，直接模拟点击即可。至此，流程发现已经往下继续走了。
+找到了Cancel控件，直接模拟点击即可。至此，流程发现已经往下继续走了。后续发现又有重复类型的问题，可以简单通过spy++和accexplorer来解决卡死问题。
