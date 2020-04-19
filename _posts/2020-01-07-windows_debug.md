@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Windows问题Debug
-date: 2019-01-07
+date: 2020-01-07
 tags: windows
 ---
 
@@ -98,6 +98,19 @@ ReadFile卡死，就可以YY出很多可能性，是读某个过大文件？文�
 
 找到了Cancel控件，直接模拟点击即可。至此，流程发现已经往下继续走了。后续发现又有重复类型的问题，可以简单通过spy++和accexplorer来解决卡死问题。
 
-## 解决卡死问题
+## 解决visual studio 2015卸载问题
 
-前面的方法，可以找到为何卡死，以及如何解决卡死的一种方法。实际上，当分析到进程树时，当我们观察卸载过程，就会发现，它卸载也是调用不同进程。前面的方法，即使解决了弹框卡死，卸载流程实际是失败的，那么我们让当前插件的卸载进程继续执行已经没有意义了，此时，解决卡死问题最简单的方式，就是直接杀掉卡死组件的进程。
+前面的方法，可以找到为何卡死，以及如何解决卡死的一种方法。实际上，当分析到进程树时，当我们观察卸载过程，就会发现，它卸载也是调用不同进程。前面的方法，即使解决了弹框卡死，卸载流程实际是失败的，那么我们让当前插件的卸载进程继续执行已经没有意义了，此时，解决卡死问题最简单的方式，就是直接杀掉卡死组件的卸载进程，只让部分组件无法卸载。  
+
+然而不幸的是，我机器上C:\ProgramData\PackageCache中的文件被某个不良工具清除掉了，所以导致大面积卸载异常，最后卸载失败。无奈尝试使用了微软官方的一系列卸载方法：
+
+- 方法一：[常规强制卸载](https://visualstudio.microsoft.com/zh-hans/vs/support/vs2015/uninstall-visual-studio-2015/)。示例中使用的是企业版，我这里用的是社区版，需要使用vs_community.exe替代vs_enterprise.exe。
+- 方法二：[不使用PackageCache](https://devblogs.microsoft.com/setup/moving-or-disabling-the-package-cache-for-visual-studio-2017/)。
+- 方法三：[疑难杂症卸载](https://support.microsoft.com/en-us/help/17588/windows-fix-problems-that-block-programs-being-installed-or-removed)。
+
+对于方法一和方法二，一般可以优先尝试，因为方法三非常耗时。然而，由于我的机器大面积异常，尝试前两种方法对我无效。方法三的基本使用方式如下：
+
+- Step1：控制面板执行visual studio 2015卸载，等待卡死
+- Step2：分析卡死的窗口，spy++查看对应窗口的msi组件文案，确认是哪个msi
+- Step3：使用下载下来的工具MicrosoftProgram_Install_and_Uninstall.meta.diagcab，选择卸载，然后从Step2扫描到的列表中，选择卸载异常的msi，执行卸载
+- Step4：重复执行Step1，等待卡死，直到无任何卡死
