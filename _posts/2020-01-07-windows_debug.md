@@ -112,5 +112,5 @@ ReadFile卡死，就可以YY出很多可能性，是读某个过大文件？文�
 
 - Step1：控制面板执行visual studio 2015卸载，等待卡死
 - Step2：分析卡死的窗口，spy++查看对应窗口的msi组件文案，确认是哪个msi
-- Step3：使用下载下来的工具MicrosoftProgram_Install_and_Uninstall.meta.diagcab，选择卸载，然后从Step2扫描到的列表中，选择卸载异常的msi，执行卸载
+- Step3：使用下载下来的工具MicrosoftProgram_Install_and_Uninstall.meta.diagcab，选择卸载，然后从Step2我们知道具体是哪个msi，从扫描到的列表中，选择该卸载异常的msi，执行卸载
 - Step4：重复执行Step1，等待卡死，直到无任何卡死
