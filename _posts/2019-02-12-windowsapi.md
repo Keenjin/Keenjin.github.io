@@ -289,3 +289,61 @@ void Test()
 }
 
 ```
+
+## 判断系统和进程是32位还是64位
+
+```C++
+static bool is_64bit_windows(void)
+{
+#ifdef _WIN64
+	return true;
+#else
+	BOOL x86 = false;
+	bool success = !!IsWow64Process(GetCurrentProcess(), &x86);
+	return success && !!x86;
+#endif
+}
+
+static bool is_64bit_process(HANDLE process)
+{
+	BOOL x86 = true;
+	if (is_64bit_windows()) {
+		bool success = !!IsWow64Process(process, &x86);
+		if (!success) {
+			return false;
+		}
+	}
+
+	return !x86;
+}
+```
+
+# 格式转换
+
+## 宽窄字符串互转
+
+```C++
+// string转wstring
+std::wstring StringToWString(const std::string& str)
+{
+	unsigned len = str.size() * 2;// 预留字节数
+	setlocale(LC_CTYPE, "");     //必须调用此函数
+	wchar_t *p = new wchar_t[len];// 申请一段内存存放转换后的字符串
+	mbstowcs(p, str.c_str(), len);// 转换
+	std::wstring str1(p);
+	delete[] p;// 释放申请的内存
+	return str1;
+}
+
+// wstring转string
+std::string WStringToString(const std::wstring& str)
+{
+	unsigned len = str.size() * 4;
+	setlocale(LC_CTYPE, "");
+	char *p = new char[len];
+	wcstombs(p, str.c_str(), len);
+	std::string str1(p);
+	delete[] p;
+	return str1;
+}
+```
