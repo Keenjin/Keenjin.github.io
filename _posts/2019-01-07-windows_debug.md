@@ -8,7 +8,7 @@ tags: windows
 <!-- TOC -->
 
 - [1. 符号表](#1-符号表)
-- [2. 常用命令](#2-常用命令)
+- [2. Windbg常用命令](#2-windbg常用命令)
     - [2.1. 应用层调试命令](#21-应用层调试命令)
     - [2.2. 内核层调试命令](#22-内核层调试命令)
 - [3. 问题1：卸载Visual Studio 2015卡死](#3-问题1卸载visual-studio-2015卡死)
@@ -25,16 +25,34 @@ tags: windows
 
 最近微软貌似说将符号表服务器迁移到了Azure国际版，国内被墙了，符号下载不了，找了一番，在看雪论坛找到了这个替代品：http://sym.ax2401.com:9999/symbols/，感谢大神分享！！！！！！
 
-# 2. 常用命令
+# 2. Windbg常用命令
 
 ## 2.1. 应用层调试命令
 
 ```bash
+# 查看模块列表，及模块信息，一般用来看pdb加载情况
+lm
+lmvm xxx.dll
+
+# 强制加载不匹配符号。对于外发包经常由于时间戳或者签名不一致，虽然代码一致，但是也无法正常加载pdb，可以使用此方法加载
+.reload /f /i xxxx.dll
+
+# 查看符号，一般用来辅助bp下断点
+x qtcore!*test*
+
+# 下断点，bp对函数下断点，bl查看断点列表及id，bc则通过bl查看到的id，进行删除断点
+bp qtcore!xxxxxx
+bl
+bc 1
+
 # 查看调用栈
 kv
 
 # 查看所有线程调用栈
 ~* kv
+
+# 查看局部变量及地址
+dv /v
 
 # 查看某个句柄信息
 !handle 0x002345 f
@@ -42,6 +60,19 @@ kv
 # 查看异常，其中，0x002345表示ExceptionRecord地址，0x002349表示ContextRecord地址
 .exr 0x002345
 .cxr 0x002349
+
+# 查看结构体（结构体名一般可以使用Local视图查看），可以用来看某个成员的偏移
+dt 0x26665440 xxxstruct
+
+# 计算表达式，也可以用来转换整数0nxxx到十六进制
+? 0x26665440 +0x280
+
+# 编辑内存，eb按照一个字节编辑、ew按照两个字节编辑、ed按照4字节编辑、ef和eD分别编辑浮点型、eza编辑null结尾的ascii字符串、ezu编辑null结尾unicode字符串、ea和eu则分别编辑非null结尾字符串
+eb 0x26665448 1
+
+# 条件断点，查看loadlibrary加载某个dll时中断（createfile等其他api类似）
+ad dllname
+bp Kernelbase!loadlibraryexw "as /mu ${/v:dllname} poi(@esp+4); .block{.if($spat(@\"${dllname}\",@\"*test.dll\")) {.echo ${dllname};kb;} .else {gc;}}"
 ```
 
 ## 2.2. 内核层调试命令
