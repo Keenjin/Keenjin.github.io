@@ -5,19 +5,59 @@ date: 2019-01-07
 tags: windows
 ---
 
+<!-- TOC -->
 
-# 符号表
+- [1. 符号表](#1-符号表)
+- [2. 常用命令](#2-常用命令)
+    - [2.1. 应用层调试命令](#21-应用层调试命令)
+    - [2.2. 内核层调试命令](#22-内核层调试命令)
+- [3. 问题1：卸载Visual Studio 2015卡死](#3-问题1卸载visual-studio-2015卡死)
+    - [3.1. 首先找到是哪个卸载进程卡死](#31-首先找到是哪个卸载进程卡死)
+    - [3.2. 找到是哪个窗口](#32-找到是哪个窗口)
+    - [3.3. 关闭对话框窗口](#33-关闭对话框窗口)
+    - [3.4. 解决visual studio 2015卸载问题](#34-解决visual-studio-2015卸载问题)
+- [4. 问题2：定位测试程序卡死](#4-问题2定位测试程序卡死)
+
+<!-- /TOC -->
+
+
+# 1. 符号表
 
 最近微软貌似说将符号表服务器迁移到了Azure国际版，国内被墙了，符号下载不了，找了一番，在看雪论坛找到了这个替代品：http://sym.ax2401.com:9999/symbols/，感谢大神分享！！！！！！
 
-# Windbg常用命令
+# 2. 常用命令
+
+## 2.1. 应用层调试命令
 
 ```bash
+# 查看调用栈
+kv
+
+# 查看所有线程调用栈
+~* kv
+
 # 查看某个句柄信息
 !handle 0x002345 f
+
+# 查看异常，其中，0x002345表示ExceptionRecord地址，0x002349表示ContextRecord地址
+.exr 0x002345
+.cxr 0x002349
 ```
 
-# 问题1：卸载Visual Studio 2015卡死
+## 2.2. 内核层调试命令
+
+```bash
+# 查看进程列表
+!process 0 0
+
+# 根据进程地址，查看调用栈
+!process 0x002345 7
+
+# 一键查看所有进程的所有线程调用栈（内核线程上千条，不太建议）
+!process 0 7
+```
+
+# 3. 问题1：卸载Visual Studio 2015卡死
 
 最近安装了vs2019，对我这老机器有限的磁盘空间而言，vs2015占据7.5G，为此一直耿耿于怀，而vs2019本身对2015~2019编译器有插件集成，工程编译没有问题，我就不需要2015额外的空间占用了。都知道，对于vs2015，因为安装后，默认安装了一堆Tools、.Net版本等，想要尽可能完全的卸载所有相关的依赖组件，就最好使用vs2015的vs_community.exe集成的卸载器功能（vs2019比较好的一点，是增加了一个visual studio installer工具，将组件安装卸载都集成在此，并随安装包一起安装在本地，无需单独去寻找离线包），为此找到vs2015的离线包iso，加载到虚拟光驱，运行，开始了卸载历程。  
 
@@ -27,7 +67,7 @@ tags: windows
 
 很明显，卸载进程出现卡死。  
 
-## 首先找到是哪个卸载进程卡死
+## 3.1. 首先找到是哪个卸载进程卡死
 
 这里使用工具ProcessExp，首先找到当下这个卸载界面是哪个进程，查找到如下：
 
@@ -84,7 +124,7 @@ ReadFile卡死，就可以YY出很多可能性，是读某个过大文件？文�
 
 问题比较容易发现，怎么解决呢？有很多种方式，比如找到这个窗口句柄，然后Post一个关闭消息，将窗口关闭掉，或者尝试修改窗口隐藏属性，将窗口显示出来。  
 
-## 找到是哪个窗口
+## 3.2. 找到是哪个窗口
 
 通过windbg分析栈去查找窗口比较麻烦，我们知道，DialogBox一定包含对话框窗口类属性，同时，通过上述栈信息，我们知道，0号线程的pid是2a2c，tid是1d9c，我们可以通过spy++去抓取进程的线程相关的所有窗口，就可以将窗口缩小到最小范围。  
 
@@ -95,7 +135,7 @@ ReadFile卡死，就可以YY出很多可能性，是读某个过大文件？文�
 
 ![png](/images/post/windbg/vs2015_uninst_hung5.png)
 
-## 关闭对话框窗口
+## 3.3. 关闭对话框窗口
 
 关闭窗口，可以发送WM_CLOSE，但是我们发现还有一个OK控件和一个Cancel控件，对于这类错误弹框，如果简单的close主窗口，会重复弹出。根据文案描述，这里我们需要去点击Cancel取消这个流程。我们可以写代码去模拟点击，这里我比较懒，想到另一个工具AccExplorer.exe，可以直接模拟点击（因为控件是窗口，所以这个工具可以正常工作，对于自绘窗口控件是不行的，这个工具有这个局限性）。  
 选择Option-->Choose Window List，选择目标窗口（这里前面已经找到目标窗口的标题属性，如果有重复，可以一个个去确认尝试）
@@ -105,7 +145,7 @@ ReadFile卡死，就可以YY出很多可能性，是读某个过大文件？文�
 
 找到了Cancel控件，直接模拟点击即可。至此，流程发现已经往下继续走了。后续发现又有重复类型的问题，可以简单通过spy++和accexplorer来解决卡死问题。
 
-## 解决visual studio 2015卸载问题
+## 3.4. 解决visual studio 2015卸载问题
 
 前面的方法，可以找到为何卡死，以及如何解决卡死的一种方法。实际上，当分析到进程树时，当我们观察卸载过程，就会发现，它卸载也是调用不同进程。前面的方法，即使解决了弹框卡死，卸载流程实际是失败的，那么我们让当前插件的卸载进程继续执行已经没有意义了，此时，解决卡死问题最简单的方式，就是直接杀掉卡死组件的卸载进程，只让部分组件无法卸载。  
 
@@ -121,3 +161,147 @@ ReadFile卡死，就可以YY出很多可能性，是读某个过大文件？文�
 - Step2：分析卡死的窗口，spy++查看对应窗口的msi组件文案，确认是哪个msi
 - Step3：使用下载下来的工具MicrosoftProgram_Install_and_Uninstall.meta.diagcab，选择卸载，然后从Step2我们知道具体是哪个msi，从扫描到的列表中，选择该卸载异常的msi，执行卸载
 - Step4：重复执行Step1，等待卡死，直到无任何卡死
+
+# 4. 问题2：定位测试程序卡死
+
+测试程序D3D12Test.exe，启动后卡死。使用Windbg Attach上去调试：
+
+```bash
+0:009> ~* kv
+
+   0  Id: 543c.3968 Suspend: 1 Teb: 00219000 Unfrozen
+ # ChildEBP RetAddr  Args to Child              
+00 0055406c 770692be 005540e4 76f49482 00081cd8 win32u!NtUserDispatchMessage+0xc (FPO: [1,0,0])
+01 005540c0 77068cf0 76a1d442 00554110 77086486 USER32!DispatchMessageWorker+0x5be (FPO: [Non-Fpo])
+02 005540cc 77086486 005540e4 00081cd8 00000001 USER32!DispatchMessageW+0x10 (FPO: [Non-Fpo])
+03 00554110 770869ea 00000000 00000001 00000000 USER32!DialogBox2+0x170 (FPO: [Non-Fpo])
+04 00554140 770c089b 00081cd8 770a1bf0 00554390 USER32!InternalDialogBox+0xef (FPO: [4,5,4])
+05 00554214 770a2523 00554390 00554518 00000000 USER32!SoftModalMessageBox+0x72b (FPO: [1,43,4])
+06 00554378 770c0115 013a145b 00000000 0055e988 USER32!MessageBoxWorker+0x29a (FPO: [Non-Fpo])
+07 00554400 770c015a 00081cd8 00554518 0fc3af50 USER32!MessageBoxTimeoutW+0x165 (FPO: [6,29,4])
+08 00554420 0fcc1618 00081cd8 00554518 0fc3af50 USER32!MessageBoxW+0x1a (FPO: [Non-Fpo])
+09 00554440 0fccbe32 00081cd8 00554518 0fc3af50 ucrtbased!__acrt_MessageBoxW+0x38 (FPO: [Non-Fpo]) (CONV: stdcall) [minkernel\crts\ucrt\src\appcrt\internal\winapi_thunks.cpp @ 696] 
+0a 00554458 0fccbdd9 00554470 00554490 00554494 ucrtbased!__crt_char_traits<wchar_t>::message_box<HWND__ *,wchar_t const * const &,wchar_t const * const &,unsigned int const &>+0x22 (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\inc\corecrt_internal_traits.h @ 124] 
+0b 00554488 0fccbeb6 00554518 0fc3af50 00012012 ucrtbased!common_show_message_box<wchar_t>+0x109 (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\src\appcrt\misc\crtmbox.cpp @ 75] 
+0c 0055449c 0fccca00 00554518 0fc3af50 00012012 ucrtbased!__acrt_show_wide_message_box+0x16 (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\src\appcrt\misc\crtmbox.cpp @ 93] 
+0d 00556728 0fccd3b2 00000001 0fcbfe4c 00000000 ucrtbased!common_message_window<wchar_t>+0x4a0 (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\src\appcrt\misc\dbgrpt.cpp @ 409] 
+0e 00556748 0fcce8d4 00000001 0fcbfe4c 00000000 ucrtbased!__acrt_MessageWindowW+0x22 (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\src\appcrt\misc\dbgrpt.cpp @ 464] 
+0f 0055e800 0fccd2ff 00000001 0fcbfe4c 00000000 ucrtbased!_VCrtDbgReportW+0x964 (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\src\appcrt\misc\dbgrptt.cpp @ 673] 
+10 0055e82c 0fcbfe4c 00000001 00000000 00000000 ucrtbased!_CrtDbgReportW+0x2f (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\src\appcrt\misc\dbgrpt.cpp @ 278] 
+11 0055e850 0fcbfff1 0fc43524 0071fb78 0055e890 ucrtbased!issue_debug_notification+0x1c (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\src\appcrt\internal\report_runtime_error.cpp @ 25] 
+12 0055e868 0fcd12ca 0fc43524 6ff6335c 0055e8b0 ucrtbased!__acrt_report_runtime_error+0x11 (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\src\appcrt\internal\report_runtime_error.cpp @ 154] 
+13 0055e878 0fcd076d 4a98ddad 013a145b 00000000 ucrtbased!abort+0x1a (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\src\appcrt\startup\abort.cpp @ 51] 
+14 0055e8b0 013b3725 0055eac8 0055e958 7792de80 ucrtbased!terminate+0x7d (FPO: [Non-Fpo]) (CONV: cdecl) [minkernel\crts\ucrt\src\appcrt\misc\terminate.cpp @ 59] 
+15 0055e8bc 7792de80 0055e988 abad65ee 00000000 D3D12Test!__scrt_unhandled_exception_filter+0x55 (FPO: [Non-Fpo]) (CONV: stdcall) [d:\agent\_work\3\s\src\vctools\crt\vcstartup\src\utility\utility_desktop.cpp @ 94] 
+16 0055e958 77f032b2 0055e988 77ed3cf2 0055fc9c KERNELBASE!UnhandledExceptionFilter+0x1a0 (FPO: [Non-Fpo])
+17 0055fcac 77ec5e97 ffffffff 77eeae74 00000000 ntdll!__RtlUserThreadStart+0x3d41a
+18 0055fcbc 00000000 013a1a7d 00216000 00000000 ntdll!_RtlUserThreadStart+0x1b (FPO: [Non-Fpo])
+
+```
+
+可以知道是有一个MessageBox弹框出现导致0号线程卡死，而出现这个弹框，是因为一个异常出现。  
+第16号栈帧可以看到捕获到异常KERNELBASE!UnhandledExceptionFilter，它的参数如下：
+
+```C++
+LONG WINAPI UnhandledExceptionFilter(
+  _In_ struct _EXCEPTION_POINTERS *ExceptionInfo
+);
+
+typedef struct _EXCEPTION_POINTERS {
+  PEXCEPTION_RECORD ExceptionRecord;
+  PCONTEXT          ContextRecord;
+} EXCEPTION_POINTERS, *PEXCEPTION_POINTERS;
+```
+
+直接查看结构，可以看到异常基本信息：
+
+```bash
+# 取KERNELBASE!UnhandledExceptionFilter第一个参数：0055e988
+0:009> dt /r EXCEPTION_POINTERS 0055e988 
+hookd3d9!EXCEPTION_POINTERS
+   +0x000 ExceptionRecord  : 0x0055eac8 _EXCEPTION_RECORD
+      +0x000 ExceptionCode    : 0xe06d7363
+      +0x004 ExceptionFlags   : 1
+      +0x008 ExceptionRecord  : (null) 
+      +0x00c ExceptionAddress : 0x778a4bb2 Void
+      +0x010 NumberParameters : 3
+      +0x014 ExceptionInformation : [15] 0x19930520
+   +0x004 ContextRecord    : 0x0055eb18 _CONTEXT
+      +0x000 ContextFlags     : 0x1007f
+      +0x004 Dr0              : 0
+      +0x008 Dr1              : 0
+      +0x00c Dr2              : 0
+      +0x010 Dr3              : 0
+      +0x014 Dr6              : 0
+      +0x018 Dr7              : 0
+      +0x01c FloatSave        : _FLOATING_SAVE_AREA
+         +0x000 ControlWord      : 0x27f
+         +0x004 StatusWord       : 0x120
+         +0x008 TagWord          : 0xffff
+         +0x00c ErrorOffset      : 0xfb443a1
+         +0x010 ErrorSelector    : 0
+         +0x014 DataOffset       : 0
+         +0x018 DataSelector     : 0
+         +0x01c RegisterArea     : [80]  ""
+         +0x06c Spare0           : 0
+      +0x08c SegGs            : 0x2b
+      +0x090 SegFs            : 0x53
+      +0x094 SegEs            : 0x2b
+      +0x098 SegDs            : 0x2b
+      +0x09c Edi              : 0x55f090
+      +0x0a0 Esi              : 0xf2615a8
+      +0x0a4 Ebx              : 0x216000
+      +0x0a8 Edx              : 0
+      +0x0ac Ecx              : 3
+      +0x0b0 Eax              : 0x55eff8
+      +0x0b4 Ebp              : 0x55f050
+      +0x0b8 Eip              : 0x778a4bb2
+      +0x0bc SegCs            : 0x23
+      +0x0c0 EFlags           : 0x212
+      +0x0c4 Esp              : 0x55eff8
+      +0x0c8 SegSs            : 0x2b
+      +0x0cc ExtendedRegisters : [512]  "???"
+
+# .exr和.cxr是分别查看ExceptionRecord和ContextRecord的命令，同时，会将栈切换到异常时上下文
+0:009> .exr 0x0055eac8 
+ExceptionAddress: 778a4bb2 (KERNELBASE!RaiseException+0x00000062)
+   ExceptionCode: e06d7363 (C++ EH exception)
+  ExceptionFlags: 00000001
+NumberParameters: 3
+   Parameter[0]: 19930520
+   Parameter[1]: 0055f0c4
+   Parameter[2]: 013bd278
+  pExceptionObject: 0055f0c4
+  _s_ThrowInfo    : 013bd278
+  Type            : class HrException
+  Type            : class std::runtime_error
+  Type            : class std::exception
+0:009> .cxr 0x0055eb18 
+eax=0055eff8 ebx=00216000 ecx=00000003 edx=00000000 esi=0f2615a8 edi=0055f090
+eip=778a4bb2 esp=0055eff8 ebp=0055f050 iopl=0         nv up ei pl nz ac po nc
+cs=0023  ss=002b  ds=002b  es=002b  fs=0053  gs=002b             efl=00000212
+KERNELBASE!RaiseException+0x62:
+778a4bb2 8b4c2454        mov     ecx,dword ptr [esp+54h] ss:002b:0055f04c=abad634e
+
+# 当前已经切换到异常上下文，直接查看调用栈信息
+0:000> kv
+  *** Stack trace for last set context - .thread/.cxr resets it
+ # ChildEBP RetAddr  Args to Child              
+00 0055f050 0f2697a9 e06d7363 00000001 00000003 KERNELBASE!RaiseException+0x62 (FPO: [4,22,0])
+01 0055f0a4 013ae34e 0055f0c4 013bd278 0055f198 VCRUNTIME140D!_CxxThrowException+0xa9 (FPO: [Non-Fpo]) (CONV: stdcall) [d:\agent\_work\1\s\src\vctools\crt\vcruntime\src\eh\throw.cpp @ 133] 
+02 0055f198 013abbcd 80070003 aff51556 0055fac0 D3D12Test!ThrowIfFailed+0x4e (FPO: [Non-Fpo]) (CONV: cdecl) [d:\keencode\d3dsample\d3d12test\d3drender.cpp @ 61] 
+03 0055f9ec 013aabb9 0055fbcc 0055facc 00216000 D3D12Test!LoadAssets+0x1dd (FPO: [Non-Fpo]) (CONV: cdecl) [d:\keencode\d3dsample\d3d12test\d3drender.cpp @ 196] 
+04 0055fac0 013a49ac 00081cd8 013a1a7d 013a1a7d D3D12Test!InitDevice+0x39 (FPO: [Non-Fpo]) (CONV: cdecl) [d:\keencode\d3dsample\d3d12test\d3drender.cpp @ 302] 
+05 0055fbcc 013b1f4e 01390000 00000000 00702708 D3D12Test!wWinMain+0x9c (FPO: [Non-Fpo]) (CONV: stdcall) [d:\keencode\d3dsample\d3d12test\d3d12test.cpp @ 44] 
+06 0055fbe4 013b1db7 aff510fa 013a1a7d 013a1a7d D3D12Test!invoke_main+0x1e (FPO: [Non-Fpo]) (CONV: cdecl) [d:\agent\_work\3\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl @ 123] 
+07 0055fc40 013b1c4d 0055fc50 013b1fc8 0055fc64 D3D12Test!__scrt_common_main_seh+0x157 (FPO: [Non-Fpo]) (CONV: cdecl) [d:\agent\_work\3\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl @ 288] 
+08 0055fc48 013b1fc8 0055fc64 77cc8674 00216000 D3D12Test!__scrt_common_main+0xd (FPO: [Non-Fpo]) (CONV: cdecl) [d:\agent\_work\3\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl @ 331] 
+09 0055fc50 77cc8674 00216000 77cc8650 ab8016bc D3D12Test!wWinMainCRTStartup+0x8 (FPO: [Non-Fpo]) (CONV: cdecl) [d:\agent\_work\3\s\src\vctools\crt\vcstartup\src\startup\exe_wwinmain.cpp @ 17] 
+0a 0055fc64 77ec5ec7 00216000 6fa3cff0 00000000 KERNEL32!BaseThreadInitThunk+0x24 (FPO: [Non-Fpo])
+0b 0055fcac 77ec5e97 ffffffff 77eeae74 00000000 ntdll!__RtlUserThreadStart+0x2f (FPO: [SEH])
+0c 0055fcbc 00000000 013a1a7d 00216000 00000000 ntdll!_RtlUserThreadStart+0x1b (FPO: [Non-Fpo])
+
+```
+
+找到异常内容了。
+
