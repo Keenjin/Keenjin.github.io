@@ -35,6 +35,15 @@ netsh int ipv4 add address "以太网" 192.168.100.101 255.255.255.0
 （3）开机进入带命令提示符安全模式，输入net user administrator  /active:yes;
 ```
 
+# 编译相关
+
+```bash
+devenv mysln.sln /Rebuild "Release|x86" /Out %build_dir%\build_release_x86.log
+devenv mysln.sln /Rebuild "Release|x64" /Out %build_dir%\build_release_x64.log
+
+msbuild /m /p:Configuration=Release /p:Platform=x86 mysln.sln
+```
+
 # 示例1：检测环境配置，执行编译打包
 
 ![png](/images/post/win_cmd/bat_sample1.png)
