@@ -17,6 +17,7 @@ tags: linux
     - [运行某个sh脚本./](#运行某个sh脚本)
     - [打印内容echo](#打印内容echo)
     - [日期date](#日期date)
+    - [时间同步](#时间同步)
     - [上传rz](#上传rz)
     - [下载sz](#下载sz)
     - [ubuntu设置代理](#ubuntu设置代理)
@@ -170,6 +171,26 @@ date +%Y-%m-%d
 20181227
 20181226
 2018-12-27
+```
+
+## 时间同步
+
+命令：
+
+```bash
+# 查看时区
+timedatectl status|grep 'Time zone'
+# 设置与本地时间保持一致
+timedatectl set-local-rtc 1
+# 调整时区
+timedatectl set-timezone Asia/Shanghai
+date
+
+# 如果发现时间还不同步，使用时间同步服务器
+yum -y install ntpdate
+ntpdate -u cn.ntp.org.cn
+date
+
 ```
 
 ## 上传rz
