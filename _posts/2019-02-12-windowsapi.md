@@ -5,9 +5,24 @@ date: 2019-02-12
 tags: Windows
 ---
 
-# 进程模块相关
+<!-- TOC -->
 
-## 获取当前调用栈模块
+- [1. 进程模块相关](#1-进程模块相关)
+    - [1.1. 获取当前调用栈模块](#11-获取当前调用栈模块)
+    - [1.2. 获取模块签名](#12-获取模块签名)
+    - [1.3. 创建进程dump](#13-创建进程dump)
+    - [1.4. 判断系统和进程是32位还是64位](#14-判断系统和进程是32位还是64位)
+- [2. 格式转换](#2-格式转换)
+    - [2.1. 宽窄字符串互转](#21-宽窄字符串互转)
+- [3. 服务相关](#3-服务相关)
+    - [3.1. 服务进程阻断调试](#31-服务进程阻断调试)
+    - [3.2. 服务切换身份](#32-服务切换身份)
+
+<!-- /TOC -->
+
+# 1. 进程模块相关
+
+## 1.1. 获取当前调用栈模块
 
 ```C++
 std::wstring GetCallStackModule()
@@ -32,7 +47,7 @@ std::wstring GetCallStackModule()
 }
 ```
 
-## 获取模块签名
+## 1.2. 获取模块签名
 
 ```C++
 #include <wincrypt.h>
@@ -177,7 +192,7 @@ LONG GetSoftSign(WCHAR* v_pszFilePath, char * v_pszSign, int v_iBufSize)
 }
 ```
 
-## 创建进程dump
+## 1.3. 创建进程dump
 
 ```C++
 bool CDumpHelper::CreateDump(UINT uPID, LPCWSTR lpszFile, MINIDUMP_TYPE type/* = MINIDUMP_TYPE::MiniDumpNormal*/)
@@ -290,7 +305,7 @@ void Test()
 
 ```
 
-## 判断系统和进程是32位还是64位
+## 1.4. 判断系统和进程是32位还是64位
 
 ```C++
 static bool is_64bit_windows(void)
@@ -318,9 +333,9 @@ static bool is_64bit_process(HANDLE process)
 }
 ```
 
-# 格式转换
+# 2. 格式转换
 
-## 宽窄字符串互转
+## 2.1. 宽窄字符串互转
 
 ```C++
 // string转wstring
@@ -345,5 +360,69 @@ std::string WStringToString(const std::wstring& str)
 	std::string str1(p);
 	delete[] p;
 	return str1;
+}
+```
+
+# 3. 服务相关
+
+## 3.1. 服务进程阻断调试
+
+```c++
+void ServiceMsgBox(const std::wstring& caption, const std::wstring& text) {
+	DWORD dwResponse = 0;
+
+	::WTSSendMessage(
+		WTS_CURRENT_SERVER_HANDLE, 
+		::WTSGetActiveConsoleSessionId(), 
+		caption.c_str(), 
+		caption.size(), 
+		text.c_str(), 
+		text.size(),
+		MB_OK|MB_TOPMOST,
+		0,
+		&dwResponse,
+		TRUE);
+}
+
+```
+
+## 3.2. 服务切换身份
+
+```c++
+class CAutoImpersonUser {
+public:
+	CAutoImpersonUser() {
+		ImpersonUser();
+	}
+
+	~CAutoImpersonUser() {
+		EndImperson();
+	}
+
+private:
+	BOOL ImpersonUser()	{
+		HANDLE hToken = NULL;
+		BOOL bImperson = FALSE;
+		
+		do {
+			BOOL bRet = WTSQueryUserToken(WTSGetActiveConsoleSessionId(), &hToken);
+			if (!bRet || NULL == hToken)
+				break;
+			
+			bImperson = ImpersonateLoggedOnUser(hToken);
+
+		} while (false);
+
+		if (NULL != hToken)	{
+			CloseHandle(hToken);
+			hToken = NULL;
+		}
+
+		return bImperson;
+	}
+
+	void EndImperson() {
+		RevertToSelf();
+	}
 }
 ```
