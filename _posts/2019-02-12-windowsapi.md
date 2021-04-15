@@ -368,20 +368,31 @@ std::string WStringToString(const std::wstring& str)
 ## 3.1. 服务进程阻断调试
 
 ```c++
-void ServiceMsgBox(const std::wstring& caption, const std::wstring& text) {
+void ServiceMsgBox(const std::wstring& caption, const std::wstring& text, DWORD dwType = MB_OK|MB_TOPMOST) {
 	DWORD dwResponse = 0;
+
+	wchar_t* pCaption = new wchar_t[caption.size() + 1];
+	wcscpy_s(pCaption, caption.size() * 2, caption.c_str());
+	pCaption[caption.size()] = L'\0';
+
+	wchar_t* pText = new wchar_t[text.size() + 1];
+	wcscpy_s(pText, text.size() * 2, text.c_str());
+	pText[text.size()] = L'\0';
 
 	::WTSSendMessage(
 		WTS_CURRENT_SERVER_HANDLE, 
 		::WTSGetActiveConsoleSessionId(), 
-		caption.c_str(), 
-		caption.size(), 
-		text.c_str(), 
-		text.size(),
-		MB_OK|MB_TOPMOST,
+		(LPWSTR)pText, 
+		(text.size() + 1)*2,
+		(LPWSTR)pCaption, 
+		(caption.size() + 1)*2, 
+		dwType,
 		0,
 		&dwResponse,
 		TRUE);
+
+	delete []pCaption;
+	delete []pText;
 }
 
 ```
