@@ -2,7 +2,7 @@
 layout: post
 title: 【源码片段】Python笔记杂项
 date: 2019-01-04
-tags: python 源码片段 
+tags: Python 源码片段 
 ---
 
 <!-- TOC -->
