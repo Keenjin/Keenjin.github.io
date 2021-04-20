@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Squid代理服务器
+title: 【架构设计】Squid代理服务器
 date: 2019-07-10
-tags: Linux
+tags: 架构设计
 ---
 
 <!-- TOC -->

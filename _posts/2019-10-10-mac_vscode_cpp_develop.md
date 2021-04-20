@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 使用vscode做c++项目开发
+title: 【调试技术】使用vscode做c++项目开发
 date: 2019-10-10
-tags: C++
+tags: 调试技术
 ---
 
 # 准备环境

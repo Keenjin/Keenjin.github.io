@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Windows API
+title: 【源码片段】Windows API
 date: 2019-02-12
-tags: Windows
+tags: 源码片段
 ---
 
 <!-- TOC -->
@@ -17,6 +17,7 @@ tags: Windows
 - [3. 服务相关](#3-服务相关)
     - [3.1. 服务进程阻断调试](#31-服务进程阻断调试)
     - [3.2. 服务切换身份](#32-服务切换身份)
+    - [3.3. 服务退出监控](#33-服务退出监控)
 
 <!-- /TOC -->
 
@@ -436,4 +437,28 @@ private:
 		RevertToSelf();
 	}
 }
+```
+
+## 3.3. 服务退出监控
+
+```c++
+void ServiceMain(DWORD argc, char**argv) {
+	......
+	SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler,TRUE);
+}
+
+BOOL WINAPI CtrlHandler(DWORD fdwCtrlType) 
+{ 
+	switch( fdwCtrlType ) 
+	{
+	case CTRL_SHUTDOWN_EVENT:	// Receive shut down event, Add our process code below
+		// 关机代码
+		......
+		return FALSE;	// Call next handler
+	default: 
+		break;
+	} 
+
+	return TRUE; 
+} 
 ```

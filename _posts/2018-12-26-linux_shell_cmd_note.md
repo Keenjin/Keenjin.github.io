@@ -1,8 +1,8 @@
 ---
 layout: post
-title: linux常用操作及问题笔记
+title: 【操作指令】linux常用操作及问题笔记
 date: 2018-12-26 
-tags: linux  
+tags: 操作指令
 ---
   
 > 实际操作过程中的积累

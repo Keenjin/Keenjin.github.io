@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Windows Performance Analyzer使用
+title: 【调试技术】Windows Performance Analyzer使用
 date: 2019-02-23
-tags: 调试 性能
+tags: 调试技术
 ---
 
 <!-- TOC -->

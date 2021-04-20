@@ -1,8 +1,8 @@
 ---
 layout: post
-title: VSCode远程开发
+title: 【调试技术】VSCode远程开发
 date: 2019-07-18
-tags: vscode
+tags: 调试技术
 ---
 
 # VSCode远程开发

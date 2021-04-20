@@ -1,8 +1,8 @@
 ---
 layout: post
-title: ELK + FileBeat实现实时日志收集和分析系统
+title: 【架构设计】ELK + FileBeat实现实时日志收集和分析系统
 date: 2019-03-12
-tags: Linux  
+tags: 架构设计 
 ---
 
 <!-- TOC -->

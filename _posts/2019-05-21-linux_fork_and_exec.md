@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Linux下fork和exec的使用特性
+title: 【源码片段】Linux下fork和exec的使用特性
 date: 2019-05-21
-tags: Linux
+tags: 源码片段
 ---
 
 # fork

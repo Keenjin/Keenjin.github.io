@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Linux内核调试方法
+title: 【调试技术】Linux内核调试方法
 date: 2019-06-02
-tags: linux
+tags: 调试技术
 ---
 
 # Linux 内核调试方法

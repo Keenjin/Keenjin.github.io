@@ -1,8 +1,8 @@
 ---
 layout: post
-title: CentOS下doc转docx
+title: 【操作指令】CentOS下doc转docx
 date: 2019-05-13
-tags: libreoffice
+tags: 操作指令
 ---
 
 # 参考

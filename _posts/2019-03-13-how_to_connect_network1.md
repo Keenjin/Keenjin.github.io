@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 网络是怎样连接的（一）- Web浏览器
+title: 【网络技术】网络是怎样连接的（一）- Web浏览器
 date: 2017-03-13
-tags: 网络
+tags: 网络技术
 ---
 
 <!-- TOC -->

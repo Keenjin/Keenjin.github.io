@@ -1,8 +1,8 @@
 ---
 layout: post
-title: ZooKeeper原理
+title: 【架构设计】ZooKeeper原理
 date: 2019-05-08
-tags: 后台框架
+tags: 架构设计
 ---
 
 # ZooKeeper原理

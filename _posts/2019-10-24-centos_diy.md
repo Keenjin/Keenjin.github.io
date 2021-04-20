@@ -1,8 +1,8 @@
 ---
 layout: post
-title: CentOS系统定制
+title: 【系统原理】CentOS系统定制
 date: 2019-10-24
-tags: linux
+tags: 系统原理
 ---
 
 <!-- TOC -->

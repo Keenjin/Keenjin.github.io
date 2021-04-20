@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Windows命令行
+title: 【操作指令】Windows命令行
 date: 2019-12-30
-tags: windows
+tags: 操作指令
 ---
 
 # 通用语法

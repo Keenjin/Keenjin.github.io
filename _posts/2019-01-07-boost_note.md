@@ -1,13 +1,15 @@
 ---
 layout: post
-title: c++ boost库使用笔记
+title: 【代码片段】c++ boost库使用笔记
 date: 2019-01-07
-tags: boost  
+tags: C++  代码片段
 ---
 
 <!-- TOC -->
 
 - [Boost库编译步骤](#boost库编译步骤)
+    - [Windows下编译](#windows下编译)
+    - [Unix下编译](#unix下编译)
 - [信号槽signals2和单实例](#信号槽signals2和单实例)
 - [boost::shared_ptr使用注意点](#boostshared_ptr使用注意点)
 - [运行时类型识别boost::dynamic_pointer_cast](#运行时类型识别boostdynamic_pointer_cast)
