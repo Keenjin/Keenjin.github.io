@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 【代码片段】C++模板使用
+title: 【源码片段】C++模板使用
 date: 2017-12-16
-tags: C++ 代码片段 
+tags: C++ 源码片段 
 ---
 
 <!-- TOC -->

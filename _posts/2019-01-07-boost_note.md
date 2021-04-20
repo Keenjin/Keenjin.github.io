@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 【代码片段】c++ boost库使用笔记
+title: 【源码片段】c++ boost库使用笔记
 date: 2019-01-07
-tags: C++  代码片段
+tags: C++  源码片段
 ---
 
 <!-- TOC -->
