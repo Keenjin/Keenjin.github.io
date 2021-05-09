@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Python笔记杂项
+title: 【源码片段】Python笔记杂项
 date: 2019-01-04
-tags: python  
+tags: Python 源码片段 
 ---
 
 <!-- TOC -->

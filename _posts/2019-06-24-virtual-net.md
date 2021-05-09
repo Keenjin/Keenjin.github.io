@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 网络虚拟化
+title: 【网络技术】网络虚拟化
 date: 2019-06-24
-tags: 网络 虚拟化
+tags: 网络技术
 ---
 
 # 虚拟网络原理

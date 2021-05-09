@@ -1,8 +1,8 @@
 ---
 layout: post
-title: CSIDL映射关系
+title: 【记录备忘】CSIDL映射关系
 date: 2019-03-04
-tags: 记录  
+tags: 记录备忘 
 ---
 
 | CSIDL                         | VALUE     | PATH - WIN7                                                                                              | PATH - XP                                                                                             |

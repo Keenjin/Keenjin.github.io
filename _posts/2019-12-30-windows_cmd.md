@@ -1,19 +1,119 @@
 ---
 layout: post
-title: Windows命令行
+title: 【操作指令】Windows命令行
 date: 2019-12-30
-tags: windows
+tags: 操作指令
 ---
 
-# Bat通用命令行
+# 通用语法
 
 ```bat
-rem 拷贝文件或目录到某一个目录
-xcopy c:\test d:\test\
-xcopy c:\test\ttt.txt d:\test\
+rem ==================================================================
+rem 关闭echo命令提示
+@echo off
+rem ==================================================================
+
+rem ==================================================================
+rem 获取当前脚本目录
+set cur_dir=%~dp0
+rem ==================================================================
+
+rem ==================================================================
+rem 命令行参数
+echo "run script:%0" 
+set param1=%1
+rem ==================================================================
+
+rem ==================================================================
+rem 执行脚本1：在当前cmd环境，同步运行
+call ../build.bat
+if %errorlevel%==0 (
+	echo "build succeed."
+)
+
+rem 执行脚本2：新起一个cmd环境，异步执行
+start ../build.bat
+rem ==================================================================
+
+rem ==================================================================
+rem 判断语句
+set build_release=%1
+if "%build_release%"=="" (
+	echo "no build_release参数"
+)
+rem ==================================================================
+
+rem ==================================================================
+rem for循环
+rem 一般都需要利用变量延迟展开，否则并使用!xxx!来操作变量
+setlocal EnableDelayedExpansion
+for %%i in ('ipconfig /all') do (
+	set out_str=%%i
+	echo !out_str!
+)
+setlocal DisableDelayedExpansion
+rem ==================================================================
+
+rem ==================================================================
+rem 标签跳转
+set param1=%1
+if "%param1%"=="" (
+	goto failed
+) else (
+	goto succeed
+)
+
+:failed
+echo "run label1"
+goto finished
+
+:succeed
+echo "run label2"
+
+:finished
+echo "finished."
+rem ==================================================================
+
+rem ==================================================================
+rem 函数
+rem 函数没有返回值，只能通过全局变量来设置。可以传递参数，跟脚本一样传递
+echo "run func1"
+set param1=1
+set param2=2
+call :func1 %param1% %param2%
+echo "run func1 finished."
+
+rem 为何需要goto？不然就会去执行函数部分，这里需要能跳出去
+goto finished
+
+:func1
+set p=%1
+echo "run func1, param: %p%"
+goto:eof
+
+:finished
+echo "finished"
+rem ==================================================================
+
+rem ==================================================================
+rem 变量计算
+set try_cnt=0
+set /a try_cnt+=1
+rem ==================================================================
+```
+
+# 文件操作
+
+```bat
+rem 拷贝文件或目录到某一个目录，注意：尾部反斜杠的使用
+rem 其中，/Y表示不用确认，/E表示拷贝空目录
+xcopy c:\test d:\test\ /Y /E
+xcopy c:\test\ttt.txt d:\test\ /Y /E
 
 rem 判断某个命令行执行结果返回值
-
+python --version
+if %errorlevel%==0 echo "success"
+else echo "failed."
 ```
 
 

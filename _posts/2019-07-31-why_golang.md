@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 对Go的理解
+title: 【架构设计】对Go的理解
 date: 2019-07-31
-tags: go
+tags: Go 架构设计
 ---
 
 <!-- TOC -->

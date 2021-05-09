@@ -1,13 +1,29 @@
 ---
 layout: post
-title: Windows API
+title: 【源码片段】Windows API
 date: 2019-02-12
-tags: Windows
+tags: 源码片段
 ---
 
-# 进程模块相关
+<!-- TOC -->
 
-## 获取当前调用栈模块
+- [1. 进程模块相关](#1-进程模块相关)
+    - [1.1. 获取当前调用栈模块](#11-获取当前调用栈模块)
+    - [1.2. 获取模块签名](#12-获取模块签名)
+    - [1.3. 创建进程dump](#13-创建进程dump)
+    - [1.4. 判断系统和进程是32位还是64位](#14-判断系统和进程是32位还是64位)
+- [2. 格式转换](#2-格式转换)
+    - [2.1. 宽窄字符串互转](#21-宽窄字符串互转)
+- [3. 服务相关](#3-服务相关)
+    - [3.1. 服务进程阻断调试](#31-服务进程阻断调试)
+    - [3.2. 服务切换身份](#32-服务切换身份)
+    - [3.3. 服务退出监控](#33-服务退出监控)
+
+<!-- /TOC -->
+
+# 1. 进程模块相关
+
+## 1.1. 获取当前调用栈模块
 
 ```C++
 std::wstring GetCallStackModule()
@@ -32,7 +48,7 @@ std::wstring GetCallStackModule()
 }
 ```
 
-## 获取模块签名
+## 1.2. 获取模块签名
 
 ```C++
 #include <wincrypt.h>
@@ -177,7 +193,7 @@ LONG GetSoftSign(WCHAR* v_pszFilePath, char * v_pszSign, int v_iBufSize)
 }
 ```
 
-## 创建进程dump
+## 1.3. 创建进程dump
 
 ```C++
 bool CDumpHelper::CreateDump(UINT uPID, LPCWSTR lpszFile, MINIDUMP_TYPE type/* = MINIDUMP_TYPE::MiniDumpNormal*/)
@@ -290,7 +306,7 @@ void Test()
 
 ```
 
-## 判断系统和进程是32位还是64位
+## 1.4. 判断系统和进程是32位还是64位
 
 ```C++
 static bool is_64bit_windows(void)
@@ -318,9 +334,9 @@ static bool is_64bit_process(HANDLE process)
 }
 ```
 
-# 格式转换
+# 2. 格式转换
 
-## 宽窄字符串互转
+## 2.1. 宽窄字符串互转
 
 ```C++
 // string转wstring
@@ -346,4 +362,103 @@ std::string WStringToString(const std::wstring& str)
 	delete[] p;
 	return str1;
 }
+```
+
+# 3. 服务相关
+
+## 3.1. 服务进程阻断调试
+
+```c++
+void ServiceMsgBox(const std::wstring& caption, const std::wstring& text, DWORD dwType = MB_OK|MB_TOPMOST) {
+	DWORD dwResponse = 0;
+
+	wchar_t* pCaption = new wchar_t[caption.size() + 1];
+	wcscpy_s(pCaption, caption.size() * 2, caption.c_str());
+	pCaption[caption.size()] = L'\0';
+
+	wchar_t* pText = new wchar_t[text.size() + 1];
+	wcscpy_s(pText, text.size() * 2, text.c_str());
+	pText[text.size()] = L'\0';
+
+	::WTSSendMessage(
+		WTS_CURRENT_SERVER_HANDLE, 
+		::WTSGetActiveConsoleSessionId(), 
+		(LPWSTR)pText, 
+		(text.size() + 1)*2,
+		(LPWSTR)pCaption, 
+		(caption.size() + 1)*2, 
+		dwType,
+		0,
+		&dwResponse,
+		TRUE);
+
+	delete []pCaption;
+	delete []pText;
+}
+
+```
+
+## 3.2. 服务切换身份
+
+```c++
+class CAutoImpersonUser {
+public:
+	CAutoImpersonUser() {
+		ImpersonUser();
+	}
+
+	~CAutoImpersonUser() {
+		EndImperson();
+	}
+
+private:
+	BOOL ImpersonUser()	{
+		HANDLE hToken = NULL;
+		BOOL bImperson = FALSE;
+		
+		do {
+			BOOL bRet = WTSQueryUserToken(WTSGetActiveConsoleSessionId(), &hToken);
+			if (!bRet || NULL == hToken)
+				break;
+			
+			bImperson = ImpersonateLoggedOnUser(hToken);
+
+		} while (false);
+
+		if (NULL != hToken)	{
+			CloseHandle(hToken);
+			hToken = NULL;
+		}
+
+		return bImperson;
+	}
+
+	void EndImperson() {
+		RevertToSelf();
+	}
+}
+```
+
+## 3.3. 服务退出监控
+
+```c++
+void ServiceMain(DWORD argc, char**argv) {
+	......
+	SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler,TRUE);
+}
+
+BOOL WINAPI CtrlHandler(DWORD fdwCtrlType) 
+{ 
+	switch( fdwCtrlType ) 
+	{
+	case CTRL_SHUTDOWN_EVENT:	// Receive shut down event, Add our process code below
+		// 关机代码
+		......
+		return FALSE;	// Call next handler
+	default: 
+		break;
+	} 
+
+	return TRUE; 
+} 
 ```

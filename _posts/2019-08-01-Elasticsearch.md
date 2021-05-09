@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Elasticsearch总结
+title: 【架构设计】Elasticsearch总结
 date: 2019-08-01
-tags: db es
+tags: 架构设计
 ---
 
 <!-- TOC -->

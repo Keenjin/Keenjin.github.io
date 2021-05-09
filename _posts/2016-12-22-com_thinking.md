@@ -1,8 +1,8 @@
 ---
 layout: post
-title: COM运行机制
+title: 【架构设计】COM运行机制
 date: 2016-12-22
-tags: COM  
+tags: 架构设计
 ---
 
 # 概述

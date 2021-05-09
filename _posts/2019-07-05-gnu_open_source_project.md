@@ -1,8 +1,8 @@
 ---
 layout: post
-title: GNU开源项目总结
+title: 【操作指令】GNU开源项目总结
 date: 2019-07-05
-tags: Linux
+tags: 操作指令
 ---
 
 # GNU开源项目编译总结

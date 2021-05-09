@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Jekyll搭建个人博客
+title: 【记录备忘】Jekyll搭建个人博客
 date: 2018-12-25 
-tags: 经验  
+tags: 记录备忘
 ---
 
 <!-- TOC -->

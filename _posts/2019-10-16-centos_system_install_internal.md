@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Centos系统安装启动原理
+title: 【系统原理】Centos系统安装启动原理
 date: 2019-10-16
-tags: linux
+tags: 系统原理
 ---
 
 # 一些资料

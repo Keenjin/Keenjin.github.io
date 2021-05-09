@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 白话大数据与机器学习
+title: 【人工智能】白话大数据与机器学习
 date: 2019-02-17 
-tags: AI 
+tags: 人工智能
 ---
 
 <!-- TOC -->

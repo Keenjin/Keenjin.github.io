@@ -1,8 +1,8 @@
 ---
 layout: post
-title: VMware + CentOS7 + XShell6环境配置
+title: 【操作指令】VMware + CentOS7 + XShell6环境配置
 date: 2019-03-11 
-tags: 经验  
+tags: 操作指令 
 ---
 
 <!-- TOC -->
