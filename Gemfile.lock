@@ -24,7 +24,7 @@ GEM
     jekyll-sitemap (0.10.0)
     jekyll-watch (1.5.1)
       listen (~> 3.0)
-    kramdown (2.3.0)
+    kramdown (2.3.1)
       rexml
     liquid (4.0.3)
     listen (3.1.5)
