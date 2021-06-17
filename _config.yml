@@ -16,9 +16,9 @@ url: "http://Keenjin.github.io"
 valine_comment:
   enable: true
 # app_id
-  leancloud_appid: hQKGaeJIS6EKerqSsoCUX0E7-gzGzoHsz
+  leancloud_appid: WLHx1W75qB1ofuimclmXRr1B-gzGzoHsz
 # app_key
-  leancloud_appkey: MjNOS6VGmaY29xsCpdCgtMsp
+  leancloud_appkey: ISYfdaNGbSsHU84206bkrryu
 # placeholde
   placeholder: "欢迎提出您的宝贵意见"
 
